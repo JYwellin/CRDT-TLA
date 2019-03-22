@@ -1,0 +1,115 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.13 of 18 July 2018
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with fp 8 and seed 6527579869965798818 with 4 workers on 8 cores with 2428MB heap and 5460MB offheap memory (Mac OS X 10.14.2 x86_64, Oracle Corporation 1.8.0_191 x86_64).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file /Users/jywellin/Desktop/tlaspec/OpCounter.toolbox/Model_1/MC.tla
+Parsing file /Users/jywellin/Desktop/tlaspec/OpCounter.toolbox/Model_1/OpCounter.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/TLC.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/Naturals.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/Sequences.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/Bags.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module Bags
+Semantic processing of module OpCounter
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2019-03-22 20:58:13)
+@!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2102:1 @!@!@
+@!@!@STARTMSG 2154:0 @!@!@
+Attempted to apply the operator overridden by the Java method
+public static tlc2.value.Value tlc2.module.Bags.SetToBag(tlc2.value.Value),
+but it produced the following error:
+@!@!@STARTMSG 2176:0 @!@!@
+Applying BagToSet to the following value,
+which is not a function with a finite domain:
+Nat
+@!@!@ENDMSG 2176 @!@!@
+@!@!@ENDMSG 2154 @!@!@
+While working on the initial state:
+/\ counter = (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)
+/\ buffer = (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)
+/\ incoming = (r1 :> << >> @@ r2 :> << >> @@ r3 :> << >>)
+
+@!@!@ENDMSG 2102 @!@!@
+@!@!@STARTMSG 2103:1 @!@!@
+The error occurred when TLC was evaluating the nested
+expressions at the following positions:
+0. Line 13, column 9 to line 15, column 51 in OpCounter
+1. Line 13, column 12 to line 13, column 43 in OpCounter
+2. Line 14, column 12 to line 14, column 42 in OpCounter
+3. Line 15, column 12 to line 15, column 51 in OpCounter
+4. Line 8, column 11 to line 11, column 60 in OpCounter
+5. Line 11, column 14 to line 11, column 60 in OpCounter
+6. Line 11, column 27 to line 11, column 60 in OpCounter
+7. Line 11, column 39 to line 11, column 59 in OpCounter
+8. Line 98, column 3 to line 111, column 11 in Bags
+9. Line 111, column 6 to line 111, column 11 in Bags
+10. Line 111, column 6 to line 111, column 8 in Bags
+11. Line 107, column 7 to line 110, column 68 in Bags
+12. Line 107, column 18 to line 107, column 66 in Bags
+13. Line 107, column 24 to line 107, column 66 in Bags
+14. Line 107, column 51 to line 107, column 65 in Bags
+15. Line 107, column 58 to line 107, column 65 in Bags
+16. Line 107, column 65 to line 107, column 65 in Bags
+17. Line 11, column 46 to line 11, column 58 in OpCounter
+
+
+@!@!@ENDMSG 2103 @!@!@
+@!@!@STARTMSG 2201:0 @!@!@
+The coverage statistics at 2019-03-22 20:58:14
+@!@!@ENDMSG 2201 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 19, col 14 to line 19, col 53 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 20, col 14 to line 20, col 51 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 21, col 24 to line 21, col 35 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 24, col 16 to line 24, col 49 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 25, col 16 to line 28, col 67 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 29, col 26 to line 29, col 36 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 33, col 24 to line 33, col 79 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 34, col 24 to line 34, col 63 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 35, col 28 to line 35, col 37 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2202:0 @!@!@
+End of statistics.
+@!@!@ENDMSG 2202 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(0) at 2019-03-22 20:58:14: 1 states generated (90 s/min), 1 distinct states found (90 ds/min), 1 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2199:0 @!@!@
+1 states generated, 1 distinct states found, 1 states left on queue.
+@!@!@ENDMSG 2199 @!@!@
+@!@!@STARTMSG 2186:0 @!@!@
+Finished in 970ms at (2019-03-22 20:58:14)
+@!@!@ENDMSG 2186 @!@!@
