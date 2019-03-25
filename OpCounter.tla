@@ -1,14 +1,20 @@
 ----------------------------- MODULE OpCounter -----------------------------
+(**********************************************************************)
+(* Exactly-once network.                                              *)
+(* Casual is unnecessary.                                             *)
+(**********************************************************************)
 EXTENDS Naturals,Sequences,Bags
-
+-----------------------------------------------------------------------------
 CONSTANTS Replica 
+-----------------------------------------------------------------------------
 VARIABLE counter,buffer,incoming
 vars == <<counter,buffer,incoming>>
-
+-----------------------------------------------------------------------------
 TypeOK == /\ counter \in [Replica -> Nat]
           /\ buffer \in [Replica -> Nat]
           /\ \A r \in Replica:IsABag(incoming[r])
        \* /\ incoming \in [Replica -> SubBag(SetToBag(Nat))] 
+-----------------------------------------------------------------------------
           
 Init == /\ counter = [r \in Replica |-> 0 ]
         /\ buffer = [r \in Replica |-> 0 ]
@@ -34,10 +40,8 @@ receive(r) == /\ incoming[r] # EmptyBag
                     /\ counter' = [counter EXCEPT ![r] = @ + m])
               /\ UNCHANGED <<buffer>>
               
------------------------------------------------------------------------------
 Next == 
    \E r \in Replica: inc(r) \/ send(r)\/ receive(r)
-
 -----------------------------------------------------------------------------                   
 Spec == Init /\ [][Next]_vars   
 -----------------------------------------------------------------------------
@@ -48,5 +52,5 @@ EC == EmptyChannel /\ EmptyBuffer
 
 =============================================================================
 \* Modification History
-\* Last modified Fri Mar 22 21:32:40 CST 2019 by jywellin
+\* Last modified Mon Mar 25 16:52:34 CST 2019 by jywellin
 \* Created Fri Mar 22 20:43:27 CST 2019 by jywellin
