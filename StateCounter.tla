@@ -24,12 +24,12 @@ Init == /\ state = [r \in Replica |-> initvector]
 \*count(x,sum) == count(sum) + 
 \*read(r) == count(state[r],0)
 
-inc(r) == /\ state' = [state EXCEPT ![r][r] = @ + 1]
+Inc(r) == /\ state' = [state EXCEPT ![r][r] = @ + 1]
           /\ update' = [update EXCEPT![r] = 1]
           /\ UNCHANGED <<incoming>>
 
 
-send(r) == /\ incoming' = [x \in Replica |->
+Send(r) == /\ incoming' = [x \in Replica |->
                         IF x = r
                         THEN incoming[x]
                         ELSE incoming[x] (+) SetToBag({state[r]})]
@@ -39,13 +39,13 @@ send(r) == /\ incoming' = [x \in Replica |->
 
 SetMax(r, s) == IF r > s THEN r ELSE s
     
-receive(r) == /\ incoming[r] # EmptyBag  
+Receive(r) == /\ incoming[r] # EmptyBag  
               /\ \E m \in BagToSet(incoming[r]):  
                     (/\ \A s \in Replica: state' = [state EXCEPT ![r][s] = SetMax(@, m[s])]
                      /\ incoming' = [incoming EXCEPT ![r] = @ (-) SetToBag({m})])                   
               /\ UNCHANGED <<update>>
 -----------------------------------------------------------------------------
-Next == /\ \E r \in Replica: inc(r) \/ send(r) \/ receive(r)
+Next == /\ \E r \in Replica: Inc(r) \/ Send(r) \/ Receive(r)
 -----------------------------------------------------------------------------
 Spec == Init /\ [][Next]_vars
 -----------------------------------------------------------------------------
@@ -56,5 +56,5 @@ EC == EmptyChannel /\ EmptyUpdate
 
 =============================================================================
 \* Modification History
-\* Last modified Mon Mar 25 19:47:02 CST 2019 by jywellin
+\* Last modified Wed Mar 27 16:17:50 CST 2019 by jywellin
 \* Created Mon Mar 25 14:25:48 CST 2019 by jywellin
