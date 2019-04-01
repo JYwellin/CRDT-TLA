@@ -29,5 +29,5 @@ EmptyChannel ==  incoming = [r \in Replica |-> <<>>]
 
 =============================================================================
 \* Modification History
-\* Last modified Wed Mar 27 20:12:20 CST 2019 by jywellin
+\* Last modified Mon Apr 01 16:30:17 CST 2019 by jywellin
 \* Created Wed Mar 27 20:03:44 CST 2019 by jywellin
