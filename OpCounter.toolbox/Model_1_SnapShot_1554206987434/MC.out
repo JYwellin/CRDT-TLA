@@ -1,0 +1,146 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.13 of 18 July 2018
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with seed -6146378416413089869 with 4 workers on 4 cores with 297MB heap and 664MB offheap memory (Windows 10 10.0 amd64, Oracle Corporation 1.8.0_201 x86_64).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\OpCounter.toolbox\Model_1\MC.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\OpCounter.toolbox\Model_1\OpCounter.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\TLC.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\Naturals.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\Sequences.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\Bags.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\OpCounter.toolbox\Model_1\ReliableNetwork.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\FiniteSets.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\OpCounter.toolbox\Model_1\Network.tla
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module Bags
+Semantic processing of module Network
+Semantic processing of module ReliableNetwork
+Semantic processing of module OpCounter
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2019-04-02 20:09:44)
+@!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 1000:1 @!@!@
+TLC threw an unexpected exception.
+This was probably caused by an error in the spec or model.
+See the User Output or TLC Console for clues to what happened.
+The exception was a java.lang.RuntimeException
+: TLC encountered a non-enumerable quantifier bound
+<<1>>.
+line 23, col 28 to line 23, col 38 of module Network
+@!@!@ENDMSG 1000 @!@!@
+@!@!@STARTMSG 2121:1 @!@!@
+The behavior up to this point is:
+@!@!@ENDMSG 2121 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+1: <Initial predicate>
+/\ buffer = (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)
+/\ msg = (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)
+/\ counter = (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)
+/\ incoming = (r1 :> << >> @@ r2 :> << >> @@ r3 :> << >>)
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+2: <Inc line 29, col 11 to line 31, col 30 of module OpCounter>
+/\ buffer = (r1 :> 1 @@ r2 :> 0 @@ r3 :> 0)
+/\ msg = (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)
+/\ counter = (r1 :> 1 @@ r2 :> 0 @@ r3 :> 0)
+/\ incoming = (r1 :> << >> @@ r2 :> << >> @@ r3 :> << >>)
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+3: <Send line 33, col 13 to line 36, col 36 of module OpCounter>
+/\ buffer = (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)
+/\ msg = (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)
+/\ counter = (r1 :> 1 @@ r2 :> 0 @@ r3 :> 0)
+/\ incoming = (r1 :> << >> @@ r2 :> <<1>> @@ r3 :> <<1>>)
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2103:1 @!@!@
+The error occurred when TLC was evaluating the nested
+expressions at the following positions:
+0. Line 38, column 15 to line 40, column 37 in OpCounter
+1. Line 38, column 18 to line 38, column 35 in OpCounter
+2. Line 14, column 1 to line 14, column 74 in OpCounter
+3. Line 17, column 15 to line 17, column 32 in ReliableNetwork
+4. Line 11, column 1 to line 11, column 65 in ReliableNetwork
+5. Line 22, column 15 to line 25, column 58 in Network
+6. Line 22, column 18 to line 22, column 39 in Network
+7. Line 23, column 19 to line 25, column 58 in Network
+
+
+@!@!@ENDMSG 2103 @!@!@
+@!@!@STARTMSG 2201:0 @!@!@
+The coverage statistics at 2019-04-02 20:09:46
+@!@!@ENDMSG 2201 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 19, col 22 to line 22, col 47 of module ReliableNetwork: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 23, col 34 to line 23, col 36 of module ReliableNetwork: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 24, col 30 to line 24, col 85 of module Network: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 25, col 30 to line 25, col 57 of module Network: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 29, col 14 to line 29, col 53 of module OpCounter: 32
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 30, col 14 to line 30, col 51 of module OpCounter: 32
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 34, col 16 to line 34, col 49 of module OpCounter: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 36, col 28 to line 36, col 34 of module OpCounter: 11
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 39, col 18 to line 39, col 63 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 40, col 30 to line 40, col 35 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 8, col 14 to line 8, col 21 of module OpCounter: 32
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 8, col 23 to line 8, col 25 of module OpCounter: 32
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2202:0 @!@!@
+End of statistics.
+@!@!@ENDMSG 2202 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(5) at 2019-04-02 20:09:46: 44 states generated (2,000 s/min), 30 distinct states found (1,363 ds/min), 18 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2199:0 @!@!@
+44 states generated, 30 distinct states found, 18 states left on queue.
+@!@!@ENDMSG 2199 @!@!@
+@!@!@STARTMSG 2194:0 @!@!@
+The depth of the complete state graph search is 6.
+@!@!@ENDMSG 2194 @!@!@
+@!@!@STARTMSG 2268:0 @!@!@
+The average outdegree of the complete state graph is 3 (minimum is 1, the maximum 3 and the 95th percentile is 3).
+@!@!@ENDMSG 2268 @!@!@
+@!@!@STARTMSG 2186:0 @!@!@
+Finished in 3417ms at (2019-04-02 20:09:46)
+@!@!@ENDMSG 2186 @!@!@

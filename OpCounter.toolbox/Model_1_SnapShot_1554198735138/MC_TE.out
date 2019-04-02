@@ -1,0 +1,93 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.13 of 18 July 2018
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with seed 7722711250425370145 with 4 workers on 4 cores with 297MB heap and 664MB offheap memory (Windows 10 10.0 amd64, Oracle Corporation 1.8.0_201 x86_64).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\OpCounter.toolbox\Model_1\MC.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\OpCounter.toolbox\Model_1\OpCounter.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\TLC.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\Naturals.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\Sequences.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\Bags.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\OpCounter.toolbox\Model_1\ReliableNetwork.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\FiniteSets.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\OpCounter.toolbox\Model_1\Network.tla
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module Bags
+Semantic processing of module Network
+Semantic processing of module ReliableNetwork
+Semantic processing of module OpCounter
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2019-04-02 17:48:54)
+@!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(15) at 2019-04-02 17:48:58: 237796 states generated (237,796 s/min), 66223 distinct states found (66,223 ds/min), 34225 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(21) at 2019-04-02 17:49:58: 14848589 states generated (14,610,793 s/min), 3214884 distinct states found (3,148,661 ds/min), 1490499 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(22) at 2019-04-02 17:50:58: 28891507 states generated (14,042,918 s/min), 6011244 distinct states found (2,796,360 ds/min), 2723752 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(23) at 2019-04-02 17:51:58: 42727858 states generated (13,836,351 s/min), 8819448 distinct states found (2,808,204 ds/min), 4013366 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2201:0 @!@!@
+The coverage statistics at 2019-04-02 17:51:58
+@!@!@ENDMSG 2201 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 19, col 22 to line 22, col 47 of module ReliableNetwork: 7763857
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 23, col 34 to line 23, col 36 of module ReliableNetwork: 7763857
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 26, col 30 to line 26, col 85 of module Network: 20552538
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 27, col 30 to line 27, col 57 of module Network: 20552538
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 29, col 14 to line 29, col 53 of module OpCounter: 14422863
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 30, col 14 to line 30, col 51 of module OpCounter: 14422863
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 34, col 16 to line 34, col 49 of module OpCounter: 7763858
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 36, col 28 to line 36, col 34 of module OpCounter: 7763857
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 39, col 18 to line 39, col 63 of module OpCounter: 20552538
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 40, col 30 to line 40, col 35 of module OpCounter: 20552540
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 8, col 14 to line 8, col 21 of module OpCounter: 14422863
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 8, col 23 to line 8, col 25 of module OpCounter: 14422864
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2202:0 @!@!@
+End of statistics.
+@!@!@ENDMSG 2202 @!@!@

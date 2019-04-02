@@ -1,0 +1,127 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.13 of 18 July 2018
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with seed -6183459184815424922 with 4 workers on 4 cores with 297MB heap and 664MB offheap memory (Windows 10 10.0 amd64, Oracle Corporation 1.8.0_201 x86_64).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\OpCounter.toolbox\Model_1\MC.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\OpCounter.toolbox\Model_1\OpCounter.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\TLC.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\Naturals.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\Sequences.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\Bags.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\OpCounter.toolbox\Model_1\ReliableNetwork.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\OpCounter.toolbox\Model_1\Network.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module Bags
+Semantic processing of module Network
+Semantic processing of module ReliableNetwork
+Semantic processing of module OpCounter
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2019-04-02 21:18:05)
+@!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2102:1 @!@!@
+Attempted to enumerate a set of the form [l1 : v1, ..., ln : vn],
+but can't enumerate the value of the `seq' field:
+Nat
+While working on the initial state:
+/\ seq = (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)
+/\ buffer = (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)
+/\ msg = (r1 :> [seq: Nat, r: {r1, r2, r3}, buf: Nat] @@ r2 :> [seq: Nat, r: {r1, r2, r3}, buf: Nat] @@ r3 :> [seq: Nat, r: {r1, r2, r3}, buf: Nat])
+/\ counter = (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)
+/\ incoming = (r1 :> {} @@ r2 :> {} @@ r3 :> {})
+
+@!@!@ENDMSG 2102 @!@!@
+@!@!@STARTMSG 2103:1 @!@!@
+The error occurred when TLC was evaluating the nested
+expressions at the following positions:
+0. Line 28, column 5 to line 31, column 38 in OpCounter
+1. Line 28, column 8 to line 28, column 19 in OpCounter
+2. Line 21, column 1 to line 21, column 35 in OpCounter
+3. Line 4, column 9 to line 4, column 13 in ReliableNetwork
+4. Line 12, column 5 to line 13, column 36 in Network
+5. Line 12, column 8 to line 12, column 40 in Network
+6. Line 13, column 8 to line 13, column 36 in Network
+7. Line 29, column 8 to line 29, column 34 in OpCounter
+8. Line 30, column 8 to line 30, column 39 in OpCounter
+9. Line 31, column 8 to line 31, column 38 in OpCounter
+
+
+@!@!@ENDMSG 2103 @!@!@
+@!@!@STARTMSG 2201:0 @!@!@
+The coverage statistics at 2019-04-02 21:18:06
+@!@!@ENDMSG 2201 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 11, col 12 to line 11, col 39 of module ReliableNetwork: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 12, col 12 to line 12, col 55 of module ReliableNetwork: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 16, col 8 to line 19, col 50 of module Network: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 20, col 20 to line 20, col 22 of module Network: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 35, col 14 to line 35, col 53 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 36, col 14 to line 36, col 51 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 37, col 14 to line 37, col 45 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 38, col 26 to line 38, col 33 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 38, col 36 to line 38, col 38 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 41, col 16 to line 41, col 49 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 43, col 28 to line 43, col 34 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 43, col 37 to line 43, col 39 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 43, col 42 to line 43, col 44 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 46, col 18 to line 46, col 67 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 47, col 30 to line 47, col 35 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 47, col 38 to line 47, col 40 of module OpCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2202:0 @!@!@
+End of statistics.
+@!@!@ENDMSG 2202 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(0) at 2019-04-02 21:18:06: 1 states generated (68 s/min), 0 distinct states found (0 ds/min), 0 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2199:0 @!@!@
+1 states generated, 0 distinct states found, 0 states left on queue.
+@!@!@ENDMSG 2199 @!@!@
+@!@!@STARTMSG 2186:0 @!@!@
+Finished in 2296ms at (2019-04-02 21:18:06)
+@!@!@ENDMSG 2186 @!@!@
