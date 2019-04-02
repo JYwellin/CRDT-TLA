@@ -1,8 +1,4 @@
 ----------------------------- MODULE OpCounter -----------------------------
-(**********************************************************************)
-(* Reliable network.                                                  *)
-(* Casual is unnecessary.                                             *)
-(**********************************************************************)
 EXTENDS Naturals,Sequences,Bags
 -----------------------------------------------------------------------------
 CONSTANTS Replica 
@@ -12,6 +8,9 @@ vars == <<counter,buffer,incoming,msg>>
 netvars == <<incoming,msg>>
 statevars == <<counter,buffer>>
 -----------------------------------------------------------------------------
+(**********************************************************************)
+(* Reliable network.                                                  *)
+(**********************************************************************)
 Network == INSTANCE ReliableNetwork WITH  incoming <- incoming,msg <- msg
 -----------------------------------------------------------------------------
 TypeOK == /\ counter \in [Replica -> Nat]
@@ -44,12 +43,11 @@ Next ==
 -----------------------------------------------------------------------------                   
 Spec == Init /\ [][Next]_vars   
 -----------------------------------------------------------------------------
-
 EmptyBuffer == buffer = [r \in Replica |-> 0 ]
 EC == Network!EmptyChannel /\ EmptyBuffer
             => \A r,s \in Replica : counter[r] = counter[s]
 
 =============================================================================
 \* Modification History
-\* Last modified Wed Mar 27 17:01:06 CST 2019 by jywellin
+\* Last modified Tue Apr 02 15:12:00 CST 2019 by jywellin
 \* Created Fri Mar 22 20:43:27 CST 2019 by jywellin

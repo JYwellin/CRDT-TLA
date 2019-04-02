@@ -16,6 +16,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>Network.tla</name>
+			<type>1</type>
+			<location>/Users/jywellin/Documents/GitHub/CRDT/Network.tla</location>
+		</link>
+		<link>
 			<name>ReliableNetwork.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/ReliableNetwork.tla</locationURI>
