@@ -11,9 +11,10 @@ statevars == <<counter,buffer>>
 (**********************************************************************)
 (* Reliable network.                                                  *)
 (**********************************************************************)
-Network == INSTANCE ReliableNetwork WITH  incoming <- incoming,msg <- msg
+Network == INSTANCE ReliableNetwork WITH  incoming <- incoming, msg <- msg
 -----------------------------------------------------------------------------
-TypeOK == /\ counter \in [Replica -> Nat]
+TypeOK == /\ Network!TypeOK
+          /\ counter \in [Replica -> Nat]
           /\ buffer \in [Replica -> Nat]
 
 -----------------------------------------------------------------------------
@@ -37,7 +38,7 @@ Send(r) ==  /\ buffer[r] # 0
 Receive(r) == /\ Network!Deliver(r)
               /\ counter' = [counter EXCEPT ![r] = @ + msg'[r]]
               /\ UNCHANGED <<buffer>>
-              
+-----------------------------------------------------------------------------                
 Next == 
    \E r \in Replica: Inc(r) \/ Send(r)\/ Receive(r)
 -----------------------------------------------------------------------------                   
@@ -49,5 +50,5 @@ EC == Network!EmptyChannel /\ EmptyBuffer
 
 =============================================================================
 \* Modification History
-\* Last modified Tue Apr 02 15:12:00 CST 2019 by jywellin
+\* Last modified Tue Apr 02 17:06:31 CST 2019 by jywellin
 \* Created Fri Mar 22 20:43:27 CST 2019 by jywellin
