@@ -21,6 +21,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Network.tla</locationURI>
 		</link>
 		<link>
+			<name>OpCounter.tla</name>
+			<type>1</type>
+			<location>/Users/jywellin/Documents/GitHub/CRDT/OpCounter.tla</location>
+		</link>
+		<link>
 			<name>ReliableNetwork.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/ReliableNetwork.tla</locationURI>

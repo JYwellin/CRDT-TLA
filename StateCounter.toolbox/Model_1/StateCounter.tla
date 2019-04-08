@@ -3,50 +3,57 @@ EXTENDS Naturals, Sequences, Bags, TLC
 -----------------------------------------------------------------------------
 CONSTANTS 
     Replica
-    
 -----------------------------------------------------------------------------    
 VARIABLES 
-    state, incoming, update, msg
-    vars == <<state, incoming, update, msg>>
-    netvars == <<incoming, msg>>
-    statevars == <<state, update>> 
-    
+    state,
+    update,
+    seq,
+    incoming,
+    msg
+
+vars == <<state, update, seq, incoming, msg>>
+
 vector == [Replica -> Nat]
 initvector == [r \in Replica |-> 0]
+Msg == [r : Replica, seq : Nat, vc : vector]
 -----------------------------------------------------------------------------  
 (**********************************************************************)
 (* Any network.                                                       *)
 (**********************************************************************)
-Network == INSTANCE ReliableNetwork WITH  incoming <- incoming, msg <- msg
+Network == INSTANCE ReliableNetwork
 -----------------------------------------------------------------------------
-TypeOK == /\ Network!TypeOK
-          /\ state \in [Replica -> vector]
-          /\ update \in [Replica -> {0,1}]
-
+TypeOK == 
+    /\ state \in [Replica -> vector]
+    /\ update \in [Replica -> {0,1}]
 -----------------------------------------------------------------------------
-Init == /\ Network!Init
-        /\ state = [r \in Replica |-> initvector]
-        /\ update = [r \in Replica |-> 0]
-        
+Init == 
+    /\ Network!Init
+    /\ state = [r \in Replica |-> initvector]
+    /\ update = [r \in Replica |-> 0]
+    /\ seq = [r \in Replica |-> 0]       
  -----------------------------------------------------------------------------       
 \*count(x,sum) == count(sum) + 
 \*read(r) == count(state[r],0)
 
-Inc(r) == /\ state' = [state EXCEPT ![r][r] = @ + 1]
-          /\ update' = [update EXCEPT![r] = 1]
-          /\ UNCHANGED netvars
+Inc(r) == 
+    /\ state' = [state EXCEPT ![r][r] = @ + 1]
+    /\ update' = [update EXCEPT![r] = 1]
+    /\ seq' = [seq EXCEPT ![r] = @ + 1]
+    /\ UNCHANGED <<incoming, msg>>
 
 
-Send(r) == /\ Network!Broadcast(r, SetToBag({state[r]}))
-           /\ update' = [update EXCEPT![r] = 0]
-           /\ UNCHANGED <<state>>
+Send(r) == 
+    /\ Network!Broadcast(r, [r |-> r, seq |-> seq[r], vc |-> state[r]])
+    /\ update' = [update EXCEPT![r] = 0]
+    /\ UNCHANGED <<state, seq>>
    
 
 SetMax(r, s) == IF r > s THEN r ELSE s
     
-Receive(r) == /\ Network!Deliver(r)
-              /\ \A s \in Replica : state' = [state EXCEPT ![r][s] = SetMax(@,10)]                 
-              /\ UNCHANGED <<update>>
+Receive(r) == 
+    /\ Network!Deliver(r)
+    /\ \A s \in Replica : state' = [state EXCEPT ![r][s] = SetMax(@, msg'[r].vc[s])]                 
+    /\ UNCHANGED <<update, seq>>
 -----------------------------------------------------------------------------
 Next == /\ \E r \in Replica: Inc(r) \/ Send(r) \/ Receive(r)
 -----------------------------------------------------------------------------
@@ -58,5 +65,5 @@ EC == Network!EmptyChannel /\ EmptyUpdate
 
 =============================================================================
 \* Modification History
-\* Last modified Tue Apr 02 17:00:42 CST 2019 by jywellin
+\* Last modified Mon Apr 08 19:36:07 CST 2019 by jywellin
 \* Created Mon Mar 25 14:25:48 CST 2019 by jywellin

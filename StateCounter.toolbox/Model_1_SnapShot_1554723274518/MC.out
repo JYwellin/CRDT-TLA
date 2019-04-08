@@ -1,0 +1,152 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.13 of 18 July 2018
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with fp 68 and seed -5257421110399660057 with 4 workers on 8 cores with 2428MB heap and 5460MB offheap memory (Mac OS X 10.14.2 x86_64, Oracle Corporation 1.8.0_191 x86_64).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file /Users/jywellin/Documents/GitHub/CRDT/StateCounter.toolbox/Model_1/MC.tla
+Parsing file /Users/jywellin/Documents/GitHub/CRDT/StateCounter.toolbox/Model_1/StateCounter.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/TLC.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/Naturals.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/Sequences.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/Bags.tla
+Parsing file /Users/jywellin/Documents/GitHub/CRDT/StateCounter.toolbox/Model_1/ReliableNetwork.tla
+Parsing file /Users/jywellin/Documents/GitHub/CRDT/StateCounter.toolbox/Model_1/Network.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module Bags
+Semantic processing of module Network
+Semantic processing of module ReliableNetwork
+Semantic processing of module StateCounter
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2019-04-08 19:34:32)
+@!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated at 2019-04-08 19:34:33.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 1000:1 @!@!@
+TLC threw an unexpected exception.
+This was probably caused by an error in the spec or model.
+See the User Output or TLC Console for clues to what happened.
+The exception was a java.lang.RuntimeException
+: Attempted to check equality of the function (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0) with the value:
+0
+@!@!@ENDMSG 1000 @!@!@
+@!@!@STARTMSG 2121:1 @!@!@
+The behavior up to this point is:
+@!@!@ENDMSG 2121 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+1: <Initial predicate>
+/\ seq = (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)
+/\ msg = (r1 :> NotMsg @@ r2 :> NotMsg @@ r3 :> NotMsg)
+/\ state = ( r1 :> (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0) @@
+  r2 :> (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0) @@
+  r3 :> (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0) )
+/\ incoming = (r1 :> {} @@ r2 :> {} @@ r3 :> {})
+/\ update = (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+2: <Next line 58, col 9 to line 58, col 60 of module StateCounter>
+/\ seq = (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)
+/\ msg = (r1 :> NotMsg @@ r2 :> NotMsg @@ r3 :> NotMsg)
+/\ state = ( r1 :> (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0) @@
+  r2 :> (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0) @@
+  r3 :> (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0) )
+/\ incoming = ( r1 :> {} @@
+  r2 :> {[seq |-> 0, r |-> r1, vc |-> (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)]} @@
+  r3 :> {[seq |-> 0, r |-> r1, vc |-> (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)]} )
+/\ update = (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2103:1 @!@!@
+The error occurred when TLC was evaluating the nested
+expressions at the following positions:
+0. Line 58, column 9 to line 58, column 60 in StateCounter
+1. Line 58, column 12 to line 58, column 60 in StateCounter
+2. Line 58, column 30 to line 58, column 60 in StateCounter
+3. Line 58, column 51 to line 58, column 60 in StateCounter
+4. Line 54, column 5 to line 56, column 32 in StateCounter
+5. Line 54, column 8 to line 54, column 25 in StateCounter
+6. Line 23, column 1 to line 23, column 35 in StateCounter
+7. Line 9, column 5 to line 12, column 55 in ReliableNetwork
+8. Line 9, column 8 to line 9, column 23 in ReliableNetwork
+9. Line 10, column 8 to line 12, column 55 in ReliableNetwork
+10. Line 11, column 9 to line 12, column 55 in ReliableNetwork
+11. Line 11, column 12 to line 11, column 39 in ReliableNetwork
+12. Line 12, column 12 to line 12, column 55 in ReliableNetwork
+13. Line 55, column 8 to line 55, column 70 in StateCounter
+14. Line 55, column 27 to line 55, column 70 in StateCounter
+
+
+@!@!@ENDMSG 2103 @!@!@
+@!@!@STARTMSG 2201:0 @!@!@
+The coverage statistics at 2019-04-08 19:34:33
+@!@!@ENDMSG 2201 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 11, col 12 to line 11, col 39 of module ReliableNetwork: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 12, col 12 to line 12, col 55 of module ReliableNetwork: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 18, col 8 to line 21, col 50 of module Network: 15
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 22, col 18 to line 22, col 24 of module Network: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 39, col 8 to line 39, col 46 of module StateCounter: 15
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 40, col 8 to line 40, col 40 of module StateCounter: 15
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 41, col 8 to line 41, col 39 of module StateCounter: 15
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 42, col 18 to line 42, col 34 of module StateCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 47, col 8 to line 47, col 40 of module StateCounter: 15
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 48, col 18 to line 48, col 31 of module StateCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 55, col 27 to line 55, col 70 of module StateCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 56, col 18 to line 56, col 32 of module StateCounter: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2202:0 @!@!@
+End of statistics.
+@!@!@ENDMSG 2202 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(5) at 2019-04-08 19:34:33: 31 states generated (3,369 s/min), 18 distinct states found (1,956 ds/min), 9 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2199:0 @!@!@
+31 states generated, 18 distinct states found, 9 states left on queue.
+@!@!@ENDMSG 2199 @!@!@
+@!@!@STARTMSG 2194:0 @!@!@
+The depth of the complete state graph search is 5.
+@!@!@ENDMSG 2194 @!@!@
+@!@!@STARTMSG 2268:0 @!@!@
+The average outdegree of the complete state graph is 3 (minimum is 2, the maximum 4 and the 95th percentile is 4).
+@!@!@ENDMSG 2268 @!@!@
+@!@!@STARTMSG 2186:0 @!@!@
+Finished in 917ms at (2019-04-08 19:34:33)
+@!@!@ENDMSG 2186 @!@!@
