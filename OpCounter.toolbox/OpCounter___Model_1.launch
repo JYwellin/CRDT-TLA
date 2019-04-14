@@ -6,12 +6,12 @@
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
 <intAttribute key="distributedFPSetCount" value="0"/>
-<stringAttribute key="distributedNetworkInterface" value="172.27.132.153"/>
+<stringAttribute key="distributedNetworkInterface" value="192.0.108.1"/>
 <intAttribute key="distributedNodesCount" value="1"/>
 <stringAttribute key="distributedTLC" value="off"/>
 <stringAttribute key="distributedTLCVMArgs" value=""/>
 <intAttribute key="fpBits" value="1"/>
-<intAttribute key="fpIndex" value="64"/>
+<intAttribute key="fpIndex" value="46"/>
 <booleanAttribute key="fpIndexRandom" value="true"/>
 <intAttribute key="maxHeapSize" value="25"/>
 <intAttribute key="maxSetSize" value="1000000"/>
@@ -20,12 +20,13 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="seq, buffer, msg, counter, incoming"/>
+<stringAttribute key="modelBehaviorVars" value="seq, buffer, msg, counter, updateset, incoming"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
 <listEntry value="1TypeOK"/>
 <listEntry value="1EC"/>
+<listEntry value="1SEC"/>
 </listAttribute>
 <listAttribute key="modelCorrectnessProperties"/>
 <stringAttribute key="modelExpressionEval" value=""/>

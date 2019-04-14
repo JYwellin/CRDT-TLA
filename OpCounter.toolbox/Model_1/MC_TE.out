@@ -1,5 +1,8 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.13 of 18 July 2018
+@!@!@ENDMSG 2262 @!@!@
 @!@!@STARTMSG 2187:0 @!@!@
-Running breadth-first search Model-Checking with fp 46 and seed -8277618924705191277 with 4 workers on 8 cores with 2428MB heap and 5460MB offheap memory (Mac OS X 10.14.2 x86_64, Oracle Corporation 1.8.0_191 x86_64).
+Running breadth-first search Model-Checking with fp 81 and seed 716999975471917233 with 4 workers on 8 cores with 2428MB heap and 5460MB offheap memory (Mac OS X 10.14.2 x86_64, Oracle Corporation 1.8.0_191 x86_64).
 @!@!@ENDMSG 2187 @!@!@
 @!@!@STARTMSG 2220:0 @!@!@
 Starting SANY...
@@ -26,14 +29,18 @@ Semantic processing of module MC
 SANY finished.
 @!@!@ENDMSG 2219 @!@!@
 @!@!@STARTMSG 2185:0 @!@!@
-Starting... (2019-04-08 19:03:26)
+Starting... (2019-04-14 21:00:44)
 @!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2140:3 @!@!@
+The subscript of the next-state relation specified by the specification
+does not seem to contain the state variable updateset
+@!@!@ENDMSG 2140 @!@!@
 @!@!@STARTMSG 2189:0 @!@!@
 Computing initial states...
 @!@!@ENDMSG 2189 @!@!@
 @!@!@STARTMSG 2190:0 @!@!@
-Finished computing initial states: 1 distinct state generated at 2019-04-08 19:03:27.
+Finished computing initial states: 1 distinct state generated at 2019-04-14 21:00:45.
 @!@!@ENDMSG 2190 @!@!@
 @!@!@STARTMSG 2200:0 @!@!@
-Progress(16) at 2019-04-08 19:03:30: 973644 states generated (973,644 s/min), 290200 distinct states found (290,200 ds/min), 174862 states left on queue.
+Progress(16) at 2019-04-14 21:00:48: 766759 states generated (766,759 s/min), 236203 distinct states found (236,203 ds/min), 143304 states left on queue.
 @!@!@ENDMSG 2200 @!@!@

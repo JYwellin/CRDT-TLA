@@ -1,5 +1,5 @@
 ----------------------------- MODULE OpCounter -----------------------------
-EXTENDS Naturals,Sequences,Bags
+EXTENDS Naturals, Sequences, Bags
 -----------------------------------------------------------------------------
 CONSTANTS 
     Replica 
@@ -8,8 +8,9 @@ VARIABLE
     counter,
     buffer,
     seq,
-    incoming,
-    msg
+    incoming,  \* network variable
+    msg,       \* network variable
+    updateset  \* network variable
     
 vars == <<counter, buffer, seq, incoming, msg>>
 
@@ -32,19 +33,22 @@ Init ==
      
 Read(r) == counter[r]
 
-Inc(r) == /\ counter' = [counter EXCEPT ![r] = @ + 1]
-          /\ buffer' = [buffer EXCEPT ![r] = @ + 1]
-          /\ seq' = [seq EXCEPT ![r] = @ + 1]
-          /\ UNCHANGED <<incoming, msg>>
+Inc(r) == 
+    /\ counter' = [counter EXCEPT ![r] = @ + 1]
+    /\ buffer' = [buffer EXCEPT ![r] = @ + 1]
+    /\ seq' = [seq EXCEPT ![r] = @ + 1]
+    /\ UNCHANGED <<incoming, msg, updateset>>
 
-Send(r) ==  /\ buffer[r] # 0
-            /\ buffer' = [buffer EXCEPT ![r] = 0]
-            /\ Network!Broadcast(r, [r |-> r, seq |-> seq[r], buf |-> buffer[r]])
-            /\ UNCHANGED <<counter, seq, msg>>
+Send(r) ==  
+    /\ buffer[r] # 0
+    /\ buffer' = [buffer EXCEPT ![r] = 0]
+    /\ Network!Broadcast(r, [r |-> r, seq |-> seq[r], buf |-> buffer[r]])
+    /\ UNCHANGED <<counter, seq>>
 
-Receive(r) == /\ Network!Deliver(r)
-              /\ counter' = [counter EXCEPT ![r] = @ + msg'[r].buf]
-              /\ UNCHANGED <<buffer, seq>>
+Receive(r) == 
+    /\ Network!Deliver(r)
+    /\ counter' = [counter EXCEPT ![r] = @ + msg'[r].buf]
+    /\ UNCHANGED <<buffer, seq>>
 -----------------------------------------------------------------------------                
 Next == 
    \E r \in Replica: Inc(r) \/ Send(r)\/ Receive(r)
@@ -53,10 +57,12 @@ Spec == Init /\ [][Next]_vars
 -----------------------------------------------------------------------------
 EmptyBuffer == buffer = [r \in Replica |-> 0 ]
 EC == Network!EmptyChannel /\ EmptyBuffer
-            => \A r,s \in Replica : counter[r] = counter[s]
-
+            => \A r1, r2 \in Replica : counter[r1] = counter[r2]
+            
+SEC == \E r1, r2 \in Replica : Network!Sameupdate(r1, r2)
+            => counter[r1] = counter[r2]
 =============================================================================
 \* Modification History
+\* Last modified Sun Apr 14 21:00:16 CST 2019 by jywellin
 \* Last modified Tue Apr 02 21:17:42 CST 2019 by xhdn
-\* Last modified Tue Apr 02 17:06:31 CST 2019 by jywellin
 \* Created Fri Mar 22 20:43:27 CST 2019 by jywellin
