@@ -61,14 +61,11 @@ Next == /\ \E r \in Replica: Inc(r) \/ Send(r) \/ Receive(r)
 Spec == Init /\ [][Next]_vars
 -----------------------------------------------------------------------------
 EmptyUpdate == update = [r \in Replica |-> 0 ]
-
-EC == Network!EmptyChannel /\ EmptyUpdate
-            => \A r,s \in Replica : state[r] = state[s]
             
 SEC == \E r1, r2 \in Replica : Network!Sameupdate(r1, r2)
             => state[r1] = state[r2]
 
 =============================================================================
 \* Modification History
-\* Last modified Mon Apr 15 15:43:05 CST 2019 by jywellin
+\* Last modified Mon Apr 15 19:57:43 CST 2019 by jywellin
 \* Created Mon Mar 25 14:25:48 CST 2019 by jywellin
