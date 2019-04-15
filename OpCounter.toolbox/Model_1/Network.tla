@@ -41,6 +41,6 @@ Sameupdate(r1, r2) ==
 \* judge if two replicas receive the same set of update operations                      
 =============================================================================
 \* Modification History
-\* Last modified Sun Apr 14 20:56:27 CST 2019 by jywellin
+\* Last modified Mon Apr 15 15:39:03 CST 2019 by jywellin
 \* Last modified Tue Apr 02 21:22:15 CST 2019 by xhdn
 \* Created Mon Mar 25 20:24:02 CST 2019 by jywellin

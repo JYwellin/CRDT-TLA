@@ -6,31 +6,41 @@ CONSTANTS
 NotMsg == CHOOSE m : m \notin Msg
 -----------------------------------------------------------------------------
 VARIABLES
-    incoming, msg
+    incoming,
+    msg,
+    updateset
     
-vars == <<incoming, msg>>
+vars == <<incoming, msg, updateset>>
 -----------------------------------------------------------------------------
 NInit == 
     /\ incoming = [r \in Replica |-> {}]
+    /\ updateset = [r \in Replica |-> {}]
     /\ msg = [r \in Replica |-> NotMsg]
 
 NBroadcast(r, m) == 
     /\ incoming' = [x \in Replica |->
                         IF x = r
                         THEN incoming[x]
-                        ELSE incoming[x] \cup {m}]                            
+                        ELSE incoming[x] \cup {m}]
+    /\ updateset' = [updateset EXCEPT ![r] = @ \cup {m}]                            
     /\ UNCHANGED <<msg>>
 
 NDeliver(r) == 
     /\ incoming[r] # {}
     /\ \E m \in incoming[r]:
-        msg' = [msg EXCEPT ![r] = m]
+        (/\ msg' = [msg EXCEPT ![r] = m]
+         /\ updateset' = [updateset EXCEPT ![r] = @ \cup {m}])
     /\ UNCHANGED <<incoming>>        
 -----------------------------------------------------------------------------                          
 EmptyChannel ==  
-    incoming = [r \in Replica |-> {}]                      
+    incoming = [r \in Replica |-> {}]
+
+Sameupdate(r1, r2) == 
+    updateset[r2] = updateset[r2]
+
+\* judge if two replicas receive the same set of update operations                      
 =============================================================================
 \* Modification History
+\* Last modified Mon Apr 15 15:39:03 CST 2019 by jywellin
 \* Last modified Tue Apr 02 21:22:15 CST 2019 by xhdn
-\* Last modified Wed Mar 27 17:03:22 CST 2019 by jywellin
 \* Created Mon Mar 25 20:24:02 CST 2019 by jywellin

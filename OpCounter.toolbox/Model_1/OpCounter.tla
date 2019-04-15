@@ -12,7 +12,7 @@ VARIABLE
     msg,       \* network variable
     updateset  \* network variable
     
-vars == <<counter, buffer, seq, incoming, msg>>
+vars == <<counter, buffer, seq, incoming, msg, updateset>>
 
 Msg == [r : Replica, seq : Nat, buf : Nat]
 -----------------------------------------------------------------------------
@@ -63,6 +63,6 @@ SEC == \E r1, r2 \in Replica : Network!Sameupdate(r1, r2)
             => counter[r1] = counter[r2]
 =============================================================================
 \* Modification History
-\* Last modified Sun Apr 14 21:00:16 CST 2019 by jywellin
+\* Last modified Mon Apr 15 15:42:04 CST 2019 by jywellin
 \* Last modified Tue Apr 02 21:17:42 CST 2019 by xhdn
 \* Created Fri Mar 22 20:43:27 CST 2019 by jywellin

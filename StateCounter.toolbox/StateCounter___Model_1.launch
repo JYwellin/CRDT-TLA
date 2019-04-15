@@ -11,7 +11,7 @@
 <stringAttribute key="distributedTLC" value="off"/>
 <stringAttribute key="distributedTLCVMArgs" value=""/>
 <intAttribute key="fpBits" value="1"/>
-<intAttribute key="fpIndex" value="56"/>
+<intAttribute key="fpIndex" value="84"/>
 <booleanAttribute key="fpIndexRandom" value="true"/>
 <intAttribute key="maxHeapSize" value="25"/>
 <intAttribute key="maxSetSize" value="1000000"/>
@@ -20,12 +20,13 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="seq, msg, state, incoming, update"/>
+<stringAttribute key="modelBehaviorVars" value="seq, msg, state, updateset, incoming, update"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
 <listEntry value="1TypeOK"/>
-<listEntry value="1EC"/>
+<listEntry value="0EC"/>
+<listEntry value="1SEC"/>
 </listAttribute>
 <listAttribute key="modelCorrectnessProperties"/>
 <stringAttribute key="modelExpressionEval" value=""/>
