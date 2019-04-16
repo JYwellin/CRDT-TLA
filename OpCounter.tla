@@ -1,5 +1,6 @@
 ----------------------------- MODULE OpCounter -----------------------------
-EXTENDS Naturals, Sequences, Bags
+EXTENDS 
+    Naturals, Sequences, Bags
 -----------------------------------------------------------------------------
 CONSTANTS 
     Replica 
@@ -24,6 +25,7 @@ Network == INSTANCE ReliableNetwork
 TypeOK == 
     /\ counter \in [Replica -> Nat]
     /\ buffer \in [Replica -> Nat]
+ 
 -----------------------------------------------------------------------------       
 Init == 
     /\ Network!Init
@@ -63,6 +65,6 @@ SEC == \E r1, r2 \in Replica : Network!Sameupdate(r1, r2)
             => counter[r1] = counter[r2]
 =============================================================================
 \* Modification History
-\* Last modified Mon Apr 15 15:42:04 CST 2019 by jywellin
+\* Last modified Tue Apr 16 21:18:48 CST 2019 by jywellin
 \* Last modified Tue Apr 02 21:17:42 CST 2019 by xhdn
 \* Created Fri Mar 22 20:43:27 CST 2019 by jywellin

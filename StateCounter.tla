@@ -10,7 +10,8 @@ VARIABLES
     seq,
     incoming, \* network variable
     msg,      \* network variable
-    updateset \* network variable
+    updateset, \* network variable
+    vc
 
 vars == <<state, update, seq, incoming, msg, updateset>>
 
@@ -33,9 +34,6 @@ Init ==
     /\ update = [r \in Replica |-> 0]
     /\ seq = [r \in Replica |-> 0]       
  -----------------------------------------------------------------------------       
-\*count(x,sum) == count(sum) + 
-\*read(r) == count(state[r],0)
-
 Inc(r) == 
     /\ state' = [state EXCEPT ![r][r] = @ + 1]
     /\ update' = [update EXCEPT![r] = 1]
@@ -67,5 +65,5 @@ SEC == \E r1, r2 \in Replica : Network!Sameupdate(r1, r2)
 
 =============================================================================
 \* Modification History
-\* Last modified Mon Apr 15 19:57:43 CST 2019 by jywellin
+\* Last modified Tue Apr 16 19:46:10 CST 2019 by jywellin
 \* Created Mon Mar 25 14:25:48 CST 2019 by jywellin
