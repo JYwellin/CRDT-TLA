@@ -13,7 +13,7 @@ VARIABLES
     updateset,     \* network variable
     vc             \* network variable
     
-vars == <<tree, tomb, insbuf, tombbuf, chins, incoming, msg, updateset, vc, seq>>
+vars == <<tree, tomb, insbuf, tombbuf, chins, incoming, msg, updateset, vc>>
 -----------------------------------------------------------------------------  
 vector == [Replica -> Nat]
  
@@ -49,7 +49,7 @@ Init ==
 DoIns(r) ==
     \E ins \in node:
         /\ ins.parent \in Readtree2set(tree[r]) \cup {"o"}
-        /\ ins.ts  = maxtime(tree[r],[r |-> r, time |-> 0])
+        /\ ins.time  = maxtime(tree[r],[r |-> r, time |-> 0])
         /\ ins.ch \in chins
         /\ chins' = chins \ {ins.ch} 
         /\ tree' =  [tree  EXCEPT![r] = @ \cup {ins}] 
@@ -111,6 +111,6 @@ SEC == \E r1, r2 \in Replica : Network!Sameupdate(r1, r2)
             => Readtree2list(tree[r1],"o",tomb[r1],{})= Readtree2list(tree[r2],"o",tomb[r2],{})                        
 =============================================================================
 \* Modification History
-\* Last modified Tue Apr 16 22:30:22 CST 2019 by jywellin
+\* Last modified Tue Apr 16 22:17:29 CST 2019 by jywellin
 \* Last modified Thu Jan 10 15:34:04 CST 2019 by jywellins
 \* Created Tue Nov 06 15:55:23 CST 2018 by xhdn

@@ -56,5 +56,5 @@ Readtree2list(T,root,tomb,readchar) ==
 \* Readtree2list(Createtree(3,{}),"o",{},{})
 =============================================================================
 \* Modification History
-\* Last modified Tue Apr 16 22:23:01 CST 2019 by jywellin
+\* Last modified Tue Apr 16 22:21:13 CST 2019 by jywellin
 \* Created Fri Nov 30 15:07:41 CST 2018 by jywellin

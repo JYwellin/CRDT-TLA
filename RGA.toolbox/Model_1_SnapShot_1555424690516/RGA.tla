@@ -13,7 +13,7 @@ VARIABLES
     updateset,     \* network variable
     vc             \* network variable
     
-vars == <<tree, tomb, insbuf, tombbuf, chins, incoming, msg, updateset, vc, seq>>
+vars == <<tree, tomb, insbuf, tombbuf, chins, incoming, msg, updateset, vc>>
 -----------------------------------------------------------------------------  
 vector == [Replica -> Nat]
  
@@ -111,6 +111,6 @@ SEC == \E r1, r2 \in Replica : Network!Sameupdate(r1, r2)
             => Readtree2list(tree[r1],"o",tomb[r1],{})= Readtree2list(tree[r2],"o",tomb[r2],{})                        
 =============================================================================
 \* Modification History
-\* Last modified Tue Apr 16 22:30:22 CST 2019 by jywellin
+\* Last modified Tue Apr 16 22:24:21 CST 2019 by jywellin
 \* Last modified Thu Jan 10 15:34:04 CST 2019 by jywellins
 \* Created Tue Nov 06 15:55:23 CST 2018 by xhdn

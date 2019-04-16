@@ -1,37 +1,39 @@
 -------------------------------- MODULE RGA --------------------------------
 EXTENDS Integers,Sequences,Naturals,TLC,InsertTree
------------------------------------------------------------------------------  
-CONSTANTS 
-    Replica 
------------------------------------------------------------------------------        
+-----------------------------------------------------------------------------      
 VARIABLES 
     tree,
     tomb,
     insbuf,
     tombbuf,
     chins,
-    tcurrent,
+    seq,
     incoming,      \* network variable
     msg,           \* network variable
     updateset,     \* network variable
     vc             \* network variable
     
-vars == <<tree, tomb, insbuf, tombbuf, chins, tcurrent, incoming, msg, updateset, vc>>
-
+vars == <<tree, tomb, insbuf, tombbuf, chins, incoming, msg, updateset, vc, seq>>
+-----------------------------------------------------------------------------  
 vector == [Replica -> Nat]
  
 Msg == [r : Replica, vc: vector, seq : Nat, tombbuf : SUBSET node, insbuf : SUBSET Char]
------------------------------------------------------------------------------
+
 List == Seq(Char) 
 
+RECURSIVE maxtime(_,_)
+maxtime(tr, curmax) == IF tr = {} THEN curmax
+                         ELSE  LET t == CHOOSE x \in tree: TRUE
+                         IN maxtime(tr\{t}, Setmax(t.ts, curmax))
+-----------------------------------------------------------------------------
 Network == INSTANCE CausalNetwork                     
 -----------------------------------------------------------------------------
-TypeOK == /\ tcurrent \in 1..Charnum + 1
-          /\ tree \in [Replica -> SUBSET node]
-          /\ tomb \in [Replica -> SUBSET Char]
-          /\ insbuf \in [Replica -> SUBSET node]
-          /\ tombbuf \in [Replica -> SUBSET Char]
-          /\ chins \in SUBSET Char
+TypeOK == 
+    /\ tree \in [Replica -> SUBSET node]
+    /\ tomb \in [Replica -> SUBSET Char]
+    /\ insbuf \in [Replica -> SUBSET node]
+    /\ tombbuf \in [Replica -> SUBSET Char]
+    /\ chins \in SUBSET Char
 -----------------------------------------------------------------------------         
                       
 Init == 
@@ -41,18 +43,18 @@ Init ==
     /\ insbuf = [r \in Replica |-> {}]
     /\ tombbuf = [r \in Replica |-> {}]
     /\ chins = Char
-    /\ tcurrent = 1
+    /\ seq = [r \in Replica |-> 0]
 
     
 DoIns(r) ==
     \E ins \in node:
         /\ ins.parent \in Readtree2set(tree[r]) \cup {"o"}
-        /\ ins.time  = tcurrent
-        /\ tcurrent' = tcurrent + 1
+        /\ ins.ts  = maxtime(tree[r],[r |-> r, time |-> 0])
         /\ ins.ch \in chins
         /\ chins' = chins \ {ins.ch} 
         /\ tree' =  [tree  EXCEPT![r] = @ \cup {ins}] 
         /\ insbuf' = [insbuf EXCEPT![r] = @ \cup {ins}] 
+        /\ seq' = [seq EXCEPT ![r] = @ + 1]
         /\ UNCHANGED <<incoming, msg, updateset, vc, tomb, tombbuf>>
 
 
@@ -60,9 +62,9 @@ DoDel(r) ==
     \E del \in Char:
         /\ del \in Readtree2set(tree[r])
         /\ ~ del \in tomb[r]
-        /\ tcurrent' = tcurrent + 1
         /\ tomb' = [tomb EXCEPT ![r] = @ \cup {del}] 
         /\ tombbuf' = [tombbuf EXCEPT ![r] = @ \cup {del}] 
+        /\ seq' = [seq EXCEPT ![r] = @ + 1]
         /\ UNCHANGED <<chins, tree, insbuf, incoming, msg, updateset, vc>>
 (* 
 do transitions
@@ -75,10 +77,10 @@ Do(r) ==
 send transitions
 *)     
 Send(r) ==
-     /\ Network!Broadcast(r, [r |-> r, seq |-> tcurrent, vc |-> [vc EXCEPT ![r][r] = @ + 1][r], tombbuf |-> tombbuf[r], insbuf |-> insbuf[r]])
+     /\ Network!Broadcast(r, [r |-> r, seq |-> seq[r], vc |-> [vc EXCEPT ![r][r] = @ + 1][r], tombbuf |-> tombbuf[r], insbuf |-> insbuf[r]])
      /\ tombbuf' = [tombbuf EXCEPT ![r] = {}]
      /\ insbuf' = [insbuf EXCEPT![r] = {}] 
-     /\ UNCHANGED <<chins, tcurrent, tree, tomb>>
+     /\ UNCHANGED <<chins, seq, tree, tomb>>
 
 (* 
 receive transitions
@@ -87,7 +89,7 @@ Receive(r) ==
     /\ Network!Deliver(r)
     /\ tree' =  [tree  EXCEPT![r] = @ \cup msg'[r].insbuf] 
     /\ tomb' = [tomb EXCEPT ![r] = @ \cup msg'[r].tombbuf]
-    /\ UNCHANGED <<chins, tcurrent, tombbuf, insbuf>> 
+    /\ UNCHANGED <<chins, seq, tombbuf, insbuf>> 
 -----------------------------------------------------------------------------
 Next == 
    \E r \in Replica: Do(r) \/ Send(r)\/ Receive(r)
@@ -109,6 +111,6 @@ SEC == \E r1, r2 \in Replica : Network!Sameupdate(r1, r2)
             => Readtree2list(tree[r1],"o",tomb[r1],{})= Readtree2list(tree[r2],"o",tomb[r2],{})                        
 =============================================================================
 \* Modification History
-\* Last modified Tue Apr 16 21:26:15 CST 2019 by jywellin
+\* Last modified Tue Apr 16 22:30:22 CST 2019 by jywellin
 \* Last modified Thu Jan 10 15:34:04 CST 2019 by jywellins
 \* Created Tue Nov 06 15:55:23 CST 2018 by xhdn

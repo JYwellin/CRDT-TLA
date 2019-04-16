@@ -1,10 +1,19 @@
 ----------------------------- MODULE InsertTree -----------------------------
 EXTENDS Integers,Sequences,Naturals,TLC
 -----------------------------------------------------------------------------
-CONSTANT Char,Charnum
+CONSTANT 
+    Char,
+    Charnum,
+    Replica
 -----------------------------------------------------------------------------
-node == [ch: Char, time: Int, parent:Char \cup {"o"}]  
+ts == [r : Replica, time : Nat]
+node == [ch: Char, ts: ts, parent:Char \cup {"o"}]  
 
+Ge(ts1, ts2) == IF ts1.time > ts2.time THEN TRUE
+                                       ELSE IF ts1.r > ts2.r /\ ts1.time = ts2.time THEN TRUE
+                                                                                    ELSE FALSE
+                               
+Setmax(ts1, ts2) == IF Ge(ts1, ts2) THEN ts1 ELSE ts2
 \*nodechar == <<"o">>
 RECURSIVE Readtree2set(_)
 Readtree2set(T) == IF T = {} THEN {}
@@ -19,11 +28,11 @@ Createtree(num,tree) == IF num = 0 THEN tree
 
 RECURSIVE max(_,_,_,_)
 max(T,root,curmax,readchar) == 
-    CASE  \E i \in T : i.parent = root /\ i.time > curmax /\ ~ i.ch \in readchar ->
-        LET i == CHOOSE x \in T :  x.parent = root /\ x.time > curmax /\ ~ x.ch \in readchar
+    CASE  \E i \in T : i.parent = root /\ Ge(i.time, curmax) /\ ~ i.ch \in readchar ->
+        LET i == CHOOSE x \in T :  x.parent = root /\ Ge(x.time, curmax) /\ ~ x.ch \in readchar
             IN  max(T \{i},root,i.time,readchar)
-    []    \E i \in T : i.parent = root /\ i.time <= curmax /\ ~ i.ch \in readchar -> 
-        LET i == CHOOSE x \in T :  x.parent = root /\ x.time <= curmax /\ ~ x.ch \in readchar
+    []    \E i \in T : i.parent = root /\ ~ Ge(i.time, curmax) /\ ~ i.ch \in readchar -> 
+        LET i == CHOOSE x \in T :  x.parent = root /\ ~ Ge(x.time, curmax) /\ ~ x.ch \in readchar
             IN  max(T \{i},root,curmax,readchar)
     [] OTHER -> curmax
     
@@ -47,5 +56,5 @@ Readtree2list(T,root,tomb,readchar) ==
 \* Readtree2list(Createtree(3,{}),"o",{},{})
 =============================================================================
 \* Modification History
-\* Last modified Tue Apr 16 21:20:48 CST 2019 by jywellin
+\* Last modified Tue Apr 16 22:23:01 CST 2019 by jywellin
 \* Created Fri Nov 30 15:07:41 CST 2018 by jywellin

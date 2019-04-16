@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.lamport.tla.toolbox.tool.tlc.modelCheck">
 <stringAttribute key="TLCCmdLineParameters" value=""/>
-<stringAttribute key="configurationName" value="Model_1"/>
+<stringAttribute key="configurationName" value="Model_1_SnapShot_1555424498525"/>
 <booleanAttribute key="deferLiveness" value="false"/>
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
@@ -11,7 +11,7 @@
 <stringAttribute key="distributedTLC" value="off"/>
 <stringAttribute key="distributedTLCVMArgs" value=""/>
 <intAttribute key="fpBits" value="1"/>
-<intAttribute key="fpIndex" value="118"/>
+<intAttribute key="fpIndex" value="44"/>
 <booleanAttribute key="fpIndexRandom" value="true"/>
 <intAttribute key="maxHeapSize" value="25"/>
 <intAttribute key="maxSetSize" value="1000000"/>
@@ -20,7 +20,7 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="seq, chins, msg, tombbuf, updateset, tree, tomb, insbuf, incoming, vc"/>
+<stringAttribute key="modelBehaviorVars" value="chins, msg, tombbuf, tcurrent, updateset, tree, tomb, insbuf, incoming, vc"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
@@ -39,7 +39,7 @@
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">
 <listEntry value="Network!NotMsg;;Network!NotMsg;1;0"/>
-<listEntry value="Nat;;1..10;0;0"/>
+<listEntry value="Int;;1..10;0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>
