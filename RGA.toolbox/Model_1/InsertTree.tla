@@ -8,7 +8,7 @@ CONSTANT
 -----------------------------------------------------------------------------
 ts == [r : Replica, time : Nat]
 node == [ch: Char, ts: ts, parent:Char \cup {"o"}]  
-id ==[r1 |-> 1, r2 |->2, r3 |->3]
+id ==[r1 |-> 1, r2 |-> 2, r3 |-> 3, r4 |-> 4, r5 |-> 5]
 
 Ge(ts1, ts2) == IF ts1.time > ts2.time THEN TRUE
                                        ELSE IF id[ts1.r] > id[ts2.r] /\ ts1.time = ts2.time THEN TRUE
@@ -59,6 +59,6 @@ Readtree2list(T,root,tomb,readchar) ==
 \* Readtree2list(Createtree(3,{}),"o",{},{})
 =============================================================================
 \* Modification History
-\* Last modified Wed Apr 17 17:45:02 CST 2019 by xhdn
+\* Last modified Wed Apr 17 18:45:47 CST 2019 by xhdn
 \* Last modified Tue Apr 16 22:23:01 CST 2019 by jywellin
 \* Created Fri Nov 30 15:07:41 CST 2018 by jywellin

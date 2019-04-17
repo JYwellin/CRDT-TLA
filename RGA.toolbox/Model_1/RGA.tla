@@ -1,5 +1,5 @@
 -------------------------------- MODULE RGA --------------------------------
-EXTENDS Integers,Sequences,Naturals,TLC,InsertTree
+EXTENDS Integers, Sequences, Naturals, TLC, InsertTree
 -----------------------------------------------------------------------------      
 VARIABLES 
     tree,
@@ -113,7 +113,7 @@ SEC == \E r1, r2 \in Replica : Network!Sameupdate(r1, r2)
             => Readtree2list(tree[r1],"o",tomb[r1],{})= Readtree2list(tree[r2],"o",tomb[r2],{})                        
 =============================================================================
 \* Modification History
-\* Last modified Wed Apr 17 17:45:35 CST 2019 by xhdn
+\* Last modified Wed Apr 17 18:49:43 CST 2019 by xhdn
 \* Last modified Tue Apr 16 22:30:22 CST 2019 by jywellin
 \* Last modified Thu Jan 10 15:34:04 CST 2019 by jywellins
 \* Created Tue Nov 06 15:55:23 CST 2018 by xhdn
