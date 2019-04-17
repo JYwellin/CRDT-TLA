@@ -23,7 +23,7 @@ List == Seq(Char)
 
 RECURSIVE maxtime(_,_)
 maxtime(tr, curmax) == IF tr = {} THEN curmax
-                         ELSE  LET t == CHOOSE x \in tr: TRUE
+                         ELSE  LET t == CHOOSE x \in tree: TRUE
                          IN maxtime(tr\{t}, Nummax((t.ts).time, curmax))
 -----------------------------------------------------------------------------
 Network == INSTANCE CausalNetwork                     
@@ -49,7 +49,7 @@ Init ==
 DoIns(r) ==
     \E ins \in node:
         /\ ins.parent \in Readtree2set(tree[r]) \cup {"o"}
-        /\ ins.ts  = [r|->r, time |->maxtime(tree[r], 1)]
+        /\ ins.ts  = [r|->r, time |->maxtime(tree[r], 0)]
         /\ ins.ch \in chins
         /\ chins' = chins \ {ins.ch} 
         /\ tree' =  [tree  EXCEPT![r] = @ \cup {ins}] 
@@ -113,7 +113,7 @@ SEC == \E r1, r2 \in Replica : Network!Sameupdate(r1, r2)
             => Readtree2list(tree[r1],"o",tomb[r1],{})= Readtree2list(tree[r2],"o",tomb[r2],{})                        
 =============================================================================
 \* Modification History
-\* Last modified Wed Apr 17 17:45:35 CST 2019 by xhdn
+\* Last modified Wed Apr 17 17:24:59 CST 2019 by xhdn
 \* Last modified Tue Apr 16 22:30:22 CST 2019 by jywellin
 \* Last modified Thu Jan 10 15:34:04 CST 2019 by jywellins
 \* Created Tue Nov 06 15:55:23 CST 2018 by xhdn

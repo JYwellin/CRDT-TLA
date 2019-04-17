@@ -2,7 +2,7 @@
 TLC2 Version 2.13 of 18 July 2018
 @!@!@ENDMSG 2262 @!@!@
 @!@!@STARTMSG 2187:0 @!@!@
-Running breadth-first search Model-Checking with seed 2851632490317276152 with 4 workers on 4 cores with 297MB heap and 664MB offheap memory (Windows 10 10.0 amd64, Oracle Corporation 1.8.0_201 x86_64).
+Running breadth-first search Model-Checking with seed 3884784777034990158 with 4 workers on 4 cores with 297MB heap and 664MB offheap memory (Windows 10 10.0 amd64, Oracle Corporation 1.8.0_201 x86_64).
 @!@!@ENDMSG 2187 @!@!@
 @!@!@STARTMSG 2220:0 @!@!@
 Starting SANY...
@@ -31,7 +31,7 @@ Semantic processing of module MC
 SANY finished.
 @!@!@ENDMSG 2219 @!@!@
 @!@!@STARTMSG 2185:0 @!@!@
-Starting... (2019-04-17 17:48:06)
+Starting... (2019-04-17 17:45:43)
 @!@!@ENDMSG 2185 @!@!@
 <<"$!@$!@$!@$!@$!", FALSE>>
 @!@!@STARTMSG 2189:0 @!@!@
@@ -40,151 +40,154 @@ Computing initial states...
 @!@!@STARTMSG 2190:0 @!@!@
 Finished computing initial states: 1 distinct state generated.
 @!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(12) at 2019-04-17 17:45:47: 929 states generated (929 s/min), 512 distinct states found (512 ds/min), 161 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
 @!@!@STARTMSG 2193:0 @!@!@
 Model checking completed. No error has been found.
   Estimates of the probability that TLC did not check all reachable states
   because two distinct states had the same fingerprint:
-  calculated (optimistic):  val = 4.8E-17
-  based on the actual fingerprints:  val = 5.0E-16
+  calculated (optimistic):  val = 2.9E-13
+  based on the actual fingerprints:  val = 2.9E-13
 @!@!@ENDMSG 2193 @!@!@
 @!@!@STARTMSG 2201:0 @!@!@
-The coverage statistics at 2019-04-17 17:48:11
+The coverage statistics at 2019-04-17 17:45:55
 @!@!@ENDMSG 2201 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 14, col 23 to line 14, col 55 of module CausalNetwork: 24
+  line 14, col 23 to line 14, col 55 of module CausalNetwork: 528
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 21, col 8 to line 24, col 50 of module Network: 24
+  line 21, col 8 to line 24, col 50 of module Network: 528
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 24, col 13 to line 24, col 47 of module CausalNetwork: 28
+  line 24, col 13 to line 24, col 47 of module CausalNetwork: 3882
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 25, col 13 to line 25, col 40 of module CausalNetwork: 28
+  line 25, col 13 to line 25, col 40 of module CausalNetwork: 3882
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 25, col 8 to line 25, col 56 of module Network: 24
+  line 25, col 8 to line 25, col 56 of module Network: 528
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 26, col 13 to line 26, col 56 of module CausalNetwork: 28
+  line 26, col 13 to line 26, col 56 of module CausalNetwork: 3882
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 26, col 20 to line 26, col 22 of module Network: 24
+  line 26, col 20 to line 26, col 22 of module Network: 528
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 27, col 13 to line 27, col 61 of module CausalNetwork: 28
+  line 27, col 13 to line 27, col 61 of module CausalNetwork: 3882
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 54, col 12 to line 54, col 36 of module RGA: 2
+  line 54, col 12 to line 54, col 36 of module RGA: 3
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 55, col 12 to line 55, col 53 of module RGA: 2
+  line 55, col 12 to line 55, col 53 of module RGA: 3
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 56, col 12 to line 56, col 55 of module RGA: 2
+  line 56, col 12 to line 56, col 55 of module RGA: 3
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 57, col 12 to line 57, col 43 of module RGA: 2
+  line 57, col 12 to line 57, col 43 of module RGA: 3
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 58, col 24 to line 58, col 31 of module RGA: 2
+  line 58, col 24 to line 58, col 31 of module RGA: 3
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 58, col 34 to line 58, col 36 of module RGA: 2
+  line 58, col 34 to line 58, col 36 of module RGA: 3
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 58, col 39 to line 58, col 47 of module RGA: 2
+  line 58, col 39 to line 58, col 47 of module RGA: 3
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 58, col 50 to line 58, col 51 of module RGA: 2
+  line 58, col 50 to line 58, col 51 of module RGA: 3
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 58, col 54 to line 58, col 57 of module RGA: 2
+  line 58, col 54 to line 58, col 57 of module RGA: 3
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 58, col 60 to line 58, col 66 of module RGA: 2
+  line 58, col 60 to line 58, col 66 of module RGA: 3
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 65, col 12 to line 65, col 52 of module RGA: 16
+  line 65, col 12 to line 65, col 52 of module RGA: 222
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 66, col 12 to line 66, col 58 of module RGA: 16
+  line 66, col 12 to line 66, col 58 of module RGA: 222
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 67, col 12 to line 67, col 43 of module RGA: 16
+  line 67, col 12 to line 67, col 43 of module RGA: 222
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 68, col 24 to line 68, col 28 of module RGA: 16
+  line 68, col 24 to line 68, col 28 of module RGA: 222
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 68, col 31 to line 68, col 34 of module RGA: 16
+  line 68, col 31 to line 68, col 34 of module RGA: 222
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 68, col 37 to line 68, col 42 of module RGA: 16
+  line 68, col 37 to line 68, col 42 of module RGA: 222
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 68, col 45 to line 68, col 52 of module RGA: 16
+  line 68, col 45 to line 68, col 52 of module RGA: 222
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 68, col 55 to line 68, col 57 of module RGA: 16
+  line 68, col 55 to line 68, col 57 of module RGA: 222
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 68, col 60 to line 68, col 68 of module RGA: 16
+  line 68, col 60 to line 68, col 68 of module RGA: 222
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 68, col 71 to line 68, col 72 of module RGA: 16
+  line 68, col 71 to line 68, col 72 of module RGA: 222
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 83, col 9 to line 83, col 45 of module RGA: 24
+  line 83, col 9 to line 83, col 45 of module RGA: 528
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 84, col 9 to line 84, col 42 of module RGA: 24
+  line 84, col 9 to line 84, col 42 of module RGA: 528
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 85, col 21 to line 85, col 25 of module RGA: 24
+  line 85, col 21 to line 85, col 25 of module RGA: 528
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 85, col 28 to line 85, col 30 of module RGA: 24
+  line 85, col 28 to line 85, col 30 of module RGA: 528
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 85, col 33 to line 85, col 36 of module RGA: 24
+  line 85, col 33 to line 85, col 36 of module RGA: 528
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 85, col 39 to line 85, col 42 of module RGA: 24
+  line 85, col 39 to line 85, col 42 of module RGA: 528
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 92, col 8 to line 92, col 58 of module RGA: 28
+  line 92, col 8 to line 92, col 58 of module RGA: 3882
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 93, col 8 to line 93, col 58 of module RGA: 28
+  line 93, col 8 to line 93, col 58 of module RGA: 3882
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 94, col 20 to line 94, col 24 of module RGA: 28
+  line 94, col 20 to line 94, col 24 of module RGA: 3882
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 94, col 27 to line 94, col 29 of module RGA: 28
+  line 94, col 27 to line 94, col 29 of module RGA: 3882
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 94, col 32 to line 94, col 38 of module RGA: 28
+  line 94, col 32 to line 94, col 38 of module RGA: 3882
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 94, col 41 to line 94, col 46 of module RGA: 28
+  line 94, col 41 to line 94, col 46 of module RGA: 3882
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2202:0 @!@!@
 End of statistics.
 @!@!@ENDMSG 2202 @!@!@
 @!@!@STARTMSG 2200:0 @!@!@
-Progress(10) at 2019-04-17 17:48:11: 71 states generated (1,018 s/min), 55 distinct states found (789 ds/min), 0 states left on queue.
+Progress(17) at 2019-04-17 17:45:55: 4636 states generated (24,587 s/min), 2257 distinct states found (11,970 ds/min), 0 states left on queue.
 @!@!@ENDMSG 2200 @!@!@
 @!@!@STARTMSG 2199:0 @!@!@
-71 states generated, 55 distinct states found, 0 states left on queue.
+4636 states generated, 2257 distinct states found, 0 states left on queue.
 @!@!@ENDMSG 2199 @!@!@
 @!@!@STARTMSG 2194:0 @!@!@
-The depth of the complete state graph search is 10.
+The depth of the complete state graph search is 17.
 @!@!@ENDMSG 2194 @!@!@
 @!@!@STARTMSG 2268:0 @!@!@
-The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 2 and the 95th percentile is 2).
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 5 and the 95th percentile is 3).
 @!@!@ENDMSG 2268 @!@!@
 @!@!@STARTMSG 2186:0 @!@!@
-Finished in 5369ms at (2019-04-17 17:48:11)
+Finished in 12676ms at (2019-04-17 17:45:55)
 @!@!@ENDMSG 2186 @!@!@

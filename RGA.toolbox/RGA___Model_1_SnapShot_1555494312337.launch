@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.lamport.tla.toolbox.tool.tlc.modelCheck">
 <stringAttribute key="TLCCmdLineParameters" value=""/>
-<stringAttribute key="configurationName" value="Model_1"/>
+<stringAttribute key="configurationName" value="Model_1_SnapShot_1555494312337"/>
 <booleanAttribute key="deferLiveness" value="false"/>
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
@@ -34,7 +34,7 @@
 <listAttribute key="modelParameterConstants">
 <listEntry value="Charnum;;1;0;0"/>
 <listEntry value="Char;;{&quot;a&quot;};0;0"/>
-<listEntry value="Replica;;{&quot;r1&quot;, &quot;r2&quot;};0;1"/>
+<listEntry value="Replica;;{&quot;r1&quot;, &quot;r2&quot;, &quot;r3&quot;};0;1"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">
@@ -51,5 +51,5 @@
 <intAttribute key="simuSeed" value="-1"/>
 <stringAttribute key="specName" value="RGA"/>
 <stringAttribute key="view" value=""/>
-<booleanAttribute key="visualizeStateGraph" value="true"/>
+<booleanAttribute key="visualizeStateGraph" value="false"/>
 </launchConfiguration>

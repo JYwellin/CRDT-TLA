@@ -1,0 +1,231 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.13 of 18 July 2018
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with seed -6237775837087028623 with 4 workers on 4 cores with 297MB heap and 664MB offheap memory (Windows 10 10.0 amd64, Oracle Corporation 1.8.0_201 x86_64).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\RGA.toolbox\Model_1\MC.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\RGA.toolbox\Model_1\RGA.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\TLC.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\Integers.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\Sequences.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\Naturals.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\RGA.toolbox\Model_1\InsertTree.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\RGA.toolbox\Model_1\CausalNetwork.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT\RGA.toolbox\Model_1\Network.tla
+Parsing file C:\Users\xhdn\Desktop\编程\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Integers
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module InsertTree
+Semantic processing of module Network
+Semantic processing of module CausalNetwork
+Semantic processing of module RGA
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2019-04-17 17:44:39)
+@!@!@ENDMSG 2185 @!@!@
+<<"$!@$!@$!@$!@$!", FALSE>>
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2111:1 @!@!@
+Evaluating invariant inv_1555494278184249000 failed.
+Attempted to select nonexistent field "time" from the record
+[ts |-> [r |-> "r1", time |-> 1], parent |-> "o", ch |-> "a"]
+line 34, col 46 to line 34, col 51 of module InsertTree
+@!@!@ENDMSG 2111 @!@!@
+@!@!@STARTMSG 2121:1 @!@!@
+The behavior up to this point is:
+@!@!@ENDMSG 2121 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+1: <Initial predicate>
+/\ seq = [r1 |-> 0, r2 |-> 0, r3 |-> 0]
+/\ chins = {"a"}
+/\ msg = [r1 |-> NotMsg, r2 |-> NotMsg, r3 |-> NotMsg]
+/\ tombbuf = [r1 |-> {}, r2 |-> {}, r3 |-> {}]
+/\ updateset = [r1 |-> {}, r2 |-> {}, r3 |-> {}]
+/\ tree = [r1 |-> {}, r2 |-> {}, r3 |-> {}]
+/\ tomb = [r1 |-> {}, r2 |-> {}, r3 |-> {}]
+/\ insbuf = [r1 |-> {}, r2 |-> {}, r3 |-> {}]
+/\ incoming = [r1 |-> {}, r2 |-> {}, r3 |-> {}]
+/\ vc = [ r1 |-> [r1 |-> 0, r2 |-> 0, r3 |-> 0],
+  r2 |-> [r1 |-> 0, r2 |-> 0, r3 |-> 0],
+  r3 |-> [r1 |-> 0, r2 |-> 0, r3 |-> 0] ]
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+2: <DoIns line 51, col 9 to line 58, col 68 of module RGA>
+/\ seq = [r1 |-> 1, r2 |-> 0, r3 |-> 0]
+/\ chins = {}
+/\ msg = [r1 |-> NotMsg, r2 |-> NotMsg, r3 |-> NotMsg]
+/\ tombbuf = [r1 |-> {}, r2 |-> {}, r3 |-> {}]
+/\ updateset = [r1 |-> {}, r2 |-> {}, r3 |-> {}]
+/\ tree = [ r1 |-> {[ts |-> [r |-> "r1", time |-> 1], parent |-> "o", ch |-> "a"]},
+  r2 |-> {},
+  r3 |-> {} ]
+/\ tomb = [r1 |-> {}, r2 |-> {}, r3 |-> {}]
+/\ insbuf = [ r1 |-> {[ts |-> [r |-> "r1", time |-> 1], parent |-> "o", ch |-> "a"]},
+  r2 |-> {},
+  r3 |-> {} ]
+/\ incoming = [r1 |-> {}, r2 |-> {}, r3 |-> {}]
+/\ vc = [ r1 |-> [r1 |-> 0, r2 |-> 0, r3 |-> 0],
+  r2 |-> [r1 |-> 0, r2 |-> 0, r3 |-> 0],
+  r3 |-> [r1 |-> 0, r2 |-> 0, r3 |-> 0] ]
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2103:1 @!@!@
+The error occurred when TLC was evaluating the nested
+expressions at the following positions:
+    The error call stack is empty.
+
+@!@!@ENDMSG 2103 @!@!@
+@!@!@STARTMSG 2201:0 @!@!@
+The coverage statistics at 2019-04-17 17:44:41
+@!@!@ENDMSG 2201 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 14, col 23 to line 14, col 55 of module CausalNetwork: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 21, col 8 to line 24, col 50 of module Network: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 24, col 13 to line 24, col 47 of module CausalNetwork: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 25, col 13 to line 25, col 40 of module CausalNetwork: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 25, col 8 to line 25, col 56 of module Network: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 26, col 13 to line 26, col 56 of module CausalNetwork: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 26, col 20 to line 26, col 22 of module Network: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 27, col 13 to line 27, col 61 of module CausalNetwork: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 54, col 12 to line 54, col 36 of module RGA: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 55, col 12 to line 55, col 53 of module RGA: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 56, col 12 to line 56, col 55 of module RGA: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 57, col 12 to line 57, col 43 of module RGA: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 58, col 24 to line 58, col 31 of module RGA: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 58, col 34 to line 58, col 36 of module RGA: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 58, col 39 to line 58, col 47 of module RGA: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 58, col 50 to line 58, col 51 of module RGA: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 58, col 54 to line 58, col 57 of module RGA: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 58, col 60 to line 58, col 66 of module RGA: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 65, col 12 to line 65, col 52 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 66, col 12 to line 66, col 58 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 67, col 12 to line 67, col 43 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 68, col 24 to line 68, col 28 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 68, col 31 to line 68, col 34 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 68, col 37 to line 68, col 42 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 68, col 45 to line 68, col 52 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 68, col 55 to line 68, col 57 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 68, col 60 to line 68, col 68 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 68, col 71 to line 68, col 72 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 83, col 9 to line 83, col 45 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 84, col 9 to line 84, col 42 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 85, col 21 to line 85, col 25 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 85, col 28 to line 85, col 30 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 85, col 33 to line 85, col 36 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 85, col 39 to line 85, col 42 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 92, col 8 to line 92, col 58 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 93, col 8 to line 93, col 58 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 94, col 20 to line 94, col 24 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 94, col 27 to line 94, col 29 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 94, col 32 to line 94, col 38 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 94, col 41 to line 94, col 46 of module RGA: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2202:0 @!@!@
+End of statistics.
+@!@!@ENDMSG 2202 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(2) at 2019-04-17 17:44:41: 2 states generated (71 s/min), 3 distinct states found (106 ds/min), 0 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2199:0 @!@!@
+2 states generated, 3 distinct states found, 0 states left on queue.
+@!@!@ENDMSG 2199 @!@!@
+@!@!@STARTMSG 2194:0 @!@!@
+The depth of the complete state graph search is 2.
+@!@!@ENDMSG 2194 @!@!@
+@!@!@STARTMSG 2186:0 @!@!@
+Finished in 2913ms at (2019-04-17 17:44:41)
+@!@!@ENDMSG 2186 @!@!@

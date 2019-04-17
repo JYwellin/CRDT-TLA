@@ -31,11 +31,11 @@ Createtree(num,tree) == IF num = 0 THEN tree
 
 RECURSIVE max(_,_,_,_)
 max(T,root,curmax,readchar) == 
-    CASE  \E i \in T : i.parent = root /\ Ge(i.ts, curmax) /\ ~ i.ch \in readchar ->
-        LET i == CHOOSE x \in T :  x.parent = root /\ Ge(x.ts, curmax) /\ ~ x.ch \in readchar
+    CASE  \E i \in T : i.parent = root /\ Ge(i.time, curmax) /\ ~ i.ch \in readchar ->
+        LET i == CHOOSE x \in T :  x.parent = root /\ Ge(x.time, curmax) /\ ~ x.ch \in readchar
             IN  max(T \{i}, root, i.ts, readchar)
-    []    \E i \in T : i.parent = root /\ ~ Ge(i.ts, curmax) /\ ~ i.ch \in readchar -> 
-        LET i == CHOOSE x \in T :  x.parent = root /\ ~ Ge(x.ts, curmax) /\ ~ x.ch \in readchar
+    []    \E i \in T : i.parent = root /\ ~ Ge(i.time, curmax) /\ ~ i.ch \in readchar -> 
+        LET i == CHOOSE x \in T :  x.parent = root /\ ~ Ge(x.time, curmax) /\ ~ x.ch \in readchar
             IN  max(T \{i}, root, curmax, readchar)
     [] OTHER -> curmax
     
@@ -59,6 +59,6 @@ Readtree2list(T,root,tomb,readchar) ==
 \* Readtree2list(Createtree(3,{}),"o",{},{})
 =============================================================================
 \* Modification History
-\* Last modified Wed Apr 17 17:45:02 CST 2019 by xhdn
+\* Last modified Wed Apr 17 17:44:35 CST 2019 by xhdn
 \* Last modified Tue Apr 16 22:23:01 CST 2019 by jywellin
 \* Created Fri Nov 30 15:07:41 CST 2018 by jywellin
