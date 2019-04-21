@@ -33,7 +33,7 @@ NDeliver(r) ==
     /\ incoming[r] # EmptyBag
     /\ \E m \in BagToSet(incoming[r]):
          /\ msg' = [msg EXCEPT ![r] = m]
-         /\ updateset' = [updateset EXCEPT ![r] = @ \cup {m}]
+         /\ updateset' = [updateset EXCEPT ![r] = @ (-) SetToBag({m})]
     /\ UNCHANGED <<incoming>>        
 -----------------------------------------------------------------------------                          
 EmptyChannel ==  
@@ -45,6 +45,6 @@ Sameupdate(r1, r2) ==
 \* judge if two replicas receive the same set of update operations                      
 =============================================================================
 \* Modification History
-\* Last modified Sun Apr 21 21:44:03 CST 2019 by xhdn
+\* Last modified Sun Apr 21 21:40:53 CST 2019 by xhdn
 \* Last modified Tue Apr 16 17:31:52 CST 2019 by jywellin
 \* Created Mon Mar 25 20:24:02 CST 2019 by jywellin

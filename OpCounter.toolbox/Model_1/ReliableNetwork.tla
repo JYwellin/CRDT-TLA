@@ -3,16 +3,17 @@ EXTENDS Network
 -----------------------------------------------------------------------------
 Init == NInit
 
-Broadcast(r, m) == NBroadcast(r, m)
+Broadcast(r, m) == 
+    /\ incoming' = [x \in Replica |->
+                        IF x = r
+                        THEN incoming[x]
+                        ELSE incoming[r] (+) SetToBag({m})]
+    /\ updateset' = [updateset EXCEPT ![r] = @ \cup {m}]                            
+    /\ UNCHANGED <<msg>>
 
-Deliver(r) == 
-    /\ incoming[r] # {}
-    /\ \E m \in incoming[r]:
-        (/\ msg' = [msg EXCEPT ![r] = m]
-         /\ incoming' = [incoming EXCEPT ![r] = @ \ {m}]
-         /\ updateset' = [updateset EXCEPT ![r] = @ \cup {m}])
+Deliver(r) == NDeliver(r)
 =============================================================================
 \* Modification History
+\* Last modified Sun Apr 21 21:41:29 CST 2019 by xhdn
 \* Last modified Mon Apr 15 14:04:16 CST 2019 by jywellin
-\* Last modified Tue Apr 02 20:57:30 CST 2019 by xhdn
 \* Created Wed Mar 27 16:45:34 CST 2019 by jywellin
