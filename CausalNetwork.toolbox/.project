@@ -23,12 +23,12 @@
 		<link>
 			<name>Message.tla</name>
 			<type>1</type>
-			<location>C:/Users/xhdn/Documents/GitHub/CRDT/Message.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/Message.tla</locationURI>
 		</link>
 		<link>
 			<name>Network.tla</name>
 			<type>1</type>
-			<location>C:/Users/jywellin/Documents/GitHub/CRDT/Network.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/Network.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
