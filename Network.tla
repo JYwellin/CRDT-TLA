@@ -1,5 +1,5 @@
 ------------------------------ MODULE Network ------------------------------
-EXTENDS Message, Bags
+EXTENDS Bags, Message
 -----------------------------------------------------------------------------
 CONSTANTS 
     Replica,
@@ -45,6 +45,6 @@ Sameupdate(r1, r2) ==
 \* judge if two replicas receive the same set of update operations                      
 =============================================================================
 \* Modification History
+\* Last modified Mon Apr 22 22:21:37 CST 2019 by jywellin
 \* Last modified Sun Apr 21 21:44:03 CST 2019 by xhdn
-\* Last modified Tue Apr 16 17:31:52 CST 2019 by jywellin
 \* Created Mon Mar 25 20:24:02 CST 2019 by jywellin
