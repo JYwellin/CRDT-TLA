@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>OptimizedAWSet</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>toolbox.builder.TLAParserBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>toolbox.natures.TLANature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Message.tla</name>
+			<type>1</type>
+			<location>/Users/jywellin/CRDT-TLA/Message.tla</location>
+		</link>
+		<link>
+			<name>Network.tla</name>
+			<type>1</type>
+			<location>/Users/jywellin/CRDT-TLA/Network.tla</location>
+		</link>
+		<link>
+			<name>OptimizedAWSet.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/OptimizedAWSet.tla</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>

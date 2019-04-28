@@ -1,19 +1,15 @@
 ------------------------------ MODULE Network ------------------------------
-CONSTANTS 
-    Replica,
-    Msg
-    
-NotMsg == CHOOSE m : m \notin Msg
+EXTENDS Bags, Message
 -----------------------------------------------------------------------------
 VARIABLES
     incoming,
-    msg,
-    updateset
+    msg
     
 vars == <<incoming, msg, updateset>>
 -----------------------------------------------------------------------------
 NInit == 
-    /\ incoming = [r \in Replica |-> {}]
+    /\ Minit
+    /\ incoming = [r \in Replica |-> EmptyBag]
     /\ updateset = [r \in Replica |-> {}]
     /\ msg = [r \in Replica |-> NotMsg]
 
@@ -21,26 +17,23 @@ NBroadcast(r, m) ==
     /\ incoming' = [x \in Replica |->
                         IF x = r
                         THEN incoming[x]
-                        ELSE incoming[x] \cup {m}]
-    /\ updateset' = [updateset EXCEPT ![r] = @ \cup {m}]                            
+                        ELSE incoming[r] (+) SetToBag({m}) ]
+    /\ AddUpdate(r, m)                           
     /\ UNCHANGED <<msg>>
 
 NDeliver(r) == 
-    /\ incoming[r] # {}
-    /\ \E m \in incoming[r]:
+    /\ incoming[r] # EmptyBag
+    /\ \E m \in BagToSet(incoming[r]):
          /\ msg' = [msg EXCEPT ![r] = m]
-         /\ updateset' = [updateset EXCEPT ![r] = @ \cup {m}]
+         /\ AddUpdate(r, m)
     /\ UNCHANGED <<incoming>>        
 -----------------------------------------------------------------------------                          
 EmptyChannel ==  
-    incoming = [r \in Replica |-> {}]
-
-Sameupdate(r1, r2) == 
-    updateset[r2] = updateset[r2]
+    incoming = [r \in Replica |-> EmptyBag]
 
 \* judge if two replicas receive the same set of update operations                      
 =============================================================================
 \* Modification History
-\* Last modified Tue Apr 16 17:31:52 CST 2019 by jywellin
-\* Last modified Tue Apr 02 21:22:15 CST 2019 by xhdn
+\* Last modified Sun Apr 28 14:05:56 CST 2019 by jywellin
+\* Last modified Sun Apr 21 21:44:03 CST 2019 by xhdn
 \* Created Mon Mar 25 20:24:02 CST 2019 by jywellin

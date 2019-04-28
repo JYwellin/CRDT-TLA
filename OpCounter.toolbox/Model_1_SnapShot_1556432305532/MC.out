@@ -1,0 +1,9 @@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated at 2019-04-28 14:17:50.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(15) at 2019-04-28 14:17:53: 700997 states generated (700,997 s/min), 271512 distinct states found (271,512 ds/min), 177808 states left on queue.
+@!@!@ENDMSG 2200 @!@!@

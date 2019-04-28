@@ -28,7 +28,7 @@ TypeOK ==
  
 -----------------------------------------------------------------------------       
 Init == 
-    /\ Network!Init
+    /\ Network!RInit
     /\ seq = [r \in Replica |-> 0]
     /\ counter = [r \in Replica |-> 0 ]
     /\ buffer = [r \in Replica |-> 0 ]
@@ -44,11 +44,11 @@ Inc(r) ==
 Send(r) ==  
     /\ buffer[r] # 0
     /\ buffer' = [buffer EXCEPT ![r] = 0]
-    /\ Network!Broadcast(r, [r |-> r, seq |-> seq[r], buf |-> buffer[r]])
+    /\ Network!RBroadcast(r, [r |-> r, seq |-> seq[r], buf |-> buffer[r]])
     /\ UNCHANGED <<counter, seq>>
 
 Receive(r) == 
-    /\ Network!Deliver(r)
+    /\ Network!RDeliver(r)
     /\ counter' = [counter EXCEPT ![r] = @ + msg'[r].buf]
     /\ UNCHANGED <<buffer, seq>>
 -----------------------------------------------------------------------------                
@@ -65,6 +65,6 @@ SEC == \E r1, r2 \in Replica : Network!Sameupdate(r1, r2)
             => counter[r1] = counter[r2]
 =============================================================================
 \* Modification History
-\* Last modified Mon Apr 22 21:23:56 CST 2019 by jywellin
+\* Last modified Sun Apr 28 14:17:44 CST 2019 by jywellin
 \* Last modified Sun Apr 21 18:49:22 CST 2019 by xhdn
 \* Created Fri Mar 22 20:43:27 CST 2019 by jywellin

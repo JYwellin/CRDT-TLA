@@ -17,9 +17,7 @@ NBroadcast(r, m) ==
     /\ incoming' = [x \in Replica |->
                         IF x = r
                         THEN incoming[x]
-                        ELSE \/ incoming[r] (+) SetToBag({m})
-                             \/ incoming[r] (+) SetToBag({m}) (+) SetToBag({m})
-                             \/ incoming[r]                                    ]
+                        ELSE incoming[r] (+) SetToBag({m}) ]
     /\ AddUpdate(r, m)                           
     /\ UNCHANGED <<msg>>
 
@@ -36,6 +34,6 @@ EmptyChannel ==
 \* judge if two replicas receive the same set of update operations                      
 =============================================================================
 \* Modification History
-\* Last modified Wed Apr 24 13:35:23 CST 2019 by jywellin
+\* Last modified Sun Apr 28 14:05:56 CST 2019 by jywellin
 \* Last modified Sun Apr 21 21:44:03 CST 2019 by xhdn
 \* Created Mon Mar 25 20:24:02 CST 2019 by jywellin

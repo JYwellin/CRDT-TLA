@@ -26,6 +26,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/InsertTree.tla</locationURI>
 		</link>
 		<link>
+			<name>Message.tla</name>
+			<type>1</type>
+			<location>/Users/jywellin/CRDT-TLA/Message.tla</location>
+		</link>
+		<link>
 			<name>Network.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Network.tla</locationURI>
@@ -44,6 +49,11 @@
 			<name>RGA.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/RGA.tla</locationURI>
+		</link>
+		<link>
+			<name>ReliableCausalNetwork.tla</name>
+			<type>1</type>
+			<location>/Users/jywellin/CRDT-TLA/ReliableCausalNetwork.tla</location>
 		</link>
 		<link>
 			<name>ReliableNetwork.tla</name>

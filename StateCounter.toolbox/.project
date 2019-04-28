@@ -18,7 +18,12 @@
 		<link>
 			<name>CausalNetwork.tla</name>
 			<type>1</type>
-			<location>/Users/jywellin/Documents/GitHub/CRDT/CausalNetwork.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/CausalNetwork.tla</locationURI>
+		</link>
+		<link>
+			<name>Message.tla</name>
+			<type>1</type>
+			<location>/Users/jywellin/CRDT-TLA/Message.tla</location>
 		</link>
 		<link>
 			<name>Network.tla</name>
@@ -28,7 +33,7 @@
 		<link>
 			<name>OpCounter.tla</name>
 			<type>1</type>
-			<location>/Users/jywellin/Documents/GitHub/CRDT/OpCounter.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/OpCounter.tla</locationURI>
 		</link>
 		<link>
 			<name>ReliableNetwork.tla</name>
