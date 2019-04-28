@@ -1,44 +1,48 @@
 --------------------------- MODULE OptimizedAWSet ---------------------------
-EXTENDS Network
+EXTENDS Naturals, Sequences
 -----------------------------------------------------------------------------
 CONSTANTS
-    data,
-
+    Data,
+    Replica
     
-Instance == [d: Data, r: Replica, k: Nat]
-
 VARIABLES
-    aSet,     \* aSet[r]: set of active Instance(s) maintained by r \in Replica
-    tSet,     \* tSet[r]: set of tombstone Instance(s) maintained by r \in Replica
-    seq,      \* seq[r]: local sequence number at replica r \in Replica
+    aSet,
+    seq,
     vc,
     incoming,  \* network variable
     msg,       \* network variable
     updateset  \* network variable
 
-vars == <<aSet, tSet, incoming, seq>>
+vars == <<aSet, seq, vc, incoming, msg, updateset>>
+vector == [Replica -> Nat]
+initvector == [r \in Replica |-> 0]
+Msg == [r : Replica, seq : Nat, buf : Nat]
+----------------------------------------------------------------------------- 
+Network == INSTANCE Network
+----------------------------------------------------------------------------- 
+Instance == [d: Data, r: Replica, k: Nat]
 -----------------------------------------------------------------------------    
 TypeOK == 
+    /\ Network!NInit
     /\ aSet \in [Replica -> SUBSET Instance]
-    /\ tSet \in [Replica -> SUBSET Instance]
-    /\ incoming \in [Replica -> Seq([A : SUBSET Instance, T : SUBSET Instance])]
     /\ seq \in [Replica -> Nat]
+    /\ vc \in [Replica -> vector]
+    
 -----------------------------------------------------------------------------
 Init == 
     /\ aSet = [r \in Replica |-> {}]
-    /\ tSet = [r \in Replica |-> {}]
     /\ seq = [r \in Replica |-> 0]
-    /\ incoming = [r \in Replica |-> <<>>]          
+    /\ vc = [r \in Replica |-> initvector]          
 -----------------------------------------------------------------------------
 Add(d, r) == 
     /\ seq' = [seq EXCEPT ![r] = @ + 1]
-    /\ aSet'= [aSet EXCEPT ![r] = @ \union {[d |-> d, r |-> r, k |-> seq'[r]]}]
-    /\ UNCHANGED <<tSet, incoming>>
+    /\ aSet'= [aSet EXCEPT ![r] = @ \union {[d |-> d, r |-> r, k |-> vc[r][r]+1]}]
+    /\ vc' = [vc EXCEPT ![r][r] = @ + 1]
+    /\ UNCHANGED <<incoming, msg, updateset>>
 
 Remove(d, r) ==
     /\ LET D == {ins \in aSet[r] : ins.d = d}
-       IN  /\ aSet' = [aSet EXCEPT ![r] = @ \ D]
-           /\ tSet' = [tSet EXCEPT ![r] = @ \cup D] 
+       IN   aSet' = [aSet EXCEPT ![r] = @ \ D]
     /\ UNCHANGED <<seq, incoming>>
 -----------------------------------------------------------------------------
 Broadcast(s, m) == 
@@ -47,7 +51,7 @@ Broadcast(s, m) ==
                        
 Send(r) == 
     /\ incoming' = Broadcast(r, [A |-> aSet[r], T |-> tSet[r]])   
-    /\ UNCHANGED <<aSet, tSet, seq>>
+    /\ UNCHANGED <<aSet, seq>>
            
 Deliver(r) == 
     /\ incoming[r] # <<>>
@@ -78,5 +82,5 @@ QC == Quiescence => Convergence
 
 =============================================================================
 \* Modification History
-\* Last modified Sun Apr 28 16:45:02 CST 2019 by jywellin
+\* Last modified Sun Apr 28 21:57:17 CST 2019 by jywellin
 \* Created Sun Apr 28 13:52:27 CST 2019 by jywellin

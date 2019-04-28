@@ -65,6 +65,6 @@ SEC == \E r1, r2 \in Replica : Network!Sameupdate(r1, r2)
             => counter[r1] = counter[r2]
 =============================================================================
 \* Modification History
-\* Last modified Sun Apr 28 14:17:44 CST 2019 by jywellin
+\* Last modified Sun Apr 28 17:30:55 CST 2019 by jywellin
 \* Last modified Sun Apr 21 18:49:22 CST 2019 by xhdn
 \* Created Fri Mar 22 20:43:27 CST 2019 by jywellin
