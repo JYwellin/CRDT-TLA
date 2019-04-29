@@ -1,21 +1,18 @@
 ----------------------------- MODULE OpCounter -----------------------------
 EXTENDS 
-    Naturals, Sequences
------------------------------------------------------------------------------
-CONSTANTS 
-    Replica 
+    Naturals, Sequences, Message
+
 -----------------------------------------------------------------------------
 VARIABLE 
     counter,
     buffer,
     seq,
-    incoming,  \* network variable
-    msg,       \* network variable
-    updateset  \* network variable
+    incoming,     \* network variable
+    msg           \* network variable
     
-vars == <<counter, buffer, seq, incoming, msg, updateset>>
+vars == <<counter, buffer, seq, incoming, msg, updateset, last_updateset, messageset>>
 
-Msg == [r : Replica, seq : Nat, buf : Nat]
+Msg == [r : Replica, update : SUBSET Update, seq : Nat, buf : Nat]
 -----------------------------------------------------------------------------
 (**********************************************************************)
 (* Reliable network.                                                  *)
@@ -39,12 +36,13 @@ Inc(r) ==
     /\ counter' = [counter EXCEPT ![r] = @ + 1]
     /\ buffer' = [buffer EXCEPT ![r] = @ + 1]
     /\ seq' = [seq EXCEPT ![r] = @ + 1]
-    /\ UNCHANGED <<incoming, msg, updateset>>
+    /\ AddUpdate(r, seq[r])
+    /\ UNCHANGED <<incoming, msg>>
 
 Send(r) ==  
     /\ buffer[r] # 0
     /\ buffer' = [buffer EXCEPT ![r] = 0]
-    /\ Network!RBroadcast(r, [r |-> r, seq |-> seq[r], buf |-> buffer[r]])
+    /\ Network!RBroadcast(r, [r |-> r, seq |-> seq[r], update|-> OpUpdate(r), buf |-> buffer[r]])
     /\ UNCHANGED <<counter, seq>>
 
 Receive(r) == 
@@ -61,10 +59,10 @@ EmptyBuffer == buffer = [r \in Replica |-> 0 ]
 EC == Network!EmptyChannel /\ EmptyBuffer
             => \A r1, r2 \in Replica : counter[r1] = counter[r2]
             
-SEC == \E r1, r2 \in Replica : Network!Sameupdate(r1, r2)
+SEC == \A r1, r2 \in Replica : Sameupdate(r1, r2)
             => counter[r1] = counter[r2]
 =============================================================================
 \* Modification History
-\* Last modified Sun Apr 28 14:17:44 CST 2019 by jywellin
+\* Last modified Mon Apr 29 16:19:20 CST 2019 by jywellin
 \* Last modified Sun Apr 21 18:49:22 CST 2019 by xhdn
 \* Created Fri Mar 22 20:43:27 CST 2019 by jywellin
