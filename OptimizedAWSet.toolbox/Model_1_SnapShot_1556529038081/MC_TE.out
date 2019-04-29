@@ -1,0 +1,157 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.13 of 18 July 2018
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with fp 70 and seed -2369112904016265605 with 4 workers on 8 cores with 2428MB heap and 5460MB offheap memory (Mac OS X 10.14.2 x86_64, Oracle Corporation 1.8.0_191 x86_64).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file /Users/jywellin/CRDT-TLA/OptimizedAWSet.toolbox/Model_1/MC.tla
+Parsing file /Users/jywellin/CRDT-TLA/OptimizedAWSet.toolbox/Model_1/OptimizedAWSet.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/TLC.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/Naturals.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/Sequences.tla
+Parsing file /Users/jywellin/CRDT-TLA/OptimizedAWSet.toolbox/Model_1/Message.tla
+Parsing file /Users/jywellin/CRDT-TLA/OptimizedAWSet.toolbox/Model_1/Network.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/Bags.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module Message
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module Bags
+Semantic processing of module Network
+Semantic processing of module OptimizedAWSet
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2019-04-29 17:10:36)
+@!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated at 2019-04-29 17:10:37.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2110:1 @!@!@
+Invariant SEC is violated.
+@!@!@ENDMSG 2110 @!@!@
+@!@!@STARTMSG 2121:1 @!@!@
+The behavior up to this point is:
+@!@!@ENDMSG 2121 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+1: <Initial predicate>
+/\ seq = (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0)
+/\ msg = (r1 :> NotMsg @@ r2 :> NotMsg @@ r3 :> NotMsg)
+/\ last_updateset = (r1 :> {} @@ r2 :> {} @@ r3 :> {})
+/\ updateset = (r1 :> {} @@ r2 :> {} @@ r3 :> {})
+/\ messageset = (r1 :> {} @@ r2 :> {} @@ r3 :> {})
+/\ aSet = (r1 :> {} @@ r2 :> {} @@ r3 :> {})
+/\ incoming = (r1 :> << >> @@ r2 :> << >> @@ r3 :> << >>)
+/\ vc = ( r1 :> (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0) @@
+  r2 :> (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0) @@
+  r3 :> (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0) )
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+2: <Add line 35, col 5 to line 40, col 34 of module OptimizedAWSet>
+/\ seq = (r1 :> 1 @@ r2 :> 0 @@ r3 :> 0)
+/\ msg = (r1 :> NotMsg @@ r2 :> NotMsg @@ r3 :> NotMsg)
+/\ last_updateset = (r1 :> {} @@ r2 :> {} @@ r3 :> {})
+/\ updateset = (r1 :> {[seq |-> 0, r |-> r1]} @@ r2 :> {} @@ r3 :> {})
+/\ messageset = (r1 :> {} @@ r2 :> {} @@ r3 :> {})
+/\ aSet = (r1 :> {[r |-> r1, d |-> "a", k |-> 1]} @@ r2 :> {} @@ r3 :> {})
+/\ incoming = (r1 :> << >> @@ r2 :> << >> @@ r3 :> << >>)
+/\ vc = ( r1 :> (r1 :> 1 @@ r2 :> 0 @@ r3 :> 0) @@
+  r2 :> (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0) @@
+  r3 :> (r1 :> 0 @@ r2 :> 0 @@ r3 :> 0) )
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2201:0 @!@!@
+The coverage statistics at 2019-04-29 17:10:37
+@!@!@ENDMSG 2201 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 21, col 8 to line 24, col 60 of module Network: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 26, col 18 to line 26, col 24 of module Network: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 26, col 8 to line 26, col 80 of module Message: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 27, col 18 to line 27, col 47 of module Message: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 30, col 8 to line 30, col 61 of module Message: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 31, col 13 to line 31, col 40 of module Network: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 31, col 8 to line 31, col 71 of module Message: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 32, col 8 to line 32, col 65 of module Message: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 33, col 18 to line 33, col 29 of module Network: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 35, col 8 to line 35, col 39 of module OptimizedAWSet: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 35, col 8 to line 35, col 68 of module Message: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 36, col 18 to line 36, col 42 of module Message: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 38, col 11 to line 38, col 88 of module OptimizedAWSet: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 39, col 8 to line 39, col 40 of module OptimizedAWSet: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 40, col 18 to line 40, col 34 of module OptimizedAWSet: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 43, col 8 to line 43, col 39 of module OptimizedAWSet: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 46, col 13 to line 46, col 46 of module OptimizedAWSet: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 47, col 18 to line 47, col 38 of module OptimizedAWSet: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 51, col 18 to line 51, col 34 of module OptimizedAWSet: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 63, col 12 to line 63, col 59 of module OptimizedAWSet: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 64, col 27 to line 64, col 78 of module OptimizedAWSet: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 65, col 18 to line 65, col 28 of module OptimizedAWSet: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2202:0 @!@!@
+End of statistics.
+@!@!@ENDMSG 2202 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(2) at 2019-04-29 17:10:37: 2 states generated (156 s/min), 2 distinct states found (156 ds/min), 0 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2199:0 @!@!@
+2 states generated, 2 distinct states found, 0 states left on queue.
+@!@!@ENDMSG 2199 @!@!@
+@!@!@STARTMSG 2194:0 @!@!@
+The depth of the complete state graph search is 2.
+@!@!@ENDMSG 2194 @!@!@
+@!@!@STARTMSG 2186:0 @!@!@
+Finished in 1064ms at (2019-04-29 17:10:37)
+@!@!@ENDMSG 2186 @!@!@

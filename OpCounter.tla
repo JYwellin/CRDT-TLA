@@ -63,6 +63,6 @@ SEC == \A r1, r2 \in Replica : Sameupdate(r1, r2)
             => counter[r1] = counter[r2]
 =============================================================================
 \* Modification History
-\* Last modified Mon Apr 29 16:19:20 CST 2019 by jywellin
+\* Last modified Mon Apr 29 17:17:51 CST 2019 by jywellin
 \* Last modified Sun Apr 21 18:49:22 CST 2019 by xhdn
 \* Created Fri Mar 22 20:43:27 CST 2019 by jywellin

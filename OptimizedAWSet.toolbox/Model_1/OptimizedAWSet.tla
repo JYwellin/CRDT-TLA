@@ -37,14 +37,14 @@ Add(d, r) ==
     /\ LET D == {ins \in aSet[r] : ins.d = d}
        IN aSet'= [aSet EXCEPT ![r] = (@ \cup {[d |-> d, r |-> r, k |-> vc[r][r]+1]}) \D]
     /\ vc' = [vc EXCEPT ![r][r] = @ + 1]
-    /\ UNCHANGED <<incoming, msg, updateset, last_updateset, messageset>>
+    /\ UNCHANGED <<incoming, msg>>
 
 Remove(d, r) ==
     /\ seq' = [seq EXCEPT ![r] = @ + 1]
     /\ AddUpdate(r, seq[r])
     /\ LET D == {ins \in aSet[r] : ins.d = d}
        IN   aSet' = [aSet EXCEPT ![r] = @ \ D]
-    /\ UNCHANGED <<vc, incoming, msg, updateset, last_updateset, messageset>>
+    /\ UNCHANGED <<vc, incoming, msg>>
 -----------------------------------------------------------------------------
 Send(r) == 
     /\ Network!NBroadcast(r, [r |-> r, seq |-> seq[r], update |-> StateUpdate(r), vc|-> vc[r], A|-> aSet[r] ])  
@@ -54,15 +54,16 @@ SetMax(r, s) == IF r > s THEN r ELSE s
     
 Deliver(r) == 
     /\ Network!NDeliver(r)
-    /\ LET C1 == {ins \in aSet[r]   : ~ ins \in msg[r]'.A}
-           C2 == {ins \in msg[r]'.A : ~ ins \in aSet[r]  }
-           D1 == {ins \in C1 : ins.k <= msg[r]'.vc[r]}
-           D2 == {ins \in C2 : ins.k <= vc[r][r]}
-           A1 == aSet[r] \ D1
-           A2 == msg[r]'.A \ D2
-       IN  aSet' = [aSet EXCEPT ![r] = A1 \cup A2]    
+    /\ seq' = [seq EXCEPT ![r] = @ + 1]
+    /\ LET Diff1 == {ins \in aSet[r]   : ~ ins \in msg[r]'.A}
+           Diff2 == {ins \in msg[r]'.A : ~ ins \in aSet[r]  }
+           D1 == {ins \in Diff1 : ins.k <= msg[r]'.vc[r]}
+           D2 == {ins \in Diff2 : ins.k <= vc[r][r]}
+           Alocal == aSet[r] \ D1
+           Aremote == msg[r]'.A \ D2
+       IN  aSet' = [aSet EXCEPT ![r] = Alocal \cup Aremote]    
     /\ \A s \in Replica : vc' = [vc EXCEPT ![r][s] = SetMax(@, msg'[r].vc[s])]         
-    /\ UNCHANGED <<seq, vc>>                    
+    /\ UNCHANGED <<vc>>                    
 -----------------------------------------------------------------------------
 Next ==
     \/ \E r \in Replica: \E a \in Data: 
@@ -84,8 +85,8 @@ Convergence ==
 QC == Quiescence => Convergence
 
 SEC == \A r1, r2 \in Replica : Sameupdate(r1, r2)
-            => Convergence
+            => Read(r1) = Read(r2)
 =============================================================================
 \* Modification History
-\* Last modified Mon Apr 29 16:40:17 CST 2019 by jywellin
+\* Last modified Mon Apr 29 17:17:01 CST 2019 by jywellin
 \* Created Sun Apr 28 13:52:27 CST 2019 by jywellin

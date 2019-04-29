@@ -2,7 +2,7 @@
 TLC2 Version 2.13 of 18 July 2018
 @!@!@ENDMSG 2262 @!@!@
 @!@!@STARTMSG 2187:0 @!@!@
-Running breadth-first search Model-Checking with fp 27 and seed 600962640917432279 with 4 workers on 8 cores with 2428MB heap and 5460MB offheap memory (Mac OS X 10.14.2 x86_64, Oracle Corporation 1.8.0_191 x86_64).
+Running breadth-first search Model-Checking with fp 4 and seed 2145049730147566222 with 4 workers on 8 cores with 2428MB heap and 5460MB offheap memory (Mac OS X 10.14.2 x86_64, Oracle Corporation 1.8.0_191 x86_64).
 @!@!@ENDMSG 2187 @!@!@
 @!@!@STARTMSG 2220:0 @!@!@
 Starting SANY...
@@ -29,22 +29,14 @@ Semantic processing of module MC
 SANY finished.
 @!@!@ENDMSG 2219 @!@!@
 @!@!@STARTMSG 2185:0 @!@!@
-Starting... (2019-04-29 16:40:45)
+Starting... (2019-04-29 17:17:05)
 @!@!@ENDMSG 2185 @!@!@
 @!@!@STARTMSG 2189:0 @!@!@
 Computing initial states...
 @!@!@ENDMSG 2189 @!@!@
 @!@!@STARTMSG 2190:0 @!@!@
-Finished computing initial states: 1 distinct state generated at 2019-04-29 16:40:46.
+Finished computing initial states: 1 distinct state generated at 2019-04-29 17:17:06.
 @!@!@ENDMSG 2190 @!@!@
-@!@!@STARTMSG 2143:3 @!@!@
-The variable updateset was changed while it is specified as UNCHANGED at
-line 40, col 35 to line 40, col 43 of module OptimizedAWSet
-@!@!@ENDMSG 2143 @!@!@
-@!@!@STARTMSG 2143:3 @!@!@
-The variable updateset was changed while it is specified as UNCHANGED at
-line 47, col 39 to line 47, col 47 of module OptimizedAWSet
-@!@!@ENDMSG 2143 @!@!@
 @!@!@STARTMSG 2200:0 @!@!@
-Progress(26) at 2019-04-29 16:40:49: 234307 states generated (234,307 s/min), 31109 distinct states found (31,109 ds/min), 4535 states left on queue.
+Progress(8) at 2019-04-29 17:17:09: 330076 states generated (330,076 s/min), 101848 distinct states found (101,848 ds/min), 86798 states left on queue.
 @!@!@ENDMSG 2200 @!@!@

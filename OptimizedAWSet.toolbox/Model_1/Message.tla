@@ -4,21 +4,18 @@ EXTENDS Naturals
 VARIABLES 
     messageset,
     updateset,
-    last_updateset
-   
+    last_updateset   
 -----------------------------------------------------------------------------
 CONSTANTS 
     Replica
-    
 -----------------------------------------------------------------------------    
 Update == [r : Replica, seq : Nat]
-
------------------------------------------------------------------------------
 Msgid(m) == [r |-> m.r, seq |-> m.seq] 
+-----------------------------------------------------------------------------  
 IfDeliverMsg(m, r) == Msgid(m) \in messageset[r]
 
 OpUpdate(r) == updateset[r] \ last_updateset[r] \* for op-based CRDT
-StateUpdate(r) == updateset[r] \* for state-based CRDT
+StateUpdate(r) == updateset[r]                  \* for state-based CRDT
 -----------------------------------------------------------------------------
 Minit == 
     /\ updateset = [r \in Replica |-> {}]
@@ -42,6 +39,6 @@ Sameupdate(r1, r2) ==
     updateset[r1] = updateset[r2]
 =============================================================================
 \* Modification History
-\* Last modified Mon Apr 29 16:28:28 CST 2019 by jywellin
+\* Last modified Mon Apr 29 16:54:34 CST 2019 by jywellin
 \* Last modified Sun Apr 21 18:45:44 CST 2019 by xhdn
 \* Created Sat Apr 20 22:31:38 CST 2019 by xhdn
