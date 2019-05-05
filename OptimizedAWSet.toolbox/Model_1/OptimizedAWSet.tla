@@ -34,7 +34,7 @@ Init ==
 Add(d, r) == 
     /\ seq' = [seq EXCEPT ![r] = @ + 1]
     /\ AddUpdate(r, seq[r])
-    /\ LET D == {ins \in aSet[r] : ins.d = d}
+    /\ LET D == {ins \in aSet[r] : ins.d = d /\ ins.r = r}
        IN aSet'= [aSet EXCEPT ![r] = (@ \cup {[d |-> d, r |-> r, k |-> vc[r][r]+1]}) \D]
     /\ vc' = [vc EXCEPT ![r][r] = @ + 1]
     /\ UNCHANGED <<incoming, msg>>
@@ -57,8 +57,8 @@ Deliver(r) ==
     /\ seq' = [seq EXCEPT ![r] = @ + 1]
     /\ LET Diff1 == {ins \in aSet[r]   : ~ ins \in msg[r]'.A}
            Diff2 == {ins \in msg[r]'.A : ~ ins \in aSet[r]  }
-           D1 == {ins \in Diff1 : ins.k <= msg[r]'.vc[r]}
-           D2 == {ins \in Diff2 : ins.k <= vc[r][r]}
+           D1 == {ins \in Diff1 : ins.k <= msg[r]'.vc[ins.r]}
+           D2 == {ins \in Diff2 : ins.k <= vc[r][ins.r]}
            Alocal == aSet[r] \ D1
            Aremote == msg[r]'.A \ D2
        IN  aSet' = [aSet EXCEPT ![r] = Alocal \cup Aremote]    
@@ -88,5 +88,5 @@ SEC == \A r1, r2 \in Replica : Sameupdate(r1, r2)
             => Read(r1) = Read(r2)
 =============================================================================
 \* Modification History
-\* Last modified Mon Apr 29 17:17:01 CST 2019 by jywellin
+\* Last modified Mon Apr 29 21:46:57 CST 2019 by jywellin
 \* Created Sun Apr 28 13:52:27 CST 2019 by jywellin
