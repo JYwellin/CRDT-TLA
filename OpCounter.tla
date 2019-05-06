@@ -16,7 +16,7 @@ vars == <<counter, buffer, seq, incoming, msg, messageset, SECvars>>
 Msg == [r : Replica, update : SUBSET Update, seq : Nat, buf : Nat]
 -----------------------------------------------------------------------------
 (**********************************************************************)
-(* Reliable network.                                                  *)
+(* Reliable Network                                                   *)
 (**********************************************************************)
 Network == INSTANCE ReliableNetwork
 -----------------------------------------------------------------------------
@@ -67,6 +67,6 @@ SEC == \A r1, r2 \in Replica : Sameupdate(r1, r2)
             => counter[r1] = counter[r2]
 =============================================================================
 \* Modification History
+\* Last modified Tue May 07 00:57:30 CST 2019 by xhdn
 \* Last modified Mon May 06 15:51:30 CST 2019 by jywellin
-\* Last modified Sun Apr 21 18:49:22 CST 2019 by xhdn
 \* Created Fri Mar 22 20:43:27 CST 2019 by jywellin

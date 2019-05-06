@@ -1,0 +1,51 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.13 of 18 July 2018
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with seed 3008714013746569857 with 4 workers on 4 cores with 297MB heap and 664MB offheap memory (Windows 10 10.0 amd64, Oracle Corporation 1.8.0_201 x86_64).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT-TLA\RGA.toolbox\Model_1\MC.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT-TLA\RGA.toolbox\Model_1\RGA.tla
+Parsing file C:\Users\xhdn\Desktop\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\TLC.tla
+Parsing file C:\Users\xhdn\Desktop\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\Integers.tla
+Parsing file C:\Users\xhdn\Desktop\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\Sequences.tla
+Parsing file C:\Users\xhdn\Desktop\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\Naturals.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT-TLA\RGA.toolbox\Model_1\InsertTree.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT-TLA\RGA.toolbox\Model_1\SEC.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT-TLA\RGA.toolbox\Model_1\CausalNetwork.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT-TLA\RGA.toolbox\Model_1\Network.tla
+Parsing file C:\Users\xhdn\Desktop\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\Bags.tla
+Parsing file C:\Users\xhdn\Documents\GitHub\CRDT-TLA\RGA.toolbox\Model_1\Message.tla
+Parsing file C:\Users\xhdn\Desktop\TLA\toolbox\plugins\org.lamport.tlatools_1.0.0.201807180447\tla2sany\StandardModules\FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Integers
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module SEC
+Semantic processing of module InsertTree
+Semantic processing of module Bags
+Semantic processing of module Message
+Semantic processing of module Network
+Semantic processing of module CausalNetwork
+Semantic processing of module RGA
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2019-05-07 00:37:29)
+@!@!@ENDMSG 2185 @!@!@
+<<"$!@$!@$!@$!@$!", FALSE>>
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(4) at 2019-05-07 00:37:35: 298 states generated (298 s/min), 212 distinct states found (212 ds/min), 175 states left on queue.
+@!@!@ENDMSG 2200 @!@!@

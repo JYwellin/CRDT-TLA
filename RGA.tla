@@ -17,7 +17,8 @@ vars == <<tree, tomb, insbuf, tombbuf, chins, seq, incoming, msg, messageset, vc
 -----------------------------------------------------------------------------  
 vector == [Replica -> Nat]
 
-Msg == [r : Replica, vc: vector, seq : Nat, tombbuf : SUBSET node, insbuf : SUBSET Char]
+Msg == [r : Replica, vc: vector, seq : Nat, update : SUBSET Update, 
+        tombbuf : SUBSET node, insbuf : SUBSET Char]
 
 List == Seq(Char) 
 
@@ -26,7 +27,7 @@ maxtime(tr, curmax) == IF tr = {} THEN curmax
                          ELSE  LET t == CHOOSE x \in tr: TRUE
                          IN maxtime(tr\{t}, Nummax((t.ts).time, curmax))
 -----------------------------------------------------------------------------
-Network == INSTANCE ReliableCausalNetwork                     
+Network == INSTANCE CausalNetwork                     
 -----------------------------------------------------------------------------
 TypeOK == 
     /\ tree \in [Replica -> SUBSET node]
@@ -82,7 +83,9 @@ send transitions
 Send(r) ==
      /\ \/ tombbuf[r] # {}
         \/ insbuf[r] # {}
-     /\ Network!Broadcast(r, [r |-> r, seq |-> seq[r], vc |-> [vc EXCEPT ![r][r] = @ + 1][r], tombbuf |-> tombbuf[r], insbuf |-> insbuf[r]])
+     /\ Network!Broadcast(r, [r |-> r, seq |-> seq[r], 
+                          vc |-> [vc EXCEPT ![r][r] = @ + 1][r], update|-> OpUpdate(r), 
+                          tombbuf |-> tombbuf[r], insbuf |-> insbuf[r]])
      /\ SECSend(r)
      /\ tombbuf' = [tombbuf EXCEPT ![r] = {}]
      /\ insbuf' = [insbuf EXCEPT![r] = {}] 
@@ -117,7 +120,7 @@ SEC == \E r1, r2 \in Replica : Sameupdate(r1, r2)
             => Readtree2list(tree[r1],"o",tomb[r1],{})= Readtree2list(tree[r2],"o",tomb[r2],{})                        
 =============================================================================
 \* Modification History
+\* Last modified Tue May 07 01:27:02 CST 2019 by xhdn
 \* Last modified Mon May 06 16:52:19 CST 2019 by jywellin
-\* Last modified Wed Apr 17 18:49:43 CST 2019 by xhdn
 \* Last modified Thu Jan 10 15:34:04 CST 2019 by jywellins
 \* Created Tue Nov 06 15:55:23 CST 2018 by xhdn

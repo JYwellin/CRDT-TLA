@@ -38,7 +38,7 @@
 		<link>
 			<name>SEC.tla</name>
 			<type>1</type>
-			<location>/Users/jywellin/CRDT-TLA/SEC.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/SEC.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

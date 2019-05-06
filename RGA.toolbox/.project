@@ -28,7 +28,7 @@
 		<link>
 			<name>Message.tla</name>
 			<type>1</type>
-			<location>/Users/jywellin/CRDT-TLA/Message.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/Message.tla</locationURI>
 		</link>
 		<link>
 			<name>Network.tla</name>
@@ -53,7 +53,7 @@
 		<link>
 			<name>ReliableCausalNetwork.tla</name>
 			<type>1</type>
-			<location>/Users/jywellin/CRDT-TLA/ReliableCausalNetwork.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/ReliableCausalNetwork.tla</locationURI>
 		</link>
 		<link>
 			<name>ReliableNetwork.tla</name>
@@ -63,7 +63,7 @@
 		<link>
 			<name>SEC.tla</name>
 			<type>1</type>
-			<location>/Users/jywellin/CRDT-TLA/SEC.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/SEC.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
