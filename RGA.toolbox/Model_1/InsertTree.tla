@@ -1,10 +1,10 @@
 ----------------------------- MODULE InsertTree -----------------------------
-EXTENDS Integers,Sequences,Naturals,TLC
+EXTENDS Integers,Sequences,Naturals,TLC,SEC
 -----------------------------------------------------------------------------
 CONSTANT 
     Char,
-    Charnum,
-    Replica
+    Charnum
+
 -----------------------------------------------------------------------------
 ts == [r : Replica, time : Nat]
 node == [ch: Char, ts: ts, parent:Char \cup {"o"}]  
@@ -59,6 +59,6 @@ Readtree2list(T,root,tomb,readchar) ==
 \* Readtree2list(Createtree(3,{}),"o",{},{})
 =============================================================================
 \* Modification History
+\* Last modified Mon May 06 16:46:42 CST 2019 by jywellin
 \* Last modified Wed Apr 17 18:45:47 CST 2019 by xhdn
-\* Last modified Tue Apr 16 22:23:01 CST 2019 by jywellin
 \* Created Fri Nov 30 15:07:41 CST 2018 by jywellin

@@ -1,5 +1,5 @@
 -------------------------------- MODULE RGA --------------------------------
-EXTENDS Integers, Sequences, Naturals, TLC, InsertTree
+EXTENDS Integers, Sequences, Naturals, TLC, InsertTree, SEC
 -----------------------------------------------------------------------------      
 VARIABLES 
     tree,
@@ -10,10 +10,10 @@ VARIABLES
     seq,
     incoming,      \* network variable
     msg,           \* network variable
-    updateset,     \* network variable
+    messageset,    \* network variable
     vc             \* network variable
     
-vars == <<tree, tomb, insbuf, tombbuf, chins, incoming, msg, updateset, vc, seq>>
+vars == <<tree, tomb, insbuf, tombbuf, chins, seq, incoming, msg, messageset, vc, SECvars>>
 -----------------------------------------------------------------------------  
 vector == [Replica -> Nat]
 
@@ -38,6 +38,7 @@ TypeOK ==
                       
 Init == 
     /\ Network!Init
+    /\ SECInit
     /\ tree = [r \in Replica |-> {}]
     /\ tomb = [r \in Replica |-> {}]
     /\ insbuf = [r \in Replica |-> {}]
@@ -55,7 +56,8 @@ DoIns(r) ==
         /\ tree' =  [tree  EXCEPT![r] = @ \cup {ins}] 
         /\ insbuf' = [insbuf EXCEPT![r] = @ \cup {ins}] 
         /\ seq' = [seq EXCEPT ![r] = @ + 1]
-        /\ UNCHANGED <<incoming, msg, updateset, vc, tomb, tombbuf>>
+        /\ SECUpdate(r, seq[r])
+        /\ UNCHANGED <<incoming, msg, messageset, vc, tomb, tombbuf>>
 
 
 DoDel(r) == 
@@ -65,7 +67,8 @@ DoDel(r) ==
         /\ tomb' = [tomb EXCEPT ![r] = @ \cup {del}] 
         /\ tombbuf' = [tombbuf EXCEPT ![r] = @ \cup {del}] 
         /\ seq' = [seq EXCEPT ![r] = @ + 1]
-        /\ UNCHANGED <<chins, tree, insbuf, incoming, msg, updateset, vc>>
+        /\ SECUpdate(r, seq[r])
+        /\ UNCHANGED <<chins, tree, insbuf, incoming, msg, messageset, vc>>
 (* 
 do transitions
 *)     
@@ -80,6 +83,7 @@ Send(r) ==
      /\ \/ tombbuf[r] # {}
         \/ insbuf[r] # {}
      /\ Network!Broadcast(r, [r |-> r, seq |-> seq[r], vc |-> [vc EXCEPT ![r][r] = @ + 1][r], tombbuf |-> tombbuf[r], insbuf |-> insbuf[r]])
+     /\ SECSend(r)
      /\ tombbuf' = [tombbuf EXCEPT ![r] = {}]
      /\ insbuf' = [insbuf EXCEPT![r] = {}] 
      /\ UNCHANGED <<chins, seq, tree, tomb>>
@@ -89,6 +93,7 @@ receive transitions
 *)
 Receive(r) ==
     /\ Network!Deliver(r)
+    /\ SECDeliver(r, msg'[r])
     /\ tree' =  [tree  EXCEPT![r] = @ \cup msg'[r].insbuf] 
     /\ tomb' = [tomb EXCEPT ![r] = @ \cup msg'[r].tombbuf]
     /\ UNCHANGED <<chins, seq, tombbuf, insbuf>> 
@@ -98,7 +103,6 @@ Next ==
 
 -----------------------------------------------------------------------------                   
 Spec == Init /\ [][Next]_vars   
- 
 -----------------------------------------------------------------------------
 (*
 eventual consistency              
@@ -109,11 +113,11 @@ EC == Network!EmptyChannel /\ EmptyBuffer
         =>  \A r1,r2  \in Replica:
               Readtree2list(tree[r1],"o",tomb[r1],{})= Readtree2list(tree[r2],"o",tomb[r2],{})      
               
-SEC == \E r1, r2 \in Replica : Network!Sameupdate(r1, r2)
+SEC == \E r1, r2 \in Replica : Sameupdate(r1, r2)
             => Readtree2list(tree[r1],"o",tomb[r1],{})= Readtree2list(tree[r2],"o",tomb[r2],{})                        
 =============================================================================
 \* Modification History
-\* Last modified Sun Apr 28 14:39:58 CST 2019 by jywellin
+\* Last modified Mon May 06 16:52:19 CST 2019 by jywellin
 \* Last modified Wed Apr 17 18:49:43 CST 2019 by xhdn
 \* Last modified Thu Jan 10 15:34:04 CST 2019 by jywellins
 \* Created Tue Nov 06 15:55:23 CST 2018 by xhdn

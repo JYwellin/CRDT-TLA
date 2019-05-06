@@ -2,7 +2,7 @@
 TLC2 Version 2.13 of 18 July 2018
 @!@!@ENDMSG 2262 @!@!@
 @!@!@STARTMSG 2187:0 @!@!@
-Running breadth-first search Model-Checking with fp 125 and seed 1347638687486608396 with 4 workers on 8 cores with 2428MB heap and 5460MB offheap memory (Mac OS X 10.14.2 x86_64, Oracle Corporation 1.8.0_191 x86_64).
+Running breadth-first search Model-Checking with fp 76 and seed 692097174472070593 with 4 workers on 8 cores with 2428MB heap and 5460MB offheap memory (Mac OS X 10.14.2 x86_64, Oracle Corporation 1.8.0_191 x86_64).
 @!@!@ENDMSG 2187 @!@!@
 @!@!@STARTMSG 2220:0 @!@!@
 Starting SANY...
@@ -14,6 +14,7 @@ Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport
 Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/Sequences.tla
 Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/Naturals.tla
 Parsing file /Users/jywellin/CRDT-TLA/RGA.toolbox/Model_1/InsertTree.tla
+Parsing file /Users/jywellin/CRDT-TLA/RGA.toolbox/Model_1/SEC.tla
 Parsing file /Users/jywellin/CRDT-TLA/RGA.toolbox/Model_1/ReliableCausalNetwork.tla
 Parsing file /Users/jywellin/CRDT-TLA/RGA.toolbox/Model_1/ReliableNetwork.tla
 Parsing file /Users/jywellin/CRDT-TLA/RGA.toolbox/Model_1/Network.tla
@@ -25,6 +26,7 @@ Semantic processing of module Integers
 Semantic processing of module Sequences
 Semantic processing of module FiniteSets
 Semantic processing of module TLC
+Semantic processing of module SEC
 Semantic processing of module InsertTree
 Semantic processing of module Bags
 Semantic processing of module Message
@@ -37,15 +39,15 @@ Semantic processing of module MC
 SANY finished.
 @!@!@ENDMSG 2219 @!@!@
 @!@!@STARTMSG 2185:0 @!@!@
-Starting... (2019-04-28 14:40:03)
+Starting... (2019-05-06 16:52:23)
 @!@!@ENDMSG 2185 @!@!@
 <<"$!@$!@$!@$!@$!", FALSE>>
 @!@!@STARTMSG 2189:0 @!@!@
 Computing initial states...
 @!@!@ENDMSG 2189 @!@!@
 @!@!@STARTMSG 2190:0 @!@!@
-Finished computing initial states: 1 distinct state generated at 2019-04-28 14:40:03.
+Finished computing initial states: 1 distinct state generated at 2019-05-06 16:52:23.
 @!@!@ENDMSG 2190 @!@!@
 @!@!@STARTMSG 2200:0 @!@!@
-Progress(6) at 2019-04-28 14:40:06: 2500 states generated (2,500 s/min), 1447 distinct states found (1,447 ds/min), 1047 states left on queue.
+Progress(6) at 2019-05-06 16:52:26: 1811 states generated (1,811 s/min), 1031 distinct states found (1,031 ds/min), 772 states left on queue.
 @!@!@ENDMSG 2200 @!@!@

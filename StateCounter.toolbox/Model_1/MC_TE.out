@@ -2,7 +2,7 @@
 TLC2 Version 2.13 of 18 July 2018
 @!@!@ENDMSG 2262 @!@!@
 @!@!@STARTMSG 2187:0 @!@!@
-Running breadth-first search Model-Checking with fp 47 and seed 2725686599638259495 with 4 workers on 8 cores with 2428MB heap and 5460MB offheap memory (Mac OS X 10.14.2 x86_64, Oracle Corporation 1.8.0_191 x86_64).
+Running breadth-first search Model-Checking with fp 67 and seed 4074797853151954571 with 4 workers on 8 cores with 2428MB heap and 5460MB offheap memory (Mac OS X 10.14.2 x86_64, Oracle Corporation 1.8.0_191 x86_64).
 @!@!@ENDMSG 2187 @!@!@
 @!@!@STARTMSG 2220:0 @!@!@
 Starting SANY...
@@ -13,14 +13,16 @@ Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport
 Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/Naturals.tla
 Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/Sequences.tla
 Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/Bags.tla
-Parsing file /Users/jywellin/CRDT-TLA/StateCounter.toolbox/Model_1/Message.tla
+Parsing file /Users/jywellin/CRDT-TLA/StateCounter.toolbox/Model_1/SEC.tla
 Parsing file /Users/jywellin/CRDT-TLA/StateCounter.toolbox/Model_1/Network.tla
+Parsing file /Users/jywellin/CRDT-TLA/StateCounter.toolbox/Model_1/Message.tla
 Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201811291744/tla2sany/StandardModules/FiniteSets.tla
 Semantic processing of module Naturals
 Semantic processing of module Sequences
 Semantic processing of module FiniteSets
 Semantic processing of module TLC
 Semantic processing of module Bags
+Semantic processing of module SEC
 Semantic processing of module Message
 Semantic processing of module Network
 Semantic processing of module StateCounter
@@ -29,14 +31,14 @@ Semantic processing of module MC
 SANY finished.
 @!@!@ENDMSG 2219 @!@!@
 @!@!@STARTMSG 2185:0 @!@!@
-Starting... (2019-04-29 17:51:19)
+Starting... (2019-05-06 15:54:09)
 @!@!@ENDMSG 2185 @!@!@
 @!@!@STARTMSG 2189:0 @!@!@
 Computing initial states...
 @!@!@ENDMSG 2189 @!@!@
 @!@!@STARTMSG 2190:0 @!@!@
-Finished computing initial states: 1 distinct state generated at 2019-04-29 17:51:20.
+Finished computing initial states: 1 distinct state generated at 2019-05-06 15:54:10.
 @!@!@ENDMSG 2190 @!@!@
 @!@!@STARTMSG 2200:0 @!@!@
-Progress(12) at 2019-04-29 17:51:23: 301799 states generated (301,799 s/min), 86612 distinct states found (86,612 ds/min), 52709 states left on queue.
+Progress(12) at 2019-05-06 15:54:13: 266203 states generated (266,203 s/min), 76771 distinct states found (76,771 ds/min), 46866 states left on queue.
 @!@!@ENDMSG 2200 @!@!@

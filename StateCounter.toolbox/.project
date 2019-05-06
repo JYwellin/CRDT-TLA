@@ -41,6 +41,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/ReliableNetwork.tla</locationURI>
 		</link>
 		<link>
+			<name>SEC.tla</name>
+			<type>1</type>
+			<location>/Users/jywellin/CRDT-TLA/SEC.tla</location>
+		</link>
+		<link>
 			<name>StateCounter.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/StateCounter.tla</locationURI>

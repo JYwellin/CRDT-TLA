@@ -1,15 +1,16 @@
 ---------------------------- MODULE StateCounter ----------------------------
-EXTENDS Naturals, Sequences, Bags, TLC, Message
+EXTENDS Naturals, Sequences, Bags, TLC, SEC
 -----------------------------------------------------------------------------    
 VARIABLES 
     state,
     update,
     seq,
-    incoming, \* network variable
-    msg       \* network variable
+    incoming,     \* network variable
+    msg,          \* network variable
+    messageset    \* network variable
     
 
-vars == <<state, update, seq, incoming, msg, updateset, last_updateset, messageset>>
+vars == <<state, update, seq, incoming, msg, messageset, SECvars>>
 
 Vector == [Replica -> Nat]
 Initvector == [r \in Replica |-> 0]
@@ -26,6 +27,7 @@ TypeOK ==
 -----------------------------------------------------------------------------
 Init == 
     /\ Network!NInit
+    /\ SECInit
     /\ state = [r \in Replica |-> Initvector]
     /\ update = [r \in Replica |-> 0]
     /\ seq = [r \in Replica |-> 0]       
@@ -34,12 +36,13 @@ Inc(r) ==
     /\ state' = [state EXCEPT ![r][r] = @ + 1]
     /\ update' = [update EXCEPT![r] = 1]
     /\ seq' = [seq EXCEPT ![r] = @ + 1]
-    /\ AddUpdate(r, seq[r])
-    /\ UNCHANGED <<incoming, msg>>
+    /\ SECUpdate(r, seq[r])
+    /\ UNCHANGED <<incoming, msg, messageset>>
 
 
 Send(r) == 
     /\ Network!NBroadcast(r, [r |-> r, seq |-> seq[r], update|-> StateUpdate(r), vc |-> state[r]])
+    /\ SECSend(r)
     /\ update' = [update EXCEPT![r] = 0]
     /\ UNCHANGED <<state, seq>>
    
@@ -48,6 +51,7 @@ SetMax(r, s) == IF r > s THEN r ELSE s
     
 Receive(r) == 
     /\ Network!NDeliver(r)
+    /\ SECDeliver(r, msg'[r])
     /\ \A s \in Replica : state' = [state EXCEPT ![r][s] = SetMax(@, msg'[r].vc[s])]                 
     /\ UNCHANGED <<update, seq>>
 -----------------------------------------------------------------------------
@@ -62,5 +66,5 @@ SEC == \E r1, r2 \in Replica : Sameupdate(r1, r2)
 
 =============================================================================
 \* Modification History
-\* Last modified Mon Apr 29 17:07:03 CST 2019 by jywellin
+\* Last modified Mon May 06 15:54:02 CST 2019 by jywellin
 \* Created Mon Mar 25 14:25:48 CST 2019 by jywellin

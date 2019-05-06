@@ -1,5 +1,5 @@
 --------------------------- MODULE OptimizedAWSet ---------------------------
-EXTENDS Naturals, Sequences, Message
+EXTENDS Naturals, Sequences, SEC
 -----------------------------------------------------------------------------
 CONSTANTS
     Data
@@ -9,9 +9,10 @@ VARIABLES
     seq,
     vc,
     incoming,  \* network variable
-    msg        \* network variable
+    msg,       \* network variable
+    messageset
 
-vars == <<aSet, seq, vc, incoming, msg, updateset, last_updateset, messageset>>
+vars == <<aSet, seq, vc, incoming, msg, messageset, SECvars>>
 ----------------------------------------------------------------------------- 
 Vector == [Replica -> Nat]
 Initvector == [r \in Replica |-> 0]
@@ -27,33 +28,36 @@ TypeOK ==
 -----------------------------------------------------------------------------
 Init == 
     /\ Network!NInit
+    /\ SECInit
     /\ aSet = [r \in Replica |-> {}]
     /\ seq = [r \in Replica |-> 0]
     /\ vc = [r \in Replica |-> Initvector]          
 -----------------------------------------------------------------------------
 Add(d, r) == 
     /\ seq' = [seq EXCEPT ![r] = @ + 1]
-    /\ AddUpdate(r, seq[r])
+    /\ SECUpdate(r, seq[r])
     /\ LET D == {ins \in aSet[r] : ins.d = d /\ ins.r = r}
        IN aSet'= [aSet EXCEPT ![r] = (@ \cup {[d |-> d, r |-> r, k |-> vc[r][r]+1]}) \D]
     /\ vc' = [vc EXCEPT ![r][r] = @ + 1]
-    /\ UNCHANGED <<incoming, msg>>
+    /\ UNCHANGED <<incoming, msg, messageset>>
 
 Remove(d, r) ==
     /\ seq' = [seq EXCEPT ![r] = @ + 1]
-    /\ AddUpdate(r, seq[r])
+    /\ SECUpdate(r, seq[r])
     /\ LET D == {ins \in aSet[r] : ins.d = d}
        IN   aSet' = [aSet EXCEPT ![r] = @ \ D]
-    /\ UNCHANGED <<vc, incoming, msg>>
+    /\ UNCHANGED <<vc, incoming, msg, messageset>>
 -----------------------------------------------------------------------------
 Send(r) == 
     /\ Network!NBroadcast(r, [r |-> r, seq |-> seq[r], update |-> StateUpdate(r), vc|-> vc[r], A|-> aSet[r] ])  
+    /\ SECSend(r)
     /\ UNCHANGED <<aSet, seq, vc>>
     
 SetMax(r, s) == IF r > s THEN r ELSE s      
     
 Deliver(r) == 
     /\ Network!NDeliver(r)
+    /\ SECDeliver(r, msg[r]')
     /\ seq' = [seq EXCEPT ![r] = @ + 1]
     /\ LET Diff1 == {ins \in aSet[r]   : ~ ins \in msg[r]'.A}
            Diff2 == {ins \in msg[r]'.A : ~ ins \in aSet[r]  }
@@ -88,5 +92,5 @@ SEC == \A r1, r2 \in Replica : Sameupdate(r1, r2)
             => Read(r1) = Read(r2)
 =============================================================================
 \* Modification History
-\* Last modified Mon Apr 29 21:46:57 CST 2019 by jywellin
+\* Last modified Mon May 06 15:58:14 CST 2019 by jywellin
 \* Created Sun Apr 28 13:52:27 CST 2019 by jywellin

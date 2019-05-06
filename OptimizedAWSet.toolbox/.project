@@ -45,5 +45,10 @@
 			<type>1</type>
 			<location>/Users/jywellin/CRDT-TLA/ReliableNetwork.tla</location>
 		</link>
+		<link>
+			<name>SEC.tla</name>
+			<type>1</type>
+			<location>/Users/jywellin/CRDT-TLA/SEC.tla</location>
+		</link>
 	</linkedResources>
 </projectDescription>

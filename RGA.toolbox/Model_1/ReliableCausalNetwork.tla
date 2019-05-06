@@ -15,16 +15,16 @@ Broadcast(r, m) == /\ RBroadcast(r, m)
                    
 Deliver(r) == 
     /\ incoming[r] # EmptyBag
-    /\ \E m \in BagToSet(incoming[r]): ~ delivermsg(m, r)
+    /\ \E m \in BagToSet(incoming[r]): ~ IfDeliverMsg(m, r)
          /\ \A s \in Replica:
                \/ m.vc[s] <= vc[r][s]  
                \/ s # m.r 
          /\ m.vc[m.r] = vc[r][m.r] + 1
          /\ vc' = [vc EXCEPT ![r][m.r] = @ + 1]  
          /\ msg' = [msg EXCEPT ![r] = m]
-         /\ AddUpdate(r, m) 
+    /\ UNCHANGED <<incoming>>  
          
 =============================================================================
 \* Modification History
-\* Last modified Sun Apr 28 14:36:10 CST 2019 by jywellin
+\* Last modified Mon May 06 16:07:42 CST 2019 by jywellin
 \* Created Tue Apr 02 15:26:19 CST 2019 by jywellin

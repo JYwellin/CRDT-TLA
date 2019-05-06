@@ -5,7 +5,7 @@ VARIABLES
     incoming,
     msg
     
-vars == <<incoming, msg, updateset>>
+vars == <<incoming, msg>>
 -----------------------------------------------------------------------------
 CONSTANTS 
     Msg
@@ -21,15 +21,15 @@ NBroadcast(r, m) ==
     /\ incoming' = [x \in Replica |->
                         IF x = r
                         THEN incoming[x]
-                        ELSE incoming[x] (+) SetToBag({m}) ]
-    /\ SendMsg(r)                          
-    /\ UNCHANGED <<msg>>
+                        ELSE incoming[x] (+) SetToBag({m}) ]    
+    /\ MBroadcast                  
+    /\ UNCHANGED <<msg>> 
 
 NDeliver(r) == 
     /\ incoming[r] # EmptyBag
     /\ \E m \in BagToSet(incoming[r]):
          /\ msg' = [msg EXCEPT ![r] = m]
-         /\ DeliverMsg(r, m)
+         /\ MDeliver(r, m)
     /\ UNCHANGED <<incoming>>        
 -----------------------------------------------------------------------------                          
 EmptyChannel ==  
@@ -38,6 +38,6 @@ EmptyChannel ==
 \* judge if two replicas receive the same set of update operations                      
 =============================================================================
 \* Modification History
-\* Last modified Mon Apr 29 16:35:24 CST 2019 by jywellin
+\* Last modified Mon May 06 15:30:04 CST 2019 by jywellin
 \* Last modified Sun Apr 21 21:44:03 CST 2019 by xhdn
 \* Created Mon Mar 25 20:24:02 CST 2019 by jywellin

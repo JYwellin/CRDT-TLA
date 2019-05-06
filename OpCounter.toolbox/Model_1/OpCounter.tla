@@ -1,6 +1,6 @@
 ----------------------------- MODULE OpCounter -----------------------------
 EXTENDS 
-    Naturals, Sequences, Message
+    Naturals, Sequences, SEC
 
 -----------------------------------------------------------------------------
 VARIABLE 
@@ -8,9 +8,10 @@ VARIABLE
     buffer,
     seq,
     incoming,     \* network variable
-    msg           \* network variable
+    msg,          \* network variable
+    messageset    \* network variable
     
-vars == <<counter, buffer, seq, incoming, msg, updateset, last_updateset, messageset>>
+vars == <<counter, buffer, seq, incoming, msg, messageset, SECvars>>
 
 Msg == [r : Replica, update : SUBSET Update, seq : Nat, buf : Nat]
 -----------------------------------------------------------------------------
@@ -26,9 +27,10 @@ TypeOK ==
 -----------------------------------------------------------------------------       
 Init == 
     /\ Network!RInit
+    /\ SECInit
     /\ seq = [r \in Replica |-> 0]
-    /\ counter = [r \in Replica |-> 0 ]
-    /\ buffer = [r \in Replica |-> 0 ]
+    /\ counter = [r \in Replica |-> 0]
+    /\ buffer = [r \in Replica |-> 0]
      
 Read(r) == counter[r]
 
@@ -36,17 +38,19 @@ Inc(r) ==
     /\ counter' = [counter EXCEPT ![r] = @ + 1]
     /\ buffer' = [buffer EXCEPT ![r] = @ + 1]
     /\ seq' = [seq EXCEPT ![r] = @ + 1]
-    /\ AddUpdate(r, seq[r])
-    /\ UNCHANGED <<incoming, msg>>
+    /\ SECUpdate(r, seq[r])
+    /\ UNCHANGED <<incoming, msg, messageset>>
 
 Send(r) ==  
     /\ buffer[r] # 0
     /\ buffer' = [buffer EXCEPT ![r] = 0]
     /\ Network!RBroadcast(r, [r |-> r, seq |-> seq[r], update|-> OpUpdate(r), buf |-> buffer[r]])
+    /\ SECSend(r)
     /\ UNCHANGED <<counter, seq>>
 
 Receive(r) == 
     /\ Network!RDeliver(r)
+    /\ SECDeliver(r, msg'[r])
     /\ counter' = [counter EXCEPT ![r] = @ + msg'[r].buf]
     /\ UNCHANGED <<buffer, seq>>
 -----------------------------------------------------------------------------                
@@ -63,6 +67,6 @@ SEC == \A r1, r2 \in Replica : Sameupdate(r1, r2)
             => counter[r1] = counter[r2]
 =============================================================================
 \* Modification History
-\* Last modified Mon Apr 29 16:19:20 CST 2019 by jywellin
+\* Last modified Mon May 06 15:51:30 CST 2019 by jywellin
 \* Last modified Sun Apr 21 18:49:22 CST 2019 by xhdn
 \* Created Fri Mar 22 20:43:27 CST 2019 by jywellin
