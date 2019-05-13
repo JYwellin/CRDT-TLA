@@ -120,7 +120,7 @@ SEC == \E r1, r2 \in Replica : Sameupdate(r1, r2)
             => Readtree2list(tree[r1],"o",tomb[r1],{})= Readtree2list(tree[r2],"o",tomb[r2],{})                        
 =============================================================================
 \* Modification History
-\* Last modified Tue May 07 01:27:02 CST 2019 by xhdn
+\* Last modified Sun May 12 12:55:37 CST 2019 by xhdn
 \* Last modified Mon May 06 16:52:19 CST 2019 by jywellin
 \* Last modified Thu Jan 10 15:34:04 CST 2019 by jywellins
 \* Created Tue Nov 06 15:55:23 CST 2018 by xhdn
