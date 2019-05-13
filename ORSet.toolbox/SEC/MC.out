@@ -1,0 +1,324 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.13 of 18 July 2018
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with fp 42 and seed -3424996217893613369 with 2 workers on 4 cores with 608MB heap and 1365MB offheap memory [pid: 35157] (Mac OS X 10.14.4 x86_64, AdoptOpenJDK 11.0.3 x86_64, OffHeapDiskFPSet, DiskStateQueue).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file /Users/zfwang/Documents/DisAlg/TLA+/nju-bachelor/2019-ZhifuWang/code/ORSet.toolbox/SEC/MC.tla
+Parsing file /Users/zfwang/Documents/DisAlg/TLA+/nju-bachelor/2019-ZhifuWang/code/ORSet.toolbox/SEC/ORSet.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201904262021/tla2sany/StandardModules/TLC.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201904262021/tla2sany/StandardModules/Naturals.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201904262021/tla2sany/StandardModules/Sequences.tla
+Parsing file /Users/zfwang/Documents/DisAlg/TLA+/nju-bachelor/2019-ZhifuWang/code/ORSet.toolbox/SEC/Bags.tla
+Parsing file /Users/zfwang/Documents/DisAlg/TLA+/nju-bachelor/2019-ZhifuWang/code/ORSet.toolbox/SEC/SEC.tla
+Parsing file /Users/zfwang/Documents/DisAlg/TLA+/nju-bachelor/2019-ZhifuWang/code/ORSet.toolbox/SEC/TLAPS.tla
+Parsing file /Users/zfwang/Documents/DisAlg/TLA+/nju-bachelor/2019-ZhifuWang/code/ORSet.toolbox/SEC/FiniteSetTheorems.tla
+Parsing file /Users/zfwang/Documents/DisAlg/TLA+/nju-bachelor/2019-ZhifuWang/code/ORSet.toolbox/SEC/SequenceTheorems.tla
+Parsing file /Users/zfwang/Documents/DisAlg/TLA+/nju-bachelor/2019-ZhifuWang/code/ORSet.toolbox/SEC/FiniteSets.tla
+Parsing file /Users/zfwang/Documents/DisAlg/TLA+/nju-bachelor/2019-ZhifuWang/code/ORSet.toolbox/SEC/Functions.tla
+Parsing file /Users/zfwang/Documents/DisAlg/TLA+/nju-bachelor/2019-ZhifuWang/code/ORSet.toolbox/SEC/WellFoundedInduction.tla
+Parsing file /Users/zfwang/Documents/DisAlg/TLA+/nju-bachelor/2019-ZhifuWang/code/ORSet.toolbox/SEC/NaturalsInduction.tla
+Parsing file /Applications/TLA+ Toolbox.app/Contents/Eclipse/plugins/org.lamport.tlatools_1.0.0.201904262021/tla2sany/StandardModules/Integers.tla
+Parsing file /Users/zfwang/Documents/DisAlg/TLA+/nju-bachelor/2019-ZhifuWang/code/ORSet.toolbox/SEC/ReliableNetwork.tla
+Parsing file /Users/zfwang/Documents/DisAlg/TLA+/nju-bachelor/2019-ZhifuWang/code/ORSet.toolbox/SEC/Network.tla
+Parsing file /Users/zfwang/Documents/DisAlg/TLA+/nju-bachelor/2019-ZhifuWang/code/ORSet.toolbox/SEC/Message.tla
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module TLAPS
+Semantic processing of module Functions
+Semantic processing of module Integers
+Semantic processing of module NaturalsInduction
+Semantic processing of module WellFoundedInduction
+Semantic processing of module FiniteSetTheorems
+Semantic processing of module SequenceTheorems
+Semantic processing of module Bags
+Semantic processing of module SEC
+Semantic processing of module Message
+Semantic processing of module Network
+Semantic processing of module ReliableNetwork
+Semantic processing of module ORSet
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2019-05-12 15:27:13)
+@!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated at 2019-05-12 15:27:14.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(8) at 2019-05-12 15:27:17: 86,612 states generated (86,612 s/min), 28,836 distinct states found (28,836 ds/min), 23,738 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(10) at 2019-05-12 15:28:17: 5,493,164 states generated (5,406,552 s/min), 1,627,041 distinct states found (1,598,205 ds/min), 1,323,917 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(11) at 2019-05-12 15:29:17: 11,622,581 states generated (6,129,417 s/min), 3,358,051 distinct states found (1,731,010 ds/min), 2,725,466 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(11) at 2019-05-12 15:30:17: 17,620,456 states generated (5,997,875 s/min), 5,048,734 distinct states found (1,690,683 ds/min), 4,097,297 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2201:0 @!@!@
+The coverage statistics at 2019-05-12 15:30:17
+@!@!@ENDMSG 2201 @!@!@
+@!@!@STARTMSG 2773:0 @!@!@
+<Init line 33, col 1 to line 33, col 4 of module ORSet>: 1
+@!@!@ENDMSG 2773 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 34, col 5 to line 38, col 14 of module ORSet: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<Add line 40, col 1 to line 40, col 9 of module ORSet>: 1549359:5708813
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 41, col 8 to line 41, col 39 of module ORSet: 5708828
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 23, col 8 to line 23, col 80 of module SEC: 5708832
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 23, col 21 to line 23, col 80 of module SEC: 5709093
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 23, col 22 to line 23, col 30 of module SEC: 5709093
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 23, col 39 to line 23, col 79 of module SEC: 5708820
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 23, col 46 to line 23, col 79 of module SEC: 5709093
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2775:0 @!@!@
+  |||line 23, col 53 to line 23, col 79 of module SEC: 5709093:9550927
+@!@!@ENDMSG 2775 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 23, col 55 to line 23, col 77 of module SEC: 5709093
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||||line 23, col 56 to line 23, col 62 of module SEC: 5708820
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||||line 23, col 65 to line 23, col 75 of module SEC: 5708821
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 24, col 8 to line 24, col 35 of module SEC: 5708823
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 42, col 18 to line 42, col 18 of module ORSet: 5709093
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 42, col 21 to line 42, col 26 of module ORSet: 5709093
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 42, col 21 to line 42, col 23 of module ORSet: 5709093
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 42, col 25 to line 42, col 25 of module ORSet: 5709093
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 43, col 8 to line 43, col 79 of module ORSet: 5709092
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 44, col 8 to line 44, col 46 of module ORSet: 5708826
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<Remove line 46, col 1 to line 46, col 12 of module ORSet>: 1027667:5709092
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 47, col 8 to line 47, col 39 of module ORSet: 5709092
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 23, col 8 to line 23, col 80 of module SEC: 5709092
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 24, col 8 to line 24, col 35 of module SEC: 5709092
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 48, col 18 to line 48, col 18 of module ORSet: 5709092
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 48, col 21 to line 48, col 26 of module ORSet: 5709092
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 50, col 12 to line 50, col 45 of module ORSet: 5709092
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 50, col 20 to line 50, col 45 of module ORSet: 5709092
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 50, col 21 to line 50, col 24 of module ORSet: 5709092
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 50, col 33 to line 50, col 44 of module ORSet: 5709092
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 50, col 40 to line 50, col 44 of module ORSet: 5709092
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||line 50, col 44 to line 50, col 44 of module ORSet: 5709093
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 49, col 17 to line 49, col 45 of module ORSet: 5709093
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||||line 49, col 36 to line 49, col 44 of module ORSet: 7521723
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |||||line 49, col 26 to line 49, col 32 of module ORSet: 5709093
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 51, col 8 to line 51, col 46 of module ORSet: 5709092
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<Send line 57, col 1 to line 57, col 7 of module ORSet>: 910867:2854544
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 21, col 8 to line 24, col 60 of module Network: 2854545
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2775:0 @!@!@
+  |line 21, col 20 to line 24, col 60 of module Network: 2854545:8563635
+@!@!@ENDMSG 2775 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 21, col 27 to line 21, col 33 of module Network: 2854545
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 17, col 15 to line 17, col 38 of module Message: 2854545
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 26, col 8 to line 26, col 24 of module Network: 2854545
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 6, col 32 to line 6, col 32 of module ReliableNetwork: 2854546
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 6, col 35 to line 6, col 35 of module ReliableNetwork: 2854546
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 58, col 27 to line 58, col 27 of module ORSet: 2854546
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 58, col 30 to line 58, col 92 of module ORSet: 2854546
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 27, col 8 to line 27, col 68 of module SEC: 2854546
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 28, col 8 to line 28, col 30 of module SEC: 2854545
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 59, col 16 to line 59, col 16 of module ORSet: 2854550
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 60, col 8 to line 60, col 36 of module ORSet: 2854545
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2772:0 @!@!@
+<Receive line 62, col 1 to line 62, col 10 of module ORSet>: 1561118:3349262
+@!@!@ENDMSG 2772 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 25, col 1 to line 25, col 35 of module ORSet: 13837734
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 25, col 1 to line 25, col 35 of module ORSet: 7572140
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 25, col 1 to line 25, col 35 of module ORSet: 3349274
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 25, col 1 to line 25, col 35 of module ORSet: 2854566
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 9, col 8 to line 9, col 29 of module ReliableNetwork: 4895015
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 9, col 8 to line 9, col 18 of module ReliableNetwork: 2854566
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 9, col 22 to line 9, col 29 of module ReliableNetwork: 2854567
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 10, col 40 to line 10, col 59 of module ReliableNetwork: 7572162
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 10, col 42 to line 10, col 59 of module ReliableNetwork: 4222880
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 11, col 12 to line 11, col 39 of module ReliableNetwork: 3349286
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 20, col 6 to line 20, col 63 of module Message: 3349288
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 20, col 20 to line 20, col 63 of module Message: 3349289
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 20, col 21 to line 20, col 30 of module Message: 3349289
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 20, col 39 to line 20, col 62 of module Message: 3349267
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 20, col 46 to line 20, col 62 of module Message: 3349289
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2775:0 @!@!@
+  |||line 20, col 53 to line 20, col 62 of module Message: 3349289:747446
+@!@!@ENDMSG 2775 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||||line 20, col 54 to line 20, col 61 of module Message: 3349290
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 12, col 21 to line 12, col 21 of module ReliableNetwork: 3349291
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 12, col 24 to line 12, col 24 of module ReliableNetwork: 3349291
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 10, col 17 to line 10, col 37 of module ReliableNetwork: 2419501
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 13, col 8 to line 13, col 29 of module ReliableNetwork: 3349272
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 63, col 25 to line 63, col 25 of module ORSet: 2854579
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 31, col 8 to line 31, col 61 of module SEC: 3349297
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  |line 31, col 21 to line 31, col 61 of module SEC: 3349297
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 31, col 22 to line 31, col 30 of module SEC: 3349297
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  ||line 31, col 39 to line 31, col 60 of module SEC: 3349274
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 32, col 8 to line 32, col 71 of module SEC: 3349297
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 64, col 19 to line 64, col 19 of module ORSet: 3349298
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 64, col 22 to line 64, col 28 of module ORSet: 6698596
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 65, col 8 to line 65, col 52 of module ORSet: 3349299
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 66, col 8 to line 66, col 24 of module ORSet: 3349274
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2202:0 @!@!@
+End of statistics.
+@!@!@ENDMSG 2202 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(11) at 2019-05-12 15:31:17: 24,155,604 states generated (6,535,148 s/min), 6,890,187 distinct states found (1,841,453 ds/min), 5,586,352 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
