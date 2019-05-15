@@ -942,31 +942,35 @@
 \@x{}\moduleLeftDash\@xx{ {\MODULE} Message}\moduleRightDash\@xx{}%
 \@x{ {\EXTENDS} Naturals}%
 \@x{}\midbar\@xx{}%
-\@x{ {\VARIABLES}}%
-\@x{\@s{16.4} messageset}%
-\@x{}\midbar\@xx{}%
-\@x{ {\CONSTANTS}}%
+\@x{ {\CONSTANT}}%
 \@x{\@s{16.4} Replica}%
+\@x{ {\VARIABLE}}%
+\@x{\@s{16.4} messageSet}%
 \@x{}\midbar\@xx{}%
  \@x{ Msgid ( m ) \.{\defeq} [ r \.{\mapsto} m . r ,\, seq \.{\mapsto} m . seq
  ]}%
 \@x{}\midbar\@xx{}%
- \@x{ IfDeliverMsg ( m ,\, r ) \.{\defeq} Msgid ( m ) \.{\in} messageset [ r
+ \@x{ IfDeliverMsg ( m ,\, r ) \.{\defeq} Msgid ( m ) \.{\in} messageSet [ r
  ]}%
 \@x{}\midbar\@xx{}%
-\@x{ Minit \.{\defeq}}%
-\@x{\@s{20.5} messageset \.{=} [ r \.{\in} Replica \.{\mapsto} \{ \} ]}%
+ \@x{ Minit \.{\defeq} messageSet \.{=} [ r \.{\in} Replica \.{\mapsto} \{ \}
+ ]}%
 \@pvspace{8.0pt}%
-\@x{ MBroadcast \.{\defeq} {\UNCHANGED} {\langle} messageset {\rangle}}%
+\@x{ MBroadcast \.{\defeq} {\UNCHANGED} {\langle} messageSet {\rangle}}%
 \@pvspace{8.0pt}%
 \@x{ MDeliver ( r ,\, m ) \.{\defeq}}%
- \@x{\@s{20.5} messageset \.{'} \.{=} [ messageset {\EXCEPT} {\bang} [ r ]
+ \@x{\@s{20.5} messageSet \.{'} \.{=} [ messageSet {\EXCEPT} {\bang} [ r ]
  \.{=} @ \.{\cup} \{ Msgid ( m ) \} ]}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
+\end{cpar}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue} May 14
+ 15:01:35 \ensuremath{CST} 2019 by \ensuremath{zfwang
+}%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon} May 06

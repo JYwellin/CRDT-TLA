@@ -53,7 +53,7 @@
 		<link>
 			<name>Message.tla</name>
 			<type>1</type>
-			<location>/Users/zfwang/Documents/DisAlg/TLA+/nju-bachelor/2019-ZhifuWang/code/Message.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/Message.tla</locationURI>
 		</link>
 		<link>
 			<name>NaturalsInduction.tla</name>

@@ -16,9 +16,34 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>Bags.tla</name>
+			<type>1</type>
+			<location>/usr/local/lib/tlaps/Bags.tla</location>
+		</link>
+		<link>
+			<name>FiniteSetTheorems.tla</name>
+			<type>1</type>
+			<location>/usr/local/lib/tlaps/FiniteSetTheorems.tla</location>
+		</link>
+		<link>
+			<name>FiniteSets.tla</name>
+			<type>1</type>
+			<location>/usr/local/lib/tlaps/FiniteSets.tla</location>
+		</link>
+		<link>
+			<name>Functions.tla</name>
+			<type>1</type>
+			<location>/usr/local/lib/tlaps/Functions.tla</location>
+		</link>
+		<link>
 			<name>Message.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Message.tla</locationURI>
+		</link>
+		<link>
+			<name>NaturalsInduction.tla</name>
+			<type>1</type>
+			<location>/usr/local/lib/tlaps/NaturalsInduction.tla</location>
 		</link>
 		<link>
 			<name>Network.tla</name>
@@ -39,6 +64,21 @@
 			<name>SEC.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/SEC.tla</locationURI>
+		</link>
+		<link>
+			<name>SequenceTheorems.tla</name>
+			<type>1</type>
+			<location>/usr/local/lib/tlaps/SequenceTheorems.tla</location>
+		</link>
+		<link>
+			<name>TLAPS.tla</name>
+			<type>1</type>
+			<location>/usr/local/lib/tlaps/TLAPS.tla</location>
+		</link>
+		<link>
+			<name>WellFoundedInduction.tla</name>
+			<type>1</type>
+			<location>/usr/local/lib/tlaps/WellFoundedInduction.tla</location>
 		</link>
 	</linkedResources>
 </projectDescription>

@@ -943,57 +943,62 @@
 \@x{ {\EXTENDS} Naturals}%
 \@x{}\midbar\@xx{}%
 \@x{ {\VARIABLES}}%
-\@x{\@s{16.4} updateset ,\,}%
-\@x{\@s{16.4} last\_updateset}%
+\@x{\@s{16.4} updateSet ,\,}%
+\@x{\@s{16.4} prev\_updateSet}%
 \@pvspace{8.0pt}%
-\@x{ SECvars \.{\defeq} {\langle} updateset ,\, last\_updateset {\rangle}}%
+\@x{ SECvars \.{\defeq} {\langle} updateSet ,\, prev\_updateSet {\rangle}}%
 \@x{}\midbar\@xx{}%
 \@x{ {\CONSTANTS}}%
 \@x{\@s{16.4} Replica}%
 \@x{}\midbar\@xx{}%
 \@x{ Update \.{\defeq} [ r \.{:} Replica ,\, seq \.{:} Nat ]}%
 \@x{}\midbar\@xx{}%
- \@x{ OpUpdate ( r ) \.{\defeq} updateset [ r ] \.{\,\backslash\,}
- last\_updateset [ r ]}%
+ \@x{ OpUpdate ( r ) \.{\defeq} updateSet [ r ] \.{\,\backslash\,}
+ prev\_updateSet [ r ]}%
 \@y{\@s{0}%
  for op-based \ensuremath{CRDT
 }}%
 \@xx{}%
-\@x{ StateUpdate ( r ) \.{\defeq} updateset [ r ]\@s{71.57}}%
+\@x{ StateUpdate ( r ) \.{\defeq} updateSet [ r ]\@s{76.17}}%
 \@y{\@s{0}%
  for state-based \ensuremath{CRDT
 }}%
 \@xx{}%
 \@x{}\midbar\@xx{}%
 \@x{ SECInit \.{\defeq}}%
- \@x{\@s{16.4} \.{\land} updateset \.{=} [ r \.{\in} Replica \.{\mapsto} \{ \}
- ]}%
- \@x{\@s{16.4} \.{\land} last\_updateset\@s{0.87} \.{=} [ r \.{\in} Replica
+ \@x{\@s{16.4} \.{\land} updateSet \.{=} [ r\@s{2.18} \.{\in} Replica
  \.{\mapsto} \{ \} ]}%
+ \@x{\@s{16.4} \.{\land} prev\_updateSet \.{=} [ r \.{\in} Replica \.{\mapsto}
+ \{ \} ]}%
 \@pvspace{8.0pt}%
 \@x{ SECUpdate ( r ,\, seq ) \.{\defeq}}%
- \@x{\@s{16.4} \.{\land} updateset \.{'} \.{=} [ updateset {\EXCEPT} {\bang} [
+ \@x{\@s{16.4} \.{\land} updateSet \.{'} \.{=} [ updateSet {\EXCEPT} {\bang} [
  r ] \.{=} @ \.{\cup} \{ [ r \.{\mapsto} r ,\, seq \.{\mapsto} seq ] \} ]}%
-\@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} last\_updateset {\rangle}}%
+\@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} prev\_updateSet {\rangle}}%
 \@pvspace{8.0pt}%
 \@x{ SECSend ( r ) \.{\defeq}}%
- \@x{\@s{16.4} \.{\land}\@s{14.03} last\_updateset \.{'} \.{=} [
- last\_updateset {\EXCEPT} {\bang} [ r ] \.{=} updateset [ r ] ]}%
-\@x{\@s{16.4} \.{\land}\@s{14.03} {\UNCHANGED} {\langle} updateset {\rangle}}%
+ \@x{\@s{16.4} \.{\land}\@s{14.03} prev\_updateSet \.{'} \.{=} [
+ prev\_updateSet {\EXCEPT} {\bang} [ r ] \.{=} updateSet [ r ] ]}%
+\@x{\@s{16.4} \.{\land}\@s{14.03} {\UNCHANGED} {\langle} updateSet {\rangle}}%
 \@pvspace{8.0pt}%
 \@x{ SECDeliver ( r ,\, m ) \.{\defeq}}%
- \@x{\@s{16.4} \.{\land} updateset \.{'} \.{=} [ updateset {\EXCEPT} {\bang} [
+ \@x{\@s{16.4} \.{\land} updateSet \.{'} \.{=} [ updateSet {\EXCEPT} {\bang} [
  r ] \.{=} @ \.{\cup} m . update ]}%
- \@x{\@s{16.4} \.{\land} last\_updateset \.{'} \.{=} [ last\_updateset
+ \@x{\@s{16.4} \.{\land} prev\_updateSet \.{'} \.{=} [ prev\_updateSet
  {\EXCEPT} {\bang} [ r ] \.{=} @ \.{\cup} m . update ]}%
 \@x{}\midbar\@xx{}%
 \@x{ Sameupdate ( r1 ,\, r2 ) \.{\defeq}}%
-\@x{\@s{16.4} updateset [ r1 ] \.{=} updateset [ r2 ]}%
+\@x{\@s{16.4} updateSet [ r1 ] \.{=} updateSet [ r2 ]}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
+\end{cpar}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue} May 14
+ 11:15:33 \ensuremath{CST} 2019 by \ensuremath{zfwang
+}%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon} May 06

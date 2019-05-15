@@ -939,51 +939,94 @@
 \begin{document}
 \tlatex
 \setboolean{shading}{true}
-\@x{}\moduleLeftDash\@xx{ {\MODULE} Network}\moduleRightDash\@xx{}%
-\@x{ {\EXTENDS} Bags ,\, Message}%
+\@x{}\moduleLeftDash\@xx{ {\MODULE} StateCounter}\moduleRightDash\@xx{}%
+\@x{ {\EXTENDS} Naturals ,\, Sequences ,\, Bags ,\, TLC ,\, SEC}%
 \@x{}\midbar\@xx{}%
 \@x{ {\VARIABLES}}%
-\@x{\@s{16.4} incoming ,\,}%
-\@x{\@s{16.4} msg}%
-\@pvspace{8.0pt}%
-\@x{ vars \.{\defeq} {\langle} incoming ,\, msg {\rangle}}%
-\@x{}\midbar\@xx{}%
-\@x{ {\CONSTANTS}}%
-\@x{\@s{16.4} Msg}%
-\@pvspace{8.0pt}%
-\@x{ NotMsg \.{\defeq} {\CHOOSE} m \.{:} m \.{\notin} Msg}%
-\@x{}\midbar\@xx{}%
-\@x{ NInit \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} Minit}%
- \@x{\@s{16.4} \.{\land} incoming \.{=} [ r \.{\in} Replica \.{\mapsto}
- EmptyBag ]}%
- \@x{\@s{16.4} \.{\land} msg \.{=} [ r\@s{1.08} \.{\in} Replica \.{\mapsto}
- NotMsg ]}%
-\@pvspace{8.0pt}%
-\@x{ NBroadcast ( r ,\, m ) \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} incoming \.{'} \.{=} [ x \.{\in} Replica \.{\mapsto}}%
-\@x{\@s{100.71} {\IF} x \.{=} r}%
-\@x{\@s{100.71} \.{\THEN} incoming [ x ]}%
-\@x{\@s{100.71} \.{\ELSE} incoming [ x ] \.{\oplus} SetToBag ( \{ m \} ) ]}%
-\@x{\@s{16.4} \.{\land} MBroadcast}%
-\@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} msg {\rangle}}%
-\@pvspace{8.0pt}%
-\@x{ NDeliver ( r ) \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} incoming [ r ] \.{\neq} EmptyBag}%
-\@x{\@s{16.4} \.{\land} \E\, m \.{\in} BagToSet ( incoming [ r ] ) \.{:}}%
- \@x{\@s{35.71} \.{\land} msg \.{'} \.{=} [ msg {\EXCEPT} {\bang} [ r ] \.{=}
- m ]}%
-\@x{\@s{35.71} \.{\land} MDeliver ( r ,\, m )}%
-\@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} incoming {\rangle}}%
-\@x{}\midbar\@xx{}%
-\@x{ EmptyChannel \.{\defeq}}%
-\@x{\@s{16.4} incoming \.{=} [ r \.{\in} Replica \.{\mapsto} EmptyBag ]}%
-\@pvspace{8.0pt}%
-\@x{}%
+\@x{\@s{16.4} state ,\,}%
+\@x{\@s{16.4} update ,\,}%
+\@x{\@s{16.4} seq ,\,}%
+\@x{\@s{16.4} incoming ,\,\@s{16.4}}%
 \@y{\@s{0}%
- judge if two replicas receive the same set of update operations
+ network variable
 }%
 \@xx{}%
+\@x{\@s{16.4} msg ,\,\@s{38.88}}%
+\@y{\@s{0}%
+ network variable
+}%
+\@xx{}%
+\@x{\@s{16.4} messageSet\@s{12.99}}%
+\@y{\@s{0}%
+ network variable
+}%
+\@xx{}%
+\@pvspace{8.0pt}%
+ \@x{ vars \.{\defeq} {\langle} state ,\, update ,\, seq ,\, incoming ,\, msg
+ ,\, messageSet ,\, SECvars {\rangle}}%
+\@pvspace{8.0pt}%
+\@x{ Vector \.{\defeq} [ Replica \.{\rightarrow} Nat ]}%
+\@x{ InitVector \.{\defeq} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
+ \@x{ InitState \.{\defeq} state \.{=} [ r \.{\in} Replica \.{\mapsto}
+ InitVector ]}%
+\@x{ EmptyUpdate \.{\defeq} update \.{=} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
+ \@x{ Msg \.{\defeq} [ r \.{:} Replica ,\, vc \.{:} Vector ,\, seq \.{:} Nat
+ ,\, update \.{:} {\SUBSET} Update ]}%
+\@x{}\midbar\@xx{}%
+\@x{ Network \.{\defeq} {\INSTANCE} Network}%
+\@x{}\midbar\@xx{}%
+\@x{ TypeOK \.{\defeq}}%
+ \@x{\@s{16.4} \.{\land}\@s{9.74} state \.{\in} [ Replica \.{\rightarrow}
+ Vector ]}%
+ \@x{\@s{16.4} \.{\land}\@s{9.74} update \.{\in} [ Replica \.{\rightarrow} \{
+ 0 ,\, 1 \} ]}%
+\@x{}\midbar\@xx{}%
+\@x{ Init \.{\defeq}}%
+\@x{\@s{16.4} \.{\land} InitState}%
+\@x{\@s{16.4} \.{\land} EmptyUpdate}%
+\@x{\@s{16.4} \.{\land} seq \.{=} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
+\@x{\@s{16.4} \.{\land} Network {\bang} NInit}%
+\@x{\@s{16.4} \.{\land} SECInit}%
+\@x{}\midbar\@xx{}%
+\@x{ Inc ( r ) \.{\defeq}}%
+ \@x{\@s{18.53} \.{\land} state \.{'} \.{=} [ state {\EXCEPT} {\bang} [ r ] [
+ r ] \.{=} @ \.{+} 1 ]}%
+ \@x{\@s{18.53} \.{\land} update \.{'} \.{=} [ update {\EXCEPT} {\bang} [ r ]
+ \.{=} 1 ]}%
+ \@x{\@s{18.53} \.{\land} seq \.{'} \.{=} [ seq {\EXCEPT} {\bang} [ r ] \.{=}
+ @ \.{+} 1 ]}%
+\@x{\@s{18.53} \.{\land} SECUpdate ( r ,\, seq [ r ] )}%
+ \@x{\@s{18.53} \.{\land} {\UNCHANGED} {\langle} incoming ,\, msg ,\,
+ messageSet {\rangle}}%
+\@pvspace{8.0pt}%
+\@x{ Send ( r ) \.{\defeq}}%
+ \@x{\@s{21.98} \.{\land} update \.{'} \.{=} [ update {\EXCEPT} {\bang} [ r ]
+ \.{=} 0 ]}%
+ \@x{\@s{21.98} \.{\land} Network {\bang} NBroadcast ( r ,\, [ r \.{\mapsto} r
+ ,\, vc \.{\mapsto} state [ r ] ,\, seq \.{\mapsto} seq [ r ] ,\, update
+ \.{\mapsto} StateUpdate ( r ) ] )}%
+\@x{\@s{21.98} \.{\land} SECSend ( r )}%
+\@x{\@s{21.98} \.{\land} {\UNCHANGED} {\langle} state ,\, seq {\rangle}}%
+\@pvspace{8.0pt}%
+\@x{ SetMax ( r ,\, s ) \.{\defeq} {\IF} r \.{>} s \.{\THEN} r \.{\ELSE} s}%
+\@pvspace{8.0pt}%
+\@x{ Receive ( r ) \.{\defeq}}%
+ \@x{\@s{16.4} \.{\land}\@s{5.06} \A\, s \.{\in} Replica \.{:} state \.{'}
+ \.{=} [ state {\EXCEPT} {\bang} [ r ] [ s ] \.{=} SetMax ( @ ,\, msg \.{'} [
+ r ] . vc [ s ] ) ]}%
+\@x{\@s{16.4} \.{\land}\@s{5.06} Network {\bang} NDeliver ( r )}%
+\@x{\@s{16.4} \.{\land}\@s{5.06} SECDeliver ( r ,\, msg \.{'} [ r ] )}%
+ \@x{\@s{16.4} \.{\land}\@s{5.06} {\UNCHANGED} {\langle} update ,\, seq
+ {\rangle}}%
+\@x{}\midbar\@xx{}%
+ \@x{ Next \.{\defeq} \.{\land} \E\, r \.{\in} Replica \.{:} Inc ( r )
+ \.{\lor} Send ( r ) \.{\lor} Receive ( r )}%
+\@x{}\midbar\@xx{}%
+\@x{ Spec \.{\defeq} Init \.{\land} {\Box} [ Next ]_{ vars}}%
+\@x{}\midbar\@xx{}%
+\@x{ SEC \.{\defeq} \E\, r1 ,\, r2 \.{\in} Replica \.{:}}%
+ \@x{\@s{21.01} Sameupdate ( r1 ,\, r2 ) \.{\implies} state [ r1 ] \.{=} state
+ [ r2 ]}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -992,22 +1035,17 @@
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue} May 14
- 11:14:26 \ensuremath{CST} 2019 by \ensuremath{zfwang
+ 11:24:22 \ensuremath{CST} 2019 by \ensuremath{zfwang
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon} May 06
- 15:30:04 \ensuremath{CST} 2019 by \ensuremath{jywellin
-}%
-\end{cpar}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sun \ensuremath{Apr} 21
- 21:44:03 \ensuremath{CST} 2019 by \ensuremath{xhdn
+ 15:54:02 \ensuremath{CST} 2019 by \ensuremath{jywellin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Mon} \ensuremath{Mar} 25
- 20:24:02 \ensuremath{CST} 2019 by \ensuremath{jywellin
+ 14:25:48 \ensuremath{CST} 2019 by \ensuremath{jywellin
 }%
 \end{cpar}%
 \end{lcom}%

@@ -942,40 +942,50 @@
 \@x{}\moduleLeftDash\@xx{ {\MODULE} OpCounter}\moduleRightDash\@xx{}%
 \@x{ {\EXTENDS}}%
 \@x{\@s{16.4} Naturals ,\, Sequences ,\, SEC}%
-\@pvspace{8.0pt}%
 \@x{}\midbar\@xx{}%
-\@x{ {\VARIABLE}}%
-\@x{\@s{16.4} counter ,\,}%
-\@x{\@s{16.4} buffer ,\,}%
-\@x{\@s{16.4} seq ,\,}%
-\@x{\@s{16.4} incoming ,\,\@s{16.4}}%
+\@x{ {\VARIABLES}}%
+\@x{\@s{16.4} counter ,\,\@s{10.24}}%
 \@y{\@s{0}%
- network variable
-}%
+ \ensuremath{counter[r]}: current value of the counter at replica
+ \ensuremath{r \.{\in} Replica
+}}%
 \@xx{}%
-\@x{\@s{16.4} msg ,\,\@s{38.88}}%
+\@x{\@s{16.4} buffer ,\,\@s{17.65}}%
 \@y{\@s{0}%
- network variable
-}%
+ \ensuremath{buffer[r]}: number of increments performed since the last
+ broadcast at replica \ensuremath{r \.{\in} Replica
+}}%
 \@xx{}%
-\@x{\@s{16.4} messageset\@s{14.52}}%
+\@x{\@s{16.4} seq ,\,\@s{29.98}}%
+\@y{\@s{0}%
+ \ensuremath{seq[r]}: local sequence number at replica \ensuremath{r \.{\in}
+ Replica
+}}%
+\@xx{}%
+\@x{\@s{16.4} incoming ,\,\@s{3.40}}%
+\@y{\@s{0}%
+ \ensuremath{incoming[r]}: incoming messages at replica \ensuremath{r \.{\in}
+ Replica
+}}%
+\@xx{}%
+\@x{\@s{16.4} msg ,\,\@s{25.89}}%
+\@y{\@s{0}%
+ \ensuremath{incoming[r]}: current message at replica \ensuremath{r \.{\in}
+ Replica
+}}%
+\@xx{}%
+\@x{\@s{16.4} messageSet}%
 \@y{\@s{0}%
  network variable
 }%
 \@xx{}%
 \@pvspace{8.0pt}%
  \@x{ vars \.{\defeq} {\langle} counter ,\, buffer ,\, seq ,\, incoming ,\,
- msg ,\, messageset ,\, SECvars {\rangle}}%
+ msg ,\, messageSet ,\, SECvars {\rangle}}%
 \@pvspace{8.0pt}%
- \@x{ Msg \.{\defeq} [ r \.{:} Replica ,\, update \.{:} {\SUBSET} Update ,\,
- seq \.{:} Nat ,\, buf \.{:} Nat ]}%
+ \@x{ Msg \.{\defeq} [ r \.{:} Replica ,\, buf \.{:} Nat ,\, seq \.{:} Nat ,\,
+ update \.{:} {\SUBSET} Update ]}%
 \@x{}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-Reliable \ensuremath{Network
-}%
-\end{cpar}%
-\end{lcom}%
 \@x{ Network \.{\defeq} {\INSTANCE} ReliableNetwork}%
 \@x{}\midbar\@xx{}%
 \@x{ TypeOK \.{\defeq}}%
@@ -983,14 +993,13 @@ Reliable \ensuremath{Network
  Nat ]}%
  \@x{\@s{16.4} \.{\land}\@s{9.74} buffer \.{\in} [ Replica \.{\rightarrow} Nat
  ]}%
-\@pvspace{8.0pt}%
 \@x{}\midbar\@xx{}%
 \@x{ Init \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} Network {\bang} RInit}%
-\@x{\@s{16.4} \.{\land} SECInit}%
-\@x{\@s{16.4} \.{\land} seq \.{=} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
 \@x{\@s{16.4} \.{\land} counter \.{=} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
 \@x{\@s{16.4} \.{\land} buffer \.{=} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
+\@x{\@s{16.4} \.{\land} seq \.{=} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
+\@x{\@s{16.4} \.{\land} Network {\bang} RInit}%
+\@x{\@s{16.4} \.{\land} SECInit}%
 \@pvspace{8.0pt}%
 \@x{ Read ( r ) \.{\defeq} counter [ r ]}%
 \@pvspace{8.0pt}%
@@ -1003,7 +1012,7 @@ Reliable \ensuremath{Network
  @ \.{+} 1 ]}%
 \@x{\@s{18.53} \.{\land} SECUpdate ( r ,\, seq [ r ] )}%
  \@x{\@s{18.53} \.{\land} {\UNCHANGED} {\langle} incoming ,\, msg ,\,
- messageset {\rangle}}%
+ messageSet {\rangle}}%
 \@pvspace{8.0pt}%
 \@x{ Send ( r ) \.{\defeq}}%
 \@x{\@s{21.98} \.{\land} buffer [ r ] \.{\neq} 0}%
@@ -1016,16 +1025,15 @@ Reliable \ensuremath{Network
 \@x{\@s{21.98} \.{\land} {\UNCHANGED} {\langle} counter ,\, seq {\rangle}}%
 \@pvspace{8.0pt}%
 \@x{ Receive ( r ) \.{\defeq}}%
-\@x{\@s{16.4} \.{\land}\@s{5.06} Network {\bang} RDeliver ( r )}%
-\@x{\@s{16.4} \.{\land}\@s{5.06} SECDeliver ( r ,\, msg \.{'} [ r ] )}%
  \@x{\@s{16.4} \.{\land}\@s{5.06} counter \.{'} \.{=} [ counter {\EXCEPT}
  {\bang} [ r ] \.{=} @ \.{+} msg \.{'} [ r ] . buf ]}%
+\@x{\@s{16.4} \.{\land}\@s{5.06} Network {\bang} RDeliver ( r )}%
+\@x{\@s{16.4} \.{\land}\@s{5.06} SECDeliver ( r ,\, msg \.{'} [ r ] )}%
  \@x{\@s{16.4} \.{\land}\@s{5.06} {\UNCHANGED} {\langle} buffer ,\, seq
  {\rangle}}%
 \@x{}\midbar\@xx{}%
-\@x{ Next \.{\defeq}}%
- \@x{\@s{12.29} \E\, r \.{\in} Replica \.{:} Inc ( r ) \.{\lor} Send ( r )
- \.{\lor} Receive ( r )}%
+ \@x{ Next \.{\defeq} \E\, r \.{\in} Replica \.{:} Inc ( r ) \.{\lor} Send ( r
+ ) \.{\lor} Receive ( r )}%
 \@x{}\midbar\@xx{}%
 \@x{ Spec \.{\defeq} Init \.{\land} {\Box} [ Next ]_{ vars}}%
 \@x{}\midbar\@xx{}%
@@ -1035,13 +1043,17 @@ Reliable \ensuremath{Network
  ] \.{=} counter [ r2 ]}%
 \@pvspace{8.0pt}%
  \@x{ SEC \.{\defeq} \A\, r1 ,\, r2 \.{\in} Replica \.{:} Sameupdate ( r1 ,\,
- r2 )}%
-\@x{\@s{57.41} \.{\implies} counter [ r1 ] \.{=} counter [ r2 ]}%
+ r2 ) \.{\implies} counter [ r1 ] \.{=} counter [ r2 ]}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
+\end{cpar}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Wed} May 15
+ 16:52:35 \ensuremath{CST} 2019 by \ensuremath{zfwang
+}%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue} May 07

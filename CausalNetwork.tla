@@ -5,10 +5,10 @@ VARIABLES
     vc
 -----------------------------------------------------------------------------    
 vector == [Replica -> Nat]
-initvector == [r \in Replica |-> 0]
+initVector == [r \in Replica |-> 0]
 -----------------------------------------------------------------------------
 Init == /\ NInit
-        /\ vc = [r \in Replica |-> initvector]
+        /\ vc = [r \in Replica |-> initVector]
 
 Broadcast(r, m) == /\ NBroadcast(r, m)
                    /\ vc' = [vc EXCEPT ![r][r] = @ + 1]  
@@ -25,6 +25,7 @@ Deliver(r) ==
     /\ UNCHANGED <<incoming>>   
 =============================================================================
 \* Modification History
+\* Last modified Wed May 15 00:09:33 CST 2019 by zfwang
 \* Last modified Mon May 06 16:07:03 CST 2019 by jywellin
 \* Last modified Wed Apr 17 17:47:27 CST 2019 by xhdn
 \* Created Wed Mar 27 20:03:44 CST 2019 by jywellin
