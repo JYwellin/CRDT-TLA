@@ -92,6 +92,6 @@ SEC == \A r1, r2 \in Replica : Sameupdate(r1, r2)
             => Read(r1) = Read(r2)
 =============================================================================
 \* Modification History
-\* Last modified Tue May 07 01:14:37 CST 2019 by xhdn
+\* Last modified Wed May 15 18:04:39 CST 2019 by xhdn
 \* Last modified Mon May 06 15:58:14 CST 2019 by jywellin
 \* Created Sun Apr 28 13:52:27 CST 2019 by jywellin

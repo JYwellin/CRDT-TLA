@@ -37,7 +37,7 @@ Add(d, r) ==
     /\ seq' = [seq EXCEPT ![r] = @ + 1]
     /\ SECUpdate(r, seq[r])
     /\ LET D == {ins \in aSet[r] : ins.d = d /\ ins.r = r}
-       IN aSet'= [aSet EXCEPT ![r] = (@ \cup {[d |-> d, r |-> r, k |-> vc[r][r]+1]}) \D]
+       IN aSet'= [aSet EXCEPT ![r] = (@ \cup {[d |-> d, r |-> r, k |-> vc[r][r]+1]}) \ D]
     /\ vc' = [vc EXCEPT ![r][r] = @ + 1]
     /\ UNCHANGED <<incoming, msg, messageset>>
 
@@ -92,5 +92,6 @@ SEC == \A r1, r2 \in Replica : Sameupdate(r1, r2)
             => Read(r1) = Read(r2)
 =============================================================================
 \* Modification History
+\* Last modified Wed May 15 18:04:39 CST 2019 by xhdn
 \* Last modified Mon May 06 15:58:14 CST 2019 by jywellin
 \* Created Sun Apr 28 13:52:27 CST 2019 by jywellin

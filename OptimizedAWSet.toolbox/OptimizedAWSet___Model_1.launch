@@ -6,7 +6,7 @@
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
 <intAttribute key="distributedFPSetCount" value="0"/>
-<stringAttribute key="distributedNetworkInterface" value="192.0.108.1"/>
+<stringAttribute key="distributedNetworkInterface" value="172.27.140.97"/>
 <intAttribute key="distributedNodesCount" value="1"/>
 <stringAttribute key="distributedTLC" value="off"/>
 <stringAttribute key="distributedTLCVMArgs" value=""/>
@@ -20,7 +20,7 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="seq, msg, updateset, aSet, incoming, vc"/>
+<stringAttribute key="modelBehaviorVars" value="seq, msg, last_updateset, updateset, messageset, aSet, incoming, vc"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
@@ -31,7 +31,7 @@
 <stringAttribute key="modelExpressionEval" value=""/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
-<listEntry value="Data;;{&quot;a&quot;,&quot;b&quot;,&quot;c&quot;};0;0"/>
+<listEntry value="Data;;{&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;};0;0"/>
 <listEntry value="Replica;;{r1, r2, r3};1;1"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>

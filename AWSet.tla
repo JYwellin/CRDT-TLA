@@ -83,9 +83,10 @@ QC == Quiescence => Convergence
 
 (* SEC: Strong Eventual Consistency *)
 SEC == \A r1, r2 \in Replica :
-        Sameupdate(r1, r2) => Read(r1) = Read(r2)
+        Sameupdate(r1, r2) => Convergence
 =============================================================================
 \* Modification History
+\* Last modified Wed May 15 20:55:42 CST 2019 by xhdn
 \* Last modified Mon May 13 13:28:35 CST 2019 by zfwang
 \* Last modified Sun Apr 28 15:09:12 CST 2019 by jywellin
 \* Created Sun Apr 28 14:02:54 CST 2019 by jywellin
