@@ -15,7 +15,8 @@ VARIABLES
 vars == <<aSet, tSet, seq, incoming, msg, messageSet, SECvars>>
 ----------------------------------------------------------------------------- 
 Instance == [d: Data, r: Replica, k: Nat]
-Msg == [r : Replica, A: SUBSET Instance, T : SUBSET Instance, seq : Nat, update : SUBSET Update]
+Msg == [r : Replica, A: SUBSET Instance, T : SUBSET Instance, seq : Nat, 
+       update : SUBSET Update]
 ----------------------------------------------------------------------------- 
 Network == INSTANCE Network
 -----------------------------------------------------------------------------    
@@ -32,8 +33,8 @@ Init ==
     /\ SECInit    
 -----------------------------------------------------------------------------
 Add(d, r) == 
-    /\ aSet'= [aSet EXCEPT ![r] = @ \union {[d |-> d, r |-> r, k |-> seq'[r]]}]
     /\ seq' = [seq EXCEPT ![r] = @ + 1]
+    /\ aSet'= [aSet EXCEPT ![r] = @ \union {[d |-> d, r |-> r, k |-> seq'[r]]}] 
     /\ SECUpdate(r, seq[r])
     /\ UNCHANGED <<tSet, incoming, msg, messageSet>>
 
@@ -50,24 +51,24 @@ Broadcast(s, m) ==
                                 ELSE incoming[r] \o <<m>>]
                        
 Send(r) == 
-    /\ Network!NBroadcast(r, [r |-> r, A |-> aSet[r], T |-> tSet[r], 
-       seq |-> seq[r], update |-> StateUpdate(r)])  
+    /\ Network!NBroadcast(r, [r |-> r, A |-> aSet[r], T |-> tSet[r], seq |-> seq[r], 
+       update |-> StateUpdate(r)])  
     /\ SECSend(r)
     /\ UNCHANGED <<aSet, tSet, seq>>
            
-Deliver(r) == 
+Receive(r) == 
+    /\ Network!NDeliver(r)
+    /\ SECDeliver(r, msg'[r]) 
     /\ tSet' = [tSet EXCEPT ![r] = @ \cup msg'[r].T]
     /\ aSet' = [aSet EXCEPT ![r] = (@ \cup msg'[r].A) \ tSet'[r]]
-    /\ seq' = [seq EXCEPT ![r] = @ + 1] 
-    /\ Network!NDeliver(r)
-    /\ SECDeliver(r, msg'[r])         
+    /\ seq' = [seq EXCEPT ![r] = @ + 1]  
     /\ UNCHANGED <<>>                    
 -----------------------------------------------------------------------------
 Next ==
     \/ \E r \in Replica: \E a \in Data: 
         Add(a, r) \/ Remove(a, r)
     \/ \E r \in Replica: 
-        Send(r) \/ Deliver(r)
+        Send(r) \/ Receive(r)
 
 Spec == Init /\ [][Next]_vars
 -----------------------------------------------------------------------------
@@ -84,6 +85,6 @@ QC == Quiescence => Convergence
 SEC == \A r1, r2 \in Replica : SameUpdate(r1, r2) => Read(r1) = Read(r2)
 =============================================================================
 \* Modification History
-\* Last modified Wed May 15 20:49:22 CST 2019 by zfwang
+\* Last modified Thu May 16 09:19:03 CST 2019 by zfwang
 \* Last modified Sun Apr 28 15:09:12 CST 2019 by jywellin
 \* Created Sun Apr 28 14:02:54 CST 2019 by jywellin

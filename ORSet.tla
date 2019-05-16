@@ -8,15 +8,14 @@ Instance == [d: Data, r: Replica, k: Nat]
   
 VARIABLES 
     sSet,     \* sSet[r]: set of active Instance(s) maintained by r \in Replica
-    seq,      \* seq[r]: local sequence number at replica r \in Replic
-    (* Network variables *)    
+    seq,      \* seq[r]: local sequence number at replica r \in Replic    
     incoming, \* incoming[r]: incoming messages at replica r \in Replica   
     msg,
     messageSet 
 
 vars == <<sSet, seq, incoming, msg, messageSet, SECvars>>
 
-Msg == [r : Replica, update : SUBSET Update, seq : Nat, S: SUBSET Instance]
+Msg == [r : Replica, S: SUBSET Instance, seq : Nat, update : SUBSET Update]
 -----------------------------------------------------------------------------
 Network == INSTANCE ReliableNetwork
 -----------------------------------------------------------------------------
@@ -26,14 +25,13 @@ TypeOK ==
 -----------------------------------------------------------------------------
 Init == 
     /\ sSet = [r \in Replica |-> {}]
-    /\ seq = [r \in Replica |-> 0]  
-    /\ incoming = [r \in Replica |-> <<>>]  
+    /\ seq = [r \in Replica |-> 0]    
     /\ Network!RInit
     /\ SECInit
 -----------------------------------------------------------------------------
 Add(d, r) == 
-    /\ sSet'= [sSet EXCEPT ![r] = @ \union {[d |-> d, r |-> r, k |-> seq'[r]]}] 
     /\ seq' = [seq EXCEPT ![r] = @ + 1]
+    /\ sSet'= [sSet EXCEPT ![r] = @ \union {[d |-> d, r |-> r, k |-> seq'[r]]}]   
     /\ SECUpdate(r, seq[r])
     /\ UNCHANGED <<incoming, msg, messageSet>>
 
@@ -49,14 +47,15 @@ Broadcast(s, m) ==
                                 ELSE incoming[r] (+) SetToBag({m})]
                                     
 Send(r) == 
-    /\ Network!RBroadcast(r, [r |-> r, seq |-> seq[r], update|-> OpUpdate(r), S |-> sSet[r]])
+    /\ Network!RBroadcast(r, [r |-> r, S |-> sSet[r], seq |-> seq[r], 
+       update|-> OpUpdate(r)])
     /\ SECSend(r) 
     /\ UNCHANGED <<sSet, seq>>
               
 Receive(r) == 
-    /\ sSet' = [sSet EXCEPT ![r] = @ \cup msg'[r].S]
     /\ Network!RDeliver(r)
     /\ SECDeliver(r, msg'[r])
+    /\ sSet' = [sSet EXCEPT ![r] = @ \cup msg'[r].S]
     /\ UNCHANGED <<seq>>                
 -----------------------------------------------------------------------------
 Next ==
@@ -80,5 +79,5 @@ QC == Quiescence => Convergence
 SEC == \A r1, r2 \in Replica : SameUpdate(r1, r2) => Read(r1) = Read(r2)
 =============================================================================
 \* Modification History
-\* Last modified Wed May 15 20:55:13 CST 2019 by zfwang
+\* Last modified Thu May 16 10:34:44 CST 2019 by zfwang
 \* Created Wed Feb 27 17:23:32 CST 2019 by zfwang

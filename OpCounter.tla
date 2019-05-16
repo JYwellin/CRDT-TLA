@@ -19,6 +19,7 @@ Network == INSTANCE ReliableNetwork
 TypeOK == 
     /\ counter \in [Replica -> Nat]
     /\ buffer \in [Replica -> Nat]
+    /\ seq \in [Replica -> Nat]
 -----------------------------------------------------------------------------       
 Init == 
     /\ counter = [r \in Replica |-> 0]
@@ -44,9 +45,9 @@ Send(r) ==
     /\ UNCHANGED <<counter, seq>>
 
 Receive(r) == 
-    /\ counter' = [counter EXCEPT ![r] = @ + msg'[r].buf]
     /\ Network!RDeliver(r)
     /\ SECDeliver(r, msg'[r])
+    /\ counter' = [counter EXCEPT ![r] = @ + msg'[r].buf]
     /\ UNCHANGED <<buffer, seq>>
 -----------------------------------------------------------------------------                
 Next == \E r \in Replica: Inc(r) \/ Send(r)\/ Receive(r)
@@ -55,12 +56,12 @@ Spec == Init /\ [][Next]_vars
 -----------------------------------------------------------------------------
 EmptyBuffer == buffer = [r \in Replica |-> 0]
 EC == Network!EmptyChannel /\ EmptyBuffer
-            => \A r1, r2 \in Replica : counter[r1] = counter[r2]
+            => \A r1, r2 \in Replica : Read(r1) = Read(r2)
             
-SEC == \A r1, r2 \in Replica : SameUpdate(r1, r2) => counter[r1] = counter[r2]
+SEC == \A r1, r2 \in Replica : SameUpdate(r1, r2) => Read(r1) = Read(r2)
 =============================================================================
 \* Modification History
-\* Last modified Wed May 15 19:56:44 CST 2019 by zfwang
+\* Last modified Thu May 16 09:23:01 CST 2019 by zfwang
 \* Last modified Tue May 07 00:57:30 CST 2019 by xhdn
 \* Last modified Mon May 06 15:51:30 CST 2019 by jywellin
 \* Created Fri Mar 22 20:43:27 CST 2019 by jywellin

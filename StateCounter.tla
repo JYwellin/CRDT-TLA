@@ -14,7 +14,6 @@ vars == <<counter, sendAllowed, seq, incoming, msg, messageSet, SECvars>>
 Vector == [Replica -> Nat]
 InitVector == [r \in Replica |-> 0]
 InitCounter == counter = [r \in Replica |-> InitVector]
-EmptyBuffer == sendAllowed = [r \in Replica |-> 0]
 Msg == [r : Replica, buf : Vector, seq : Nat, update : SUBSET Update]
 -----------------------------------------------------------------------------  
 Network == INSTANCE Network
@@ -25,7 +24,7 @@ TypeOK ==
 -----------------------------------------------------------------------------
 Init == 
     /\ InitCounter
-    /\ EmptyBuffer
+    /\ sendAllowed = [r \in Replica |-> 0]
     /\ seq = [r \in Replica |-> 0]       
     /\ Network!NInit
     /\ SECInit
@@ -47,19 +46,20 @@ Send(r) ==
 SetMax(r, s) == IF r > s THEN r ELSE s
     
 Receive(r) == 
-    /\ \A s \in Replica : 
-            counter' = [counter EXCEPT ![r][s] = SetMax(@, msg'[r].vc[s])]                 
     /\ Network!NDeliver(r)
     /\ SECDeliver(r, msg'[r])
+    /\ \A s \in Replica : 
+            counter' = [counter EXCEPT ![r][s] = SetMax(@, msg'[r].buf[s])]                 
     /\ UNCHANGED <<sendAllowed, seq>>
 -----------------------------------------------------------------------------
 Next == /\ \E r \in Replica: Inc(r) \/ Send(r) \/ Receive(r)
 -----------------------------------------------------------------------------
 Spec == Init /\ [][Next]_vars
 -----------------------------------------------------------------------------
-SEC == \E r1, r2 \in Replica : SameUpdate(r1, r2) => counter[r1] = counter[r2]
+Read(r) == counter[r]
+SEC == \E r1, r2 \in Replica : SameUpdate(r1, r2) => Read(r1) = Read(r2)
 =============================================================================
 \* Modification History
-\* Last modified Wed May 15 19:55:45 CST 2019 by zfwang
+\* Last modified Thu May 16 09:34:24 CST 2019 by zfwang
 \* Last modified Mon May 06 15:54:02 CST 2019 by jywellin
 \* Created Mon Mar 25 14:25:48 CST 2019 by jywellin
