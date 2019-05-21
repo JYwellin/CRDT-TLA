@@ -22,18 +22,18 @@ SECInit ==
 SECUpdate(r, seq) == 
     /\ updateset' = [updateset EXCEPT ![r] = @ \cup { [r |-> r, seq |-> seq ] }] 
     /\ UNCHANGED <<last_updateset>>  
-    
-SECDeliver(r, m) ==
-    /\ updateset' = [updateset EXCEPT ![r] = @ \cup m.update]    
-    /\ last_updateset' = [last_updateset EXCEPT ![r] = @ \cup m.update]
 
 SECSend(r) ==
     /\ last_updateset' = [last_updateset EXCEPT ![r] = updateset[r]]
     /\ UNCHANGED <<updateset>> 
+    
+SECDeliver(r, m) ==
+    /\ updateset' = [updateset EXCEPT ![r] = @ \cup m.update]    
+    /\ last_updateset' = [last_updateset EXCEPT ![r] = @ \cup m.update]
 -----------------------------------------------------------------------------    
 Sameupdate(r1, r2) == 
     updateset[r1] = updateset[r2]
 =============================================================================
 \* Modification History
-\* Last modified Mon May 06 15:44:50 CST 2019 by jywellin
+\* Last modified Mon May 06 16:50:42 CST 2019 by jywellin
 \* Created Sun May 05 15:42:13 CST 2019 by jywellin
