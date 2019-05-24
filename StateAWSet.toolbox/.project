@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>StateAWSet</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>toolbox.builder.TLAParserBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>toolbox.natures.TLANature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Message.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Message.tla</location>
+		</link>
+		<link>
+			<name>Network.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Network.tla</location>
+		</link>
+		<link>
+			<name>SEC.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/SEC.tla</location>
+		</link>
+		<link>
+			<name>StateAWSet.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/StateAWSet.tla</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>
