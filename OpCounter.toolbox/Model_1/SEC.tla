@@ -32,8 +32,9 @@ SECDeliver(r, m) ==
     /\ last_updateset' = [last_updateset EXCEPT ![r] = @ \cup m.update]
 -----------------------------------------------------------------------------    
 Sameupdate(r1, r2) == 
-    updateset[r1] = updateset[r2]
+updateset[r1] = updateset[r2]
 =============================================================================
 \* Modification History
+\* Last modified Thu May 30 19:28:21 CST 2019 by xhdn
 \* Last modified Mon May 06 16:50:42 CST 2019 by jywellin
 \* Created Sun May 05 15:42:13 CST 2019 by jywellin
