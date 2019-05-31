@@ -42,8 +42,6 @@ Send(r) ==
        update |-> StateUpdate(r)])
     /\ SECSend(r)
     /\ UNCHANGED <<counter, seq>>
- 
-SetMax(r, s) == IF r > s THEN r ELSE s
     
 Receive(r) == 
     /\ Network!NDeliver(r)
@@ -60,6 +58,6 @@ Read(r) == counter[r]
 SEC == \E r1, r2 \in Replica : SameUpdate(r1, r2) => Read(r1) = Read(r2)
 =============================================================================
 \* Modification History
-\* Last modified Thu May 16 09:34:24 CST 2019 by zfwang
+\* Last modified Mon May 20 16:13:30 CST 2019 by zfwang
 \* Last modified Mon May 06 15:54:02 CST 2019 by jywellin
 \* Created Mon Mar 25 14:25:48 CST 2019 by jywellin

@@ -3,36 +3,36 @@ EXTENDS ORSet, TLC
 
 \* MV CONSTANT declarations@modelParameterConstants
 CONSTANTS
-r1, r2, r3
+r1, r2
 ----
 
 \* MV CONSTANT declarations@modelParameterConstants
 CONSTANTS
-a, b
+a
 ----
 
 \* MV CONSTANT definitions Replica
-const_1557646031892173000 == 
-{r1, r2, r3}
+const_15592616516772000 == 
+{r1, r2}
 ----
 
 \* MV CONSTANT definitions Data
-const_1557646031892174000 == 
-{a, b}
+const_15592616516773000 == 
+{a}
 ----
 
 \* SYMMETRY definition
-symm_1557646031892175000 == 
-Permutations(const_1557646031892173000) \union Permutations(const_1557646031892174000)
+symm_15592616516774000 == 
+Permutations(const_15592616516772000) \union Permutations(const_15592616516773000)
 ----
 
 \* CONSTANT definition @modelParameterDefinitions:0
-CONSTANT def_ov_1557646031892176000
+CONSTANT def_ov_15592616516775000
 ----
-\* ACTION_CONSTRAINT definition @modelParameterActionConstraint:0
-action_constr_1557646031892177000 ==
-\A r \in Replica: seq[r] <= 3
+\* CONSTRAINT definition @modelParameterContraint:0
+constr_15592616516776000 ==
+TLCSet("exit", TLCGet("distinct") > 10000)
 ----
 =============================================================================
 \* Modification History
-\* Created Sun May 12 15:27:11 CST 2019 by zfwang
+\* Created Fri May 31 08:14:11 CST 2019 by zfwang

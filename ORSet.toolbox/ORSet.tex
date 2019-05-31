@@ -940,7 +940,6 @@
 \tlatex
 \setboolean{shading}{true}
 \@x{}\moduleLeftDash\@xx{ {\MODULE} ORSet}\moduleRightDash\@xx{}%
-\@pvspace{8.0pt}%
 \@x{ {\EXTENDS} Naturals ,\, Sequences ,\, Bags ,\, TLC ,\, SEC}%
 \@pvspace{8.0pt}%
 \@x{ {\CONSTANTS}}%
@@ -954,26 +953,19 @@
  ]}%
 \@pvspace{8.0pt}%
 \@x{ {\VARIABLES}}%
-\@x{\@s{16.4} sSet ,\,\@s{41.0}}%
+\@x{\@s{16.4} sSet ,\,\@s{21.65}}%
 \@y{\@s{0}%
  \ensuremath{sSet[r]}: set of active \ensuremath{Instance(s)} maintained by
  \ensuremath{r \.{\in} Replica
 }}%
 \@xx{}%
-\@x{\@s{16.4} seq ,\,\@s{45.91}}%
+\@x{\@s{16.4} seq ,\,\@s{26.57}}%
 \@y{\@s{0}%
  \ensuremath{seq[r]}: local sequence number at replica \ensuremath{r \.{\in}
- Replica
+ Replic
 }}%
 \@xx{}%
-\@pvspace{8.0pt}%
-\@x{\@s{16.4}}%
-\@y{\@s{0}%
- Network variables
-}%
-\@xx{}%
-\@pvspace{8.0pt}%
-\@x{\@s{16.4} incoming ,\,\@s{28.7}}%
+\@x{\@s{16.4} incoming ,\,}%
 \@y{\@s{0}%
  \ensuremath{incoming[r]}: incoming messages at replica \ensuremath{r \.{\in}
  Replica
@@ -985,45 +977,40 @@
  \@x{ vars \.{\defeq} {\langle} sSet ,\, seq ,\, incoming ,\, msg ,\,
  messageSet ,\, SECvars {\rangle}}%
 \@pvspace{8.0pt}%
- \@x{ Msg \.{\defeq} [ r \.{:} Replica ,\, update \.{:} {\SUBSET} Update ,\,
- seq \.{:} Nat ,\, S \.{:} {\SUBSET} Instance ]}%
+ \@x{ Msg \.{\defeq} [ r \.{:} Replica ,\, S \.{:} {\SUBSET} Instance ,\, seq
+ \.{:} Nat ,\, update \.{:} {\SUBSET} Update ]}%
 \@x{}\midbar\@xx{}%
-\@pvspace{8.0pt}%
 \@x{ Network \.{\defeq} {\INSTANCE} ReliableNetwork}%
-\@pvspace{8.0pt}%
 \@x{}\midbar\@xx{}%
 \@x{ TypeOK \.{\defeq}}%
  \@x{\@s{16.4} \.{\land}\@s{9.74} sSet \.{\in} [ Replica \.{\rightarrow}
  {\SUBSET} Instance ]}%
 \@x{\@s{16.4} \.{\land}\@s{9.74} seq \.{\in} [ Replica \.{\rightarrow} Nat ]}%
-\@pvspace{8.0pt}%
 \@x{}\midbar\@xx{}%
 \@x{ Init \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} seq \.{=} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
 \@x{\@s{16.4} \.{\land} sSet \.{=} [ r \.{\in} Replica \.{\mapsto} \{ \} ]}%
- \@x{\@s{16.4} \.{\land} incoming \.{=} [ r \.{\in} Replica \.{\mapsto}
- {\langle} {\rangle} ]}%
+\@x{\@s{16.4} \.{\land} seq \.{=} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
 \@x{\@s{16.4} \.{\land} Network {\bang} RInit}%
 \@x{\@s{16.4} \.{\land} SECInit}%
 \@x{}\midbar\@xx{}%
 \@x{ Add ( d ,\, r ) \.{\defeq}}%
- \@x{\@s{22.06} \.{\land} seq \.{'} \.{=} [ seq {\EXCEPT} {\bang} [ r ] \.{=}
- @ \.{+} 1 ]}%
-\@x{\@s{22.06} \.{\land} SECUpdate ( r ,\, seq [ r ] )}%
+ \@x{\@s{22.06} \.{\land} seq \.{'}\@s{4.91} \.{=} [ seq {\EXCEPT} {\bang} [ r
+ ] \.{=} @ \.{+} 1 ]}%
  \@x{\@s{22.06} \.{\land} sSet \.{'} \.{=} [ sSet {\EXCEPT} {\bang} [ r ]
  \.{=} @ \.{\cup} \{ [ d \.{\mapsto} d ,\, r \.{\mapsto} r ,\, k \.{\mapsto}
  seq \.{'} [ r ] ] \} ]}%
+\@x{\@s{22.06} \.{\land} SECUpdate ( r ,\, seq [ r ] )}%
  \@x{\@s{22.06} \.{\land} {\UNCHANGED} {\langle} incoming ,\, msg ,\,
  messageSet {\rangle}}%
 \@pvspace{8.0pt}%
 \@x{ Remove ( d ,\, r ) \.{\defeq}}%
+ \@x{\@s{16.4} \.{\land} \.{\LET} D\@s{3.54} \.{\defeq} \{ ins \.{\in} sSet [
+ r ] \.{:} ins . d \.{=} d \}}%
+ \@x{\@s{27.51} \.{\IN} sSet \.{'} \.{=} [ sSet {\EXCEPT} {\bang} [ r ] \.{=}
+ @ \.{\,\backslash\,} D ]}%
  \@x{\@s{16.4} \.{\land} seq \.{'} \.{=} [ seq {\EXCEPT} {\bang} [ r ] \.{=} @
  \.{+} 1 ]}%
 \@x{\@s{16.4} \.{\land} SECUpdate ( r ,\, seq [ r ] )}%
- \@x{\@s{16.4} \.{\land} \.{\LET} D \.{\defeq} \{ ins \.{\in} sSet [ r ] \.{:}
- ins . d \.{=} d \}}%
- \@x{\@s{27.51} \.{\IN} sSet \.{'} \.{=} [ sSet {\EXCEPT} {\bang} [ r ] \.{=}
- @ \.{\,\backslash\,} D ]}%
  \@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} incoming ,\, msg ,\,
  messageSet {\rangle}}%
 \@x{}\midbar\@xx{}%
@@ -1034,11 +1021,10 @@
 \@pvspace{8.0pt}%
 \@x{ Send ( r ) \.{\defeq}}%
  \@x{\@s{21.98} \.{\land} Network {\bang} RBroadcast ( r ,\, [ r \.{\mapsto} r
- ,\, seq \.{\mapsto} seq [ r ] ,\, update \.{\mapsto} OpUpdate ( r ) ,\, S
- \.{\mapsto} sSet [ r ] ] )}%
+ ,\, S \.{\mapsto} sSet [ r ] ,\, seq \.{\mapsto} seq [ r ] ,\,}%
+\@x{\@s{33.09} update \.{\mapsto} OpUpdate ( r ) ] )}%
 \@x{\@s{21.98} \.{\land} SECSend ( r )}%
- \@x{\@s{21.98} \.{\land} {\UNCHANGED} {\langle} sSet ,\, seq ,\, sSet
- {\rangle}}%
+\@x{\@s{21.98} \.{\land} {\UNCHANGED} {\langle} sSet ,\, seq {\rangle}}%
 \@pvspace{8.0pt}%
 \@x{ Receive ( r ) \.{\defeq}}%
 \@x{\@s{16.4} \.{\land}\@s{5.06} Network {\bang} RDeliver ( r )}%
@@ -1046,7 +1032,6 @@
  \@x{\@s{16.4} \.{\land}\@s{5.06} sSet \.{'} \.{=} [ sSet {\EXCEPT} {\bang} [
  r ] \.{=} @ \.{\cup} msg \.{'} [ r ] . S ]}%
 \@x{\@s{16.4} \.{\land}\@s{5.06} {\UNCHANGED} {\langle} seq {\rangle}}%
-\@pvspace{8.0pt}%
 \@x{}\midbar\@xx{}%
 \@x{ Next \.{\defeq}}%
  \@x{\@s{16.4} \.{\lor} \E\, r \.{\in} Replica \.{:} \E\, a \.{\in} Data
@@ -1064,12 +1049,11 @@
  \ensuremath{QC}: Quiescent Consistency
 }%
 \@xx{}%
-\@x{ Quiescence \.{\defeq}}%
- \@x{\@s{16.4} \A\, r \.{\in} Replica \.{:} incoming [ r ] \.{=} {\langle}
- {\rangle}}%
+ \@x{ Quiescence \.{\defeq} \A\, r \.{\in} Replica \.{:} incoming [ r
+ ]\@s{1.64} \.{=} {\langle} {\rangle}}%
 \@pvspace{8.0pt}%
-\@x{ Convergence \.{\defeq}}%
-\@x{\@s{16.4} \A\, r ,\, s \.{\in} Replica \.{:} Read ( r ) \.{=} Read ( s )}%
+ \@x{ Convergence \.{\defeq} \A\, r ,\, s \.{\in} Replica \.{:} Read ( r )
+ \.{=} Read ( s )}%
 \@pvspace{8.0pt}%
 \@x{ QC \.{\defeq} Quiescence \.{\implies} Convergence}%
 \@pvspace{8.0pt}%
@@ -1078,9 +1062,8 @@
  \ensuremath{SEC}: Strong Eventual Consistency
 }%
 \@xx{}%
-\@x{ SEC \.{\defeq} \A\, r1 ,\, r2 \.{\in} Replica \.{:}}%
- \@x{\@s{44.00} Sameupdate ( r1 ,\, r2 ) \.{\implies} Read ( r1 ) \.{=} Read (
- r2 )}%
+ \@x{ SEC \.{\defeq} \A\, r1 ,\, r2 \.{\in} Replica \.{:} SameUpdate ( r1 ,\,
+ r2 ) \.{\implies} Read ( r1 ) \.{=} Read ( r2 )}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -1088,8 +1071,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue} May 14
- 11:23:35 \ensuremath{CST} 2019 by \ensuremath{zfwang
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Thu} May 16
+ 10:34:44 \ensuremath{CST} 2019 by \ensuremath{zfwang
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

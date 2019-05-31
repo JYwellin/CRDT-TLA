@@ -943,56 +943,71 @@
 \@x{ {\EXTENDS} Naturals ,\, Sequences ,\, Bags ,\, TLC ,\, SEC}%
 \@x{}\midbar\@xx{}%
 \@x{ {\VARIABLES}}%
-\@x{\@s{16.4} state ,\,}%
-\@x{\@s{16.4} update ,\,}%
-\@x{\@s{16.4} seq ,\,}%
-\@x{\@s{16.4} incoming ,\,\@s{16.4}}%
+\@x{\@s{16.4} counter ,\,\@s{24.90}}%
+\@y{\@s{0}%
+ \ensuremath{counter[r][s]}: current value of the \ensuremath{Replica[s]} at
+ \ensuremath{replica[r]
+}}%
+\@xx{}%
+\@x{\@s{16.4} sendAllowed ,\,\@s{4.1}}%
+\@y{\@s{0}%
+ \ensuremath{sendAllowed[r]}: is the replica \ensuremath{r \.{\in} Replica}
+ allowed to send a message
+}%
+\@xx{}%
+\@x{\@s{16.4} seq ,\,\@s{44.64}}%
+\@y{\@s{0}%
+ \ensuremath{seq[r]}: local sequence number at replica \ensuremath{r \.{\in}
+ Replica
+}}%
+\@xx{}%
+\@x{\@s{16.4} incoming ,\,\@s{18.07}}%
 \@y{\@s{0}%
  network variable
 }%
 \@xx{}%
-\@x{\@s{16.4} msg ,\,\@s{38.88}}%
+\@x{\@s{16.4} msg ,\,\@s{40.55}}%
 \@y{\@s{0}%
  network variable
 }%
 \@xx{}%
-\@x{\@s{16.4} messageSet\@s{12.99}}%
+\@x{\@s{16.4} messageSet\@s{14.66}}%
 \@y{\@s{0}%
  network variable
 }%
 \@xx{}%
 \@pvspace{8.0pt}%
- \@x{ vars \.{\defeq} {\langle} state ,\, update ,\, seq ,\, incoming ,\, msg
- ,\, messageSet ,\, SECvars {\rangle}}%
+ \@x{ vars \.{\defeq} {\langle} counter ,\, sendAllowed ,\, seq ,\, incoming
+ ,\, msg ,\, messageSet ,\, SECvars {\rangle}}%
 \@pvspace{8.0pt}%
 \@x{ Vector \.{\defeq} [ Replica \.{\rightarrow} Nat ]}%
 \@x{ InitVector \.{\defeq} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
- \@x{ InitState \.{\defeq} state \.{=} [ r \.{\in} Replica \.{\mapsto}
+ \@x{ InitCounter \.{\defeq} counter \.{=} [ r \.{\in} Replica \.{\mapsto}
  InitVector ]}%
-\@x{ EmptyUpdate \.{\defeq} update \.{=} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
- \@x{ Msg \.{\defeq} [ r \.{:} Replica ,\, vc \.{:} Vector ,\, seq \.{:} Nat
+ \@x{ Msg \.{\defeq} [ r \.{:} Replica ,\, buf \.{:} Vector ,\, seq \.{:} Nat
  ,\, update \.{:} {\SUBSET} Update ]}%
 \@x{}\midbar\@xx{}%
 \@x{ Network \.{\defeq} {\INSTANCE} Network}%
 \@x{}\midbar\@xx{}%
 \@x{ TypeOK \.{\defeq}}%
- \@x{\@s{16.4} \.{\land}\@s{9.74} state \.{\in} [ Replica \.{\rightarrow}
+ \@x{\@s{16.4} \.{\land}\@s{9.74} counter \.{\in} [ Replica \.{\rightarrow}
  Vector ]}%
- \@x{\@s{16.4} \.{\land}\@s{9.74} update \.{\in} [ Replica \.{\rightarrow} \{
- 0 ,\, 1 \} ]}%
+ \@x{\@s{16.4} \.{\land}\@s{9.74} sendAllowed \.{\in} [ Replica
+ \.{\rightarrow} \{ 0 ,\, 1 \} ]}%
 \@x{}\midbar\@xx{}%
 \@x{ Init \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} InitState}%
-\@x{\@s{16.4} \.{\land} EmptyUpdate}%
+\@x{\@s{16.4} \.{\land} InitCounter}%
+ \@x{\@s{16.4} \.{\land} sendAllowed \.{=} [ r \.{\in} Replica \.{\mapsto} 0
+ ]}%
 \@x{\@s{16.4} \.{\land} seq \.{=} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
 \@x{\@s{16.4} \.{\land} Network {\bang} NInit}%
 \@x{\@s{16.4} \.{\land} SECInit}%
 \@x{}\midbar\@xx{}%
 \@x{ Inc ( r ) \.{\defeq}}%
- \@x{\@s{18.53} \.{\land} state \.{'} \.{=} [ state {\EXCEPT} {\bang} [ r ] [
- r ] \.{=} @ \.{+} 1 ]}%
- \@x{\@s{18.53} \.{\land} update \.{'} \.{=} [ update {\EXCEPT} {\bang} [ r ]
- \.{=} 1 ]}%
+ \@x{\@s{18.53} \.{\land} counter \.{'} \.{=} [ counter {\EXCEPT} {\bang} [ r
+ ] [ r ] \.{=} @ \.{+} 1 ]}%
+ \@x{\@s{18.53} \.{\land} sendAllowed \.{'} \.{=} [ sendAllowed {\EXCEPT}
+ {\bang} [ r ] \.{=} 1 ]}%
  \@x{\@s{18.53} \.{\land} seq \.{'} \.{=} [ seq {\EXCEPT} {\bang} [ r ] \.{=}
  @ \.{+} 1 ]}%
 \@x{\@s{18.53} \.{\land} SECUpdate ( r ,\, seq [ r ] )}%
@@ -1000,23 +1015,23 @@
  messageSet {\rangle}}%
 \@pvspace{8.0pt}%
 \@x{ Send ( r ) \.{\defeq}}%
- \@x{\@s{21.98} \.{\land} update \.{'} \.{=} [ update {\EXCEPT} {\bang} [ r ]
- \.{=} 0 ]}%
+ \@x{\@s{21.98} \.{\land} sendAllowed \.{'} \.{=} [ sendAllowed {\EXCEPT}
+ {\bang} [ r ] \.{=} 0 ]}%
  \@x{\@s{21.98} \.{\land} Network {\bang} NBroadcast ( r ,\, [ r \.{\mapsto} r
- ,\, vc \.{\mapsto} state [ r ] ,\, seq \.{\mapsto} seq [ r ] ,\, update
- \.{\mapsto} StateUpdate ( r ) ] )}%
+ ,\, buf \.{\mapsto} counter [ r ] ,\, seq \.{\mapsto} seq [ r ] ,\,}%
+\@x{\@s{33.09} update \.{\mapsto} StateUpdate ( r ) ] )}%
 \@x{\@s{21.98} \.{\land} SECSend ( r )}%
-\@x{\@s{21.98} \.{\land} {\UNCHANGED} {\langle} state ,\, seq {\rangle}}%
+\@x{\@s{21.98} \.{\land} {\UNCHANGED} {\langle} counter ,\, seq {\rangle}}%
 \@pvspace{8.0pt}%
 \@x{ SetMax ( r ,\, s ) \.{\defeq} {\IF} r \.{>} s \.{\THEN} r \.{\ELSE} s}%
 \@pvspace{8.0pt}%
 \@x{ Receive ( r ) \.{\defeq}}%
- \@x{\@s{16.4} \.{\land}\@s{5.06} \A\, s \.{\in} Replica \.{:} state \.{'}
- \.{=} [ state {\EXCEPT} {\bang} [ r ] [ s ] \.{=} SetMax ( @ ,\, msg \.{'} [
- r ] . vc [ s ] ) ]}%
 \@x{\@s{16.4} \.{\land}\@s{5.06} Network {\bang} NDeliver ( r )}%
 \@x{\@s{16.4} \.{\land}\@s{5.06} SECDeliver ( r ,\, msg \.{'} [ r ] )}%
- \@x{\@s{16.4} \.{\land}\@s{5.06} {\UNCHANGED} {\langle} update ,\, seq
+\@x{\@s{16.4} \.{\land}\@s{5.06} \A\, s \.{\in} Replica \.{:}}%
+ \@x{\@s{44.71} counter \.{'} \.{=} [ counter {\EXCEPT} {\bang} [ r ] [ s ]
+ \.{=} SetMax ( @ ,\, msg \.{'} [ r ] . buf [ s ] ) ]}%
+ \@x{\@s{16.4} \.{\land}\@s{5.06} {\UNCHANGED} {\langle} sendAllowed ,\, seq
  {\rangle}}%
 \@x{}\midbar\@xx{}%
  \@x{ Next \.{\defeq} \.{\land} \E\, r \.{\in} Replica \.{:} Inc ( r )
@@ -1024,9 +1039,9 @@
 \@x{}\midbar\@xx{}%
 \@x{ Spec \.{\defeq} Init \.{\land} {\Box} [ Next ]_{ vars}}%
 \@x{}\midbar\@xx{}%
-\@x{ SEC \.{\defeq} \E\, r1 ,\, r2 \.{\in} Replica \.{:}}%
- \@x{\@s{21.01} Sameupdate ( r1 ,\, r2 ) \.{\implies} state [ r1 ] \.{=} state
- [ r2 ]}%
+\@x{ Read ( r ) \.{\defeq} counter [ r ]}%
+ \@x{ SEC \.{\defeq} \E\, r1 ,\, r2 \.{\in} Replica \.{:} SameUpdate ( r1 ,\,
+ r2 ) \.{\implies} Read ( r1 ) \.{=} Read ( r2 )}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -1034,8 +1049,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue} May 14
- 11:24:22 \ensuremath{CST} 2019 by \ensuremath{zfwang
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Thu} May 16
+ 09:34:24 \ensuremath{CST} 2019 by \ensuremath{zfwang
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

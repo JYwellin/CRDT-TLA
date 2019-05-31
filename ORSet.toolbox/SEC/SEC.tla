@@ -2,38 +2,38 @@
 EXTENDS Naturals
 -----------------------------------------------------------------------------
 VARIABLES 
-    updateset,
-    last_updateset   
+    updateSet,
+    prev_updateSet   
     
-SECvars == <<updateset, last_updateset>>
+SECvars == <<updateSet, prev_updateSet>>
 -----------------------------------------------------------------------------
 CONSTANTS 
     Replica
 -----------------------------------------------------------------------------    
 Update == [r : Replica, seq : Nat]
 -----------------------------------------------------------------------------  
-OpUpdate(r) == updateset[r] \ last_updateset[r] \* for op-based CRDT
-StateUpdate(r) == updateset[r]                  \* for state-based CRDT
+OpUpdate(r) == updateSet[r] \ prev_updateSet[r] \* for op-based CRDT
+StateUpdate(r) == updateSet[r]                  \* for state-based CRDT
 -----------------------------------------------------------------------------
 SECInit == 
-    /\ updateset = [r \in Replica |-> {}]
-    /\ last_updateset = [r \in Replica |-> {}]
+    /\ updateSet = [r \in Replica |-> {}]
+    /\ prev_updateSet = [r \in Replica |-> {}]
 
 SECUpdate(r, seq) == 
-    /\ updateset' = [updateset EXCEPT ![r] = @ \cup { [r |-> r, seq |-> seq ] }] 
-    /\ UNCHANGED <<last_updateset>>  
+    /\ updateSet' = [updateSet EXCEPT ![r] = @ \cup { [r |-> r, seq |-> seq ] }] 
+    /\ UNCHANGED <<prev_updateSet>>  
 
 SECSend(r) ==
-    /\ last_updateset' = [last_updateset EXCEPT ![r] = updateset[r]]
-    /\ UNCHANGED <<updateset>> 
+    /\ prev_updateSet' = [prev_updateSet EXCEPT ![r] = updateSet[r]]
+    /\ UNCHANGED <<updateSet>> 
     
 SECDeliver(r, m) ==
-    /\ updateset' = [updateset EXCEPT ![r] = @ \cup m.update]    
-    /\ last_updateset' = [last_updateset EXCEPT ![r] = @ \cup m.update]
+    /\ updateSet' = [updateSet EXCEPT ![r] = @ \cup m.update]    
+    /\ prev_updateSet' = [prev_updateSet EXCEPT ![r] = @ \cup m.update]
 -----------------------------------------------------------------------------    
-Sameupdate(r1, r2) == 
-    updateset[r1] = updateset[r2]
+SameUpdate(r1, r2) == updateSet[r1] = updateSet[r2]
 =============================================================================
 \* Modification History
+\* Last modified Wed May 15 16:57:01 CST 2019 by zfwang
 \* Last modified Mon May 06 16:50:42 CST 2019 by jywellin
 \* Created Sun May 05 15:42:13 CST 2019 by jywellin

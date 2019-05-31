@@ -982,9 +982,9 @@
 \@x{}\midbar\@xx{}%
  \@x{ Instance \.{\defeq} [ d \.{:} Data ,\, r \.{:} Replica ,\, k \.{:} Nat
  ]}%
- \@x{ Msg \.{\defeq} [ r \.{:} Replica ,\, seq \.{:} Nat ,\, update \.{:}
- {\SUBSET} Update ,\, A \.{:} {\SUBSET} Instance ,\, T \.{:} {\SUBSET}
- Instance ]}%
+ \@x{ Msg \.{\defeq} [ r \.{:} Replica ,\, A \.{:} {\SUBSET} Instance ,\, T
+ \.{:} {\SUBSET} Instance ,\, seq \.{:} Nat ,\,}%
+\@x{\@s{37.42} update \.{:} {\SUBSET} Update ]}%
 \@x{}\midbar\@xx{}%
 \@x{ Network \.{\defeq} {\INSTANCE} Network}%
 \@x{}\midbar\@xx{}%
@@ -996,33 +996,33 @@
 \@x{\@s{16.4} \.{\land}\@s{9.74} seq \.{\in} [ Replica \.{\rightarrow} Nat ]}%
 \@x{}\midbar\@xx{}%
 \@x{ Init \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} Network {\bang} NInit}%
-\@x{\@s{16.4} \.{\land} SECInit}%
-\@x{\@s{16.4} \.{\land} seq \.{=} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
 \@x{\@s{16.4} \.{\land} aSet \.{=} [ r \.{\in} Replica \.{\mapsto} \{ \} ]}%
  \@x{\@s{16.4} \.{\land} tSet\@s{1.78} \.{=} [ r \.{\in} Replica \.{\mapsto}
  \{ \} ]}%
+\@x{\@s{16.4} \.{\land} seq \.{=} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
+\@x{\@s{16.4} \.{\land} Network {\bang} NInit}%
+\@x{\@s{16.4} \.{\land} SECInit}%
 \@x{}\midbar\@xx{}%
 \@x{ Add ( d ,\, r ) \.{\defeq}}%
- \@x{\@s{22.06} \.{\land} seq \.{'} \.{=} [ seq {\EXCEPT} {\bang} [ r ] \.{=}
- @ \.{+} 1 ]}%
-\@x{\@s{22.06} \.{\land} SECUpdate ( r ,\, seq [ r ] )}%
+ \@x{\@s{22.06} \.{\land} seq \.{'}\@s{5.94} \.{=} [ seq {\EXCEPT} {\bang} [ r
+ ] \.{=} @ \.{+} 1 ]}%
  \@x{\@s{22.06} \.{\land} aSet \.{'} \.{=} [ aSet {\EXCEPT} {\bang} [ r ]
  \.{=} @ \.{\cup} \{ [ d \.{\mapsto} d ,\, r \.{\mapsto} r ,\, k \.{\mapsto}
  seq \.{'} [ r ] ] \} ]}%
+\@x{\@s{22.06} \.{\land} SECUpdate ( r ,\, seq [ r ] )}%
  \@x{\@s{22.06} \.{\land} {\UNCHANGED} {\langle} tSet ,\, incoming ,\, msg ,\,
  messageSet {\rangle}}%
 \@pvspace{8.0pt}%
 \@x{ Remove ( d ,\, r ) \.{\defeq}}%
- \@x{\@s{16.4} \.{\land} seq \.{'} \.{=} [ seq {\EXCEPT} {\bang} [ r ] \.{=} @
- \.{+} 1 ]}%
-\@x{\@s{16.4} \.{\land} SECUpdate ( r ,\, seq [ r ] )}%
- \@x{\@s{16.4} \.{\land} \.{\LET} D \.{\defeq} \{ ins \.{\in} aSet [ r ] \.{:}
- ins . d \.{=} d \}}%
+ \@x{\@s{16.4} \.{\land} \.{\LET} D\@s{3.54} \.{\defeq} \{ ins \.{\in} aSet [
+ r ] \.{:} ins . d \.{=} d \}}%
  \@x{\@s{27.51} \.{\IN} \.{\land} aSet \.{'} \.{=} [ aSet {\EXCEPT} {\bang} [
  r ] \.{=} @ \.{\,\backslash\,} D ]}%
  \@x{\@s{47.91} \.{\land} tSet \.{'}\@s{1.78} \.{=} [ tSet {\EXCEPT} {\bang} [
  r ]\@s{1.78} \.{=} @ \.{\cup} D ]}%
+ \@x{\@s{16.4} \.{\land} seq \.{'} \.{=} [ seq {\EXCEPT} {\bang} [ r ] \.{=} @
+ \.{+} 1 ]}%
+\@x{\@s{16.4} \.{\land} SECUpdate ( r ,\, seq [ r ] )}%
  \@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} incoming ,\, msg ,\,
  messageSet {\rangle}}%
 \@x{}\midbar\@xx{}%
@@ -1033,30 +1033,31 @@
 \@pvspace{8.0pt}%
 \@x{ Send ( r ) \.{\defeq}}%
  \@x{\@s{21.98} \.{\land} Network {\bang} NBroadcast ( r ,\, [ r \.{\mapsto} r
- ,\, seq \.{\mapsto} seq [ r ] ,\, update \.{\mapsto} StateUpdate ( r ) ,\, A
- \.{\mapsto} aSet [ r ] ,\, T \.{\mapsto} tSet [ r ] ] )}%
+ ,\, A \.{\mapsto} aSet [ r ] ,\, T \.{\mapsto} tSet [ r ] ,\, seq
+ \.{\mapsto} seq [ r ] ,\,}%
+\@x{\@s{33.09} update \.{\mapsto} StateUpdate ( r ) ] )}%
 \@x{\@s{21.98} \.{\land} SECSend ( r )}%
  \@x{\@s{21.98} \.{\land} {\UNCHANGED} {\langle} aSet ,\, tSet ,\, seq
  {\rangle}}%
 \@pvspace{8.0pt}%
-\@x{ Deliver ( r ) \.{\defeq}}%
-\@x{\@s{16.4} \.{\land}\@s{4.75} Network {\bang} NDeliver ( r )}%
-\@x{\@s{16.4} \.{\land}\@s{4.75} SECDeliver ( r ,\, msg \.{'} [ r ] )}%
- \@x{\@s{16.4} \.{\land}\@s{4.75} seq \.{'} \.{=} [ seq {\EXCEPT} {\bang} [ r
- ] \.{=} @ \.{+} 1 ]}%
- \@x{\@s{16.4} \.{\land}\@s{4.75} tSet \.{'}\@s{1.78} \.{=} [ tSet {\EXCEPT}
+\@x{ Receive ( r ) \.{\defeq}}%
+\@x{\@s{16.4} \.{\land}\@s{5.06} Network {\bang} NDeliver ( r )}%
+\@x{\@s{16.4} \.{\land}\@s{5.06} SECDeliver ( r ,\, msg \.{'} [ r ] )}%
+ \@x{\@s{16.4} \.{\land}\@s{5.06} tSet \.{'}\@s{1.78} \.{=} [ tSet {\EXCEPT}
  {\bang} [ r ]\@s{1.78} \.{=} @ \.{\cup} msg \.{'} [ r ] . T ]}%
- \@x{\@s{16.4} \.{\land}\@s{4.75} aSet \.{'} \.{=} [ aSet {\EXCEPT} {\bang} [
+ \@x{\@s{16.4} \.{\land}\@s{5.06} aSet \.{'} \.{=} [ aSet {\EXCEPT} {\bang} [
  r ] \.{=} ( @ \.{\cup} msg \.{'} [ r ] . A ) \.{\,\backslash\,} tSet \.{'} [
  r ] ]}%
-\@x{\@s{16.4} \.{\land}\@s{4.75} {\UNCHANGED} {\langle} {\rangle}}%
+ \@x{\@s{16.4} \.{\land}\@s{5.06} seq \.{'} \.{=} [ seq {\EXCEPT} {\bang} [ r
+ ] \.{=} @ \.{+} 1 ]}%
+\@x{\@s{16.4} \.{\land}\@s{5.06} {\UNCHANGED} {\langle} {\rangle}}%
 \@x{}\midbar\@xx{}%
 \@x{ Next \.{\defeq}}%
  \@x{\@s{16.4} \.{\lor} \E\, r \.{\in} Replica \.{:} \E\, a \.{\in} Data
  \.{:}}%
 \@x{\@s{31.61} Add ( a ,\, r ) \.{\lor} Remove ( a ,\, r )}%
 \@x{\@s{16.4} \.{\lor} \E\, r \.{\in} Replica \.{:}}%
-\@x{\@s{31.61} Send ( r ) \.{\lor} Deliver ( r )}%
+\@x{\@s{31.61} Send ( r ) \.{\lor} Receive ( r )}%
 \@pvspace{8.0pt}%
 \@x{ Spec \.{\defeq} Init \.{\land} {\Box} [ Next ]_{ vars}}%
 \@x{}\midbar\@xx{}%
@@ -1067,12 +1068,11 @@
  \ensuremath{QC}: Quiescent Consistency
 }%
 \@xx{}%
-\@x{ Quiescence \.{\defeq}}%
- \@x{\@s{16.4} \A\, r \.{\in} Replica \.{:} incoming [ r ] \.{=} {\langle}
- {\rangle}}%
+ \@x{ Quiescence \.{\defeq} \A\, r \.{\in} Replica \.{:} incoming [ r
+ ]\@s{1.64} \.{=} {\langle} {\rangle}}%
 \@pvspace{8.0pt}%
-\@x{ Convergence \.{\defeq}}%
-\@x{\@s{16.4} \A\, r ,\, s \.{\in} Replica \.{:} Read ( r ) \.{=} Read ( s )}%
+ \@x{ Convergence \.{\defeq} \A\, r ,\, s \.{\in} Replica \.{:} Read ( r )
+ \.{=} Read ( s )}%
 \@pvspace{8.0pt}%
 \@x{ QC \.{\defeq} Quiescence \.{\implies} Convergence}%
 \@pvspace{8.0pt}%
@@ -1081,9 +1081,8 @@
  \ensuremath{SEC}: Strong Eventual Consistency
 }%
 \@xx{}%
-\@x{ SEC \.{\defeq} \A\, r1 ,\, r2 \.{\in} Replica \.{:}}%
- \@x{\@s{44.00} Sameupdate ( r1 ,\, r2 ) \.{\implies} Read ( r1 ) \.{=} Read (
- r2 )}%
+ \@x{ SEC \.{\defeq} \A\, r1 ,\, r2 \.{\in} Replica \.{:} SameUpdate ( r1 ,\,
+ r2 ) \.{\implies} Read ( r1 ) \.{=} Read ( r2 )}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -1091,8 +1090,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue} May 14
- 11:24:42 \ensuremath{CST} 2019 by \ensuremath{zfwang
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Thu} May 16
+ 09:19:03 \ensuremath{CST} 2019 by \ensuremath{zfwang
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

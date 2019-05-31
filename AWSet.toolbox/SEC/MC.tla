@@ -12,27 +12,23 @@ a
 ----
 
 \* MV CONSTANT definitions Replica
-const_1557725459606248000 == 
+const_1557969549026361000 == 
 {r1, r2}
 ----
 
 \* MV CONSTANT definitions Data
-const_1557725459606249000 == 
+const_1557969549026362000 == 
 {a}
 ----
 
 \* SYMMETRY definition
-symm_1557725459606250000 == 
-Permutations(const_1557725459606248000) \union Permutations(const_1557725459606249000)
+symm_1557969549026363000 == 
+Permutations(const_1557969549026361000) \union Permutations(const_1557969549026362000)
 ----
 
 \* CONSTANT definition @modelParameterDefinitions:0
-CONSTANT def_ov_1557725459606251000
-----
-\* CONSTRAINT definition @modelParameterContraint:0
-constr_1557725459606252000 ==
-\A r \in Replica: seq[r] < 2
+CONSTANT def_ov_1557969549026364000
 ----
 =============================================================================
 \* Modification History
-\* Created Mon May 13 13:30:59 CST 2019 by zfwang
+\* Created Thu May 16 09:19:09 CST 2019 by zfwang
