@@ -61,7 +61,7 @@ EC == Network!EmptyChannel /\ EmptyBuffer
 SEC == \A r1, r2 \in Replica : SameUpdate(r1, r2) => Read(r1) = Read(r2)
 =============================================================================
 \* Modification History
-\* Last modified Fri May 17 19:35:39 CST 2019 by zfwang
+\* Last modified Fri May 31 08:19:43 CST 2019 by zfwang
 \* Last modified Tue May 07 00:57:30 CST 2019 by xhdn
 \* Last modified Mon May 06 15:51:30 CST 2019 by jywellin
 \* Created Fri Mar 22 20:43:27 CST 2019 by jywellin

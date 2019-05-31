@@ -18,7 +18,7 @@ NInit ==
     /\ msg = [r \in Replica |-> NotMsg]
 
 NBroadcast(r, m) == 
-    /\ incoming' = [x \in Replica |->
+    /\ incoming' = [x \in Replica |-> 
                         IF x = r
                         THEN incoming[x]
                         ELSE incoming[x] (+) SetToBag({m}) ]    
@@ -37,7 +37,7 @@ EmptyChannel == incoming = [r \in Replica |-> EmptyBag]
 \* judge if two replicas receive the same set of update operations                      
 =============================================================================
 \* Modification History
-\* Last modified Wed May 15 16:52:45 CST 2019 by zfwang
+\* Last modified Fri May 17 00:25:13 CST 2019 by zfwang
 \* Last modified Mon May 06 15:30:04 CST 2019 by jywellin
 \* Last modified Sun Apr 21 21:44:03 CST 2019 by xhdn
 \* Created Mon Mar 25 20:24:02 CST 2019 by jywellin

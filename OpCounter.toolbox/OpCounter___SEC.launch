@@ -7,7 +7,7 @@
     <intAttribute key="dfidDepth" value="100"/>
     <booleanAttribute key="dfidMode" value="false"/>
     <intAttribute key="distributedFPSetCount" value="0"/>
-    <stringAttribute key="distributedNetworkInterface" value="192.168.0.8"/>
+    <stringAttribute key="distributedNetworkInterface" value="192.168.1.104"/>
     <intAttribute key="distributedNodesCount" value="1"/>
     <stringAttribute key="distributedTLC" value="off"/>
     <stringAttribute key="distributedTLCVMArgs" value=""/>
@@ -21,7 +21,7 @@
     <stringAttribute key="modelBehaviorNext" value=""/>
     <stringAttribute key="modelBehaviorSpec" value="Spec"/>
     <intAttribute key="modelBehaviorSpecType" value="1"/>
-    <stringAttribute key="modelBehaviorVars" value="seq, msg, counter, buffer, updateSet, messageSet, prev_updateSet, incoming"/>
+    <stringAttribute key="modelBehaviorVars" value="incVal, seq, msg, counter, updateSet, messageSet, prev_updateSet, incoming"/>
     <stringAttribute key="modelComments" value=""/>
     <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
     <listAttribute key="modelCorrectnessInvariants"/>
@@ -33,7 +33,7 @@
     <listAttribute key="modelParameterConstants">
         <listEntry value="Replica;;{r1, r2};1;1"/>
     </listAttribute>
-    <stringAttribute key="modelParameterContraint" value=""/>
+    <stringAttribute key="modelParameterContraint" value="TLCSet(&quot;exit&quot;, TLCGet(&quot;distinct&quot;) &gt; 10000)"/>
     <listAttribute key="modelParameterDefinitions">
         <listEntry value="Network!NotMsg;;Network!NotMsg;1;0"/>
     </listAttribute>

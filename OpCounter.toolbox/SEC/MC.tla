@@ -7,18 +7,22 @@ r1, r2
 ----
 
 \* MV CONSTANT definitions Replica
-const_15580578070222000 == 
+const_155926215746439000 == 
 {r1, r2}
 ----
 
 \* SYMMETRY definition
-symm_15580578070233000 == 
-Permutations(const_15580578070222000)
+symm_155926215746440000 == 
+Permutations(const_155926215746439000)
 ----
 
 \* CONSTANT definition @modelParameterDefinitions:0
-CONSTANT def_ov_15580578070234000
+CONSTANT def_ov_155926215746441000
+----
+\* CONSTRAINT definition @modelParameterContraint:0
+constr_155926215746442000 ==
+TLCSet("exit", TLCGet("distinct") > 10000)
 ----
 =============================================================================
 \* Modification History
-\* Created Fri May 17 09:50:07 CST 2019 by zfwang
+\* Created Fri May 31 08:22:37 CST 2019 by zfwang
