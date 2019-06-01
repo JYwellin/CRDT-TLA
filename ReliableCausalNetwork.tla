@@ -4,16 +4,16 @@ EXTENDS Network, Naturals
 VARIABLES
     vc
 -----------------------------------------------------------------------------    
-vector == [Replica -> Nat]
-initvector == [r \in Replica |-> 0]
+Vector == [Replica -> Nat]
+InitVector == [r \in Replica |-> 0]
 -----------------------------------------------------------------------------
-Init == /\ NInit
-        /\ vc = [r \in Replica |-> initvector]
+RCInit == /\ NInit
+          /\ vc = [r \in Replica |-> InitVector]
 
-Broadcast(r, m) == /\ NBroadcast(r, m)
-                   /\ vc' = [vc EXCEPT ![r][r] = @ + 1]  
+RCBroadcast(r, m) == /\ NBroadcast(r, m)
+                     /\ vc' = [vc EXCEPT ![r][r] = @ + 1]  
                    
-Deliver(r) == 
+RCDeliver(r) == 
     /\ incoming[r] # EmptyBag
     /\ \E m \in BagToSet(incoming[r]): 
          /\ ~ IfDeliverMsg(m, r)
@@ -22,11 +22,10 @@ Deliver(r) ==
                \/ s # m.r 
          /\ m.vc[m.r] = vc[r][m.r] + 1
          /\ vc' = [vc EXCEPT ![r][m.r] = @ + 1]  
-         /\ msg' = [msg EXCEPT ![r] = m]
-    /\ UNCHANGED <<incoming>>  
-         
+         /\ msg' =  m
+    /\ UNCHANGED <<incoming>>    
 =============================================================================
 \* Modification History
-\* Last modified Thu May 30 17:18:43 CST 2019 by xhdn
+\* Last modified Sat Jun 01 20:50:28 CST 2019 by xhdn
 \* Last modified Mon May 06 16:07:42 CST 2019 by jywellin
 \* Created Tue Apr 02 15:26:19 CST 2019 by jywellin

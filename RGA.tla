@@ -27,7 +27,7 @@ maxtime(tr, curmax) == IF tr = {} THEN curmax
                          ELSE  LET t == CHOOSE x \in tr: TRUE
                          IN maxtime(tr\{t}, Nummax((t.ts).time, curmax))
 -----------------------------------------------------------------------------
-Network == INSTANCE CausalNetwork                     
+Network == INSTANCE ReliableCausalNetwork                     
 -----------------------------------------------------------------------------
 TypeOK == 
     /\ tree \in [Replica -> SUBSET node]
@@ -38,7 +38,7 @@ TypeOK ==
 -----------------------------------------------------------------------------         
                       
 Init == 
-    /\ Network!Init
+    /\ Network!RCInit
     /\ SECInit
     /\ tree = [r \in Replica |-> {}]
     /\ tomb = [r \in Replica |-> {}]
@@ -83,7 +83,7 @@ send transitions
 Send(r) ==
      /\ \/ tombbuf[r] # {}
         \/ insbuf[r] # {}
-     /\ Network!Broadcast(r, [r |-> r, seq |-> seq[r], 
+     /\ Network!RCBroadcast(r, [r |-> r, seq |-> seq[r], 
                           vc |-> [vc EXCEPT ![r][r] = @ + 1][r], update|-> OpUpdate(r), 
                           tombbuf |-> tombbuf[r], insbuf |-> insbuf[r]])
      /\ SECSend(r)
@@ -95,7 +95,7 @@ Send(r) ==
 receive transitions
 *)
 Receive(r) ==
-    /\ Network!Deliver(r)
+    /\ Network!RCDeliver(r)
     /\ SECDeliver(r, msg'[r])
     /\ tree' =  [tree  EXCEPT![r] = @ \cup msg'[r].insbuf] 
     /\ tomb' = [tomb EXCEPT ![r] = @ \cup msg'[r].tombbuf]
@@ -120,7 +120,7 @@ SEC == \E r1, r2 \in Replica : Sameupdate(r1, r2)
             => Readtree2list(tree[r1],"o",tomb[r1],{})= Readtree2list(tree[r2],"o",tomb[r2],{})                        
 =============================================================================
 \* Modification History
-\* Last modified Sun May 12 12:55:37 CST 2019 by xhdn
+\* Last modified Fri May 31 21:33:29 CST 2019 by xhdn
 \* Last modified Mon May 06 16:52:19 CST 2019 by jywellin
 \* Last modified Thu Jan 10 15:34:04 CST 2019 by jywellins
 \* Created Tue Nov 06 15:55:23 CST 2018 by xhdn

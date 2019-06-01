@@ -1,0 +1,85 @@
+EXTENDS Naturals, Sequences, Bags, TLC, SEC
+
+CONSTANTS 
+    Data      \* the set of data
+    
+Instance == [d: Data, r: Replica, k: Nat]
+  
+VARIABLES 
+    sSet,           \* sSet[r]: set of active Instance(s) maintained by r \in Replica
+    seq,            \* seq[r]: local sequence number at replica r \in Replica
+    
+    (* Network variables *)    
+    
+    incoming,        \* incoming[r]: incoming messages at replica r \in Replica   
+    msg,
+    messageset 
+
+vars == <<sSet, seq, incoming, msg, messageset, SECvars>>
+
+Msg == [r : Replica, update : SUBSET Update, seq : Nat, element :SUBSET Instance, type:{"add","remove"}]
+-----------------------------------------------------------------------------
+Network == INSTANCE ReliableNetwork
+-----------------------------------------------------------------------------
+TypeOK == 
+    /\ sSet \in [Replica -> SUBSET Instance]
+    /\ seq \in [Replica -> Nat]
+
+-----------------------------------------------------------------------------
+Init == 
+    /\ seq = [r \in Replica |-> 0]  
+    /\ sSet = [r \in Replica |-> {}] 
+    /\ Network!RInit
+    /\ SECInit
+-----------------------------------------------------------------------------                                    
+Send(r, m) == 
+    /\ Network!RBroadcast(r, m)
+    /\ SECSend(r) 
+
+NewSet(s, m) == 
+    IF m.type = "add" 
+    THEN  s \cup m.element
+    ELSE s \ m.element
+              
+Receive(r) == 
+    /\ Network!RDeliver(r)
+    /\ SECDeliver(r, msg'[r])
+    /\ sSet' = [sSet EXCEPT ![r] = NewSet(sSet[r], msg'[r])]
+    /\ UNCHANGED <<seq>>         
+-----------------------------------------------------------------------------
+Add(d, r) == 
+    /\ seq' = [seq EXCEPT ![r] = @ + 1]
+    /\ SECUpdate(r, seq[r])
+    /\ sSet'= [sSet EXCEPT ![r] = @ \union {[d |-> d, r |-> r, k |-> seq[r]]}] 
+    /\ Send(r, [r |-> r, seq |-> seq[r], update|-> OpUpdate(r), element |-> {[d |-> d, r |-> r, k |-> seq[r]]}, type |-> "add"])
+
+Remove(d, r) ==
+    /\ {ins \in sSet[r] : ins.d = d} # {}
+    /\ seq' = [seq EXCEPT ![r] = @ + 1]
+    /\ SECUpdate(r, seq[r])
+    /\ LET D == {ins \in sSet[r] : ins.d = d}
+       IN /\  sSet' = [sSet EXCEPT ![r] = @ \ D]          
+          /\  Send(r, [r |-> r, seq |-> seq[r], update|-> OpUpdate(r), element |-> D, type |-> "remove"])
+-----------------------------------------------------------------------------
+Next ==
+    \/ \E r \in Replica: \E a \in Data: 
+        Add(a, r) \/ Remove(a, r)
+    \/ \E r \in Replica: 
+        Receive(r)
+
+Spec == Init /\ [][Next]_vars
+-----------------------------------------------------------------------------
+Read(r) == {ins.d: ins \in sSet[r]}
+
+(* QC: Quiescent Consistency *)
+Quiescence == 
+    \A r \in Replica: incoming[r] = <<>>
+    
+Convergence == 
+    \A r, s \in Replica: Read(r) = Read(s)
+
+QC == Quiescence => Convergence
+
+(* SEC: Strong Eventual Consistency *)   
+SEC == \A r1, r2 \in Replica : 
+        Sameupdate(r1, r2) => Read(r1) = Read(r2)

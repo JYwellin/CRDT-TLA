@@ -20,5 +20,15 @@
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/FIFONetwork.tla</locationURI>
 		</link>
+		<link>
+			<name>Message.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Message.tla</location>
+		</link>
+		<link>
+			<name>Network.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Network.tla</location>
+		</link>
 	</linkedResources>
 </projectDescription>

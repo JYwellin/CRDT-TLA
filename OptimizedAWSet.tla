@@ -8,17 +8,21 @@ VARIABLES
     aSet,
     seq,
     vc,
-    incoming,  \* network variable
-    msg,       \* network variable
-    messageset
+    incoming,       \* network variable
+    msg,            \* network variable
+    messageset      \* network variable
 
-vars == <<aSet, seq, vc, incoming, msg, messageset, SECvars>>
+NETvars == <<incoming, msg, messageset>>
+vars == <<aSet, seq, vc, NETvars, SECvars>>
 ----------------------------------------------------------------------------- 
 Vector == [Replica -> Nat]
 Initvector == [r \in Replica |-> 0]
 Instance == [d: Data, r: Replica, k: Nat]
 Msg == [r : Replica, seq : Nat, vc: Vector, update : SUBSET Update, A: SUBSET Instance]
 ----------------------------------------------------------------------------- 
+(**********************************************************************)
+(* Any Network                                                        *)
+(**********************************************************************)
 Network == INSTANCE Network
 -----------------------------------------------------------------------------    
 TypeOK == 
@@ -39,14 +43,14 @@ Add(d, r) ==
     /\ LET D == {ins \in aSet[r] : ins.d = d /\ ins.r = r}
        IN aSet'= [aSet EXCEPT ![r] = (@ \cup {[d |-> d, r |-> r, k |-> vc[r][r]+1]}) \ D]
     /\ vc' = [vc EXCEPT ![r][r] = @ + 1]
-    /\ UNCHANGED <<incoming, msg, messageset>>
+    /\ UNCHANGED NETvars
 
 Remove(d, r) ==
     /\ seq' = [seq EXCEPT ![r] = @ + 1]
     /\ SECUpdate(r, seq[r])
     /\ LET D == {ins \in aSet[r] : ins.d = d}
        IN   aSet' = [aSet EXCEPT ![r] = @ \ D]
-    /\ UNCHANGED <<vc, incoming, msg, messageset>>
+    /\ UNCHANGED <<vc, NETvars>>
 -----------------------------------------------------------------------------
 Send(r) == 
     /\ Network!NBroadcast(r, [r |-> r, seq |-> seq[r], update |-> StateUpdate(r), vc|-> vc[r], A|-> aSet[r] ])  
@@ -75,23 +79,14 @@ Next ==
     \/ \E r \in Replica: 
         Send(r) \/ Deliver(r)
 
-Spec == Init /\ [][Next]_vars \* /\ WF_vars(Next)
+Spec == Init /\ [][Next]_vars 
 -----------------------------------------------------------------------------
 Read(r) == {ins.d: ins \in aSet[r]}
 
-(* QC: Quiescent Consistency *)
-Quiescence == 
-    \A r \in Replica: incoming[r] = <<>>
-    
-Convergence == 
-    \A r, s \in Replica: Read(r) = Read(s)
-
-QC == Quiescence => Convergence
-
 SEC == \A r1, r2 \in Replica : Sameupdate(r1, r2)
-            => Read(r1) = Read(r2)
+                                => Read(r1) = Read(r2)
 =============================================================================
 \* Modification History
-\* Last modified Wed May 15 18:04:39 CST 2019 by xhdn
+\* Last modified Sat Jun 01 20:55:07 CST 2019 by xhdn
 \* Last modified Mon May 06 15:58:14 CST 2019 by jywellin
 \* Created Sun Apr 28 13:52:27 CST 2019 by jywellin

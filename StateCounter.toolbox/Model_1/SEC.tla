@@ -3,37 +3,42 @@ EXTENDS Naturals
 -----------------------------------------------------------------------------
 VARIABLES 
     updateset,
-    last_updateset   
+    prev_updateset   
     
-SECvars == <<updateset, last_updateset>>
+SECvars == <<updateset, prev_updateset>>
 -----------------------------------------------------------------------------
 CONSTANTS 
     Replica
 -----------------------------------------------------------------------------    
 Update == [r : Replica, seq : Nat]
 -----------------------------------------------------------------------------  
-OpUpdate(r) == updateset[r] \ last_updateset[r] \* for op-based CRDT
+OpUpdate(r) == updateset[r] \ prev_updateset[r] \* for op-based CRDT
 StateUpdate(r) == updateset[r]                  \* for state-based CRDT
 -----------------------------------------------------------------------------
 SECInit == 
     /\ updateset = [r \in Replica |-> {}]
-    /\ last_updateset = [r \in Replica |-> {}]
+    /\ prev_updateset = [r \in Replica |-> {}]
 
 SECUpdate(r, seq) == 
     /\ updateset' = [updateset EXCEPT ![r] = @ \cup { [r |-> r, seq |-> seq ] }] 
-    /\ UNCHANGED <<last_updateset>>  
+    /\ UNCHANGED <<prev_updateset>>  
+
+SECSend(r) ==
+    /\ prev_updateset' = [prev_updateset EXCEPT ![r] = updateset[r]]
+    /\ UNCHANGED <<updateset>> 
+    
+SECFlush(r, seq) ==
+    /\ updateset' = [updateset EXCEPT ![r] = @ \cup { [r |-> r, seq |-> seq ] }] 
+    /\ prev_updateset' = [prev_updateset EXCEPT ![r] = @ \cup { [r |-> r, seq |-> seq ] }] 
     
 SECDeliver(r, m) ==
     /\ updateset' = [updateset EXCEPT ![r] = @ \cup m.update]    
-    /\ last_updateset' = [last_updateset EXCEPT ![r] = @ \cup m.update]
-
-SECSend(r) ==
-    /\ last_updateset' = [last_updateset EXCEPT ![r] = updateset[r]]
-    /\ UNCHANGED <<updateset>> 
+    /\ prev_updateset' = [prev_updateset EXCEPT ![r] = @ \cup m.update]
 -----------------------------------------------------------------------------    
 Sameupdate(r1, r2) == 
     updateset[r1] = updateset[r2]
 =============================================================================
 \* Modification History
-\* Last modified Mon May 06 15:44:50 CST 2019 by jywellin
+\* Last modified Fri May 31 21:26:38 CST 2019 by xhdn
+\* Last modified Mon May 06 16:50:42 CST 2019 by jywellin
 \* Created Sun May 05 15:42:13 CST 2019 by jywellin

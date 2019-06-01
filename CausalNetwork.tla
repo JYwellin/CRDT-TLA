@@ -21,10 +21,10 @@ Deliver(r) ==
                \/ s # m.r 
          /\ m.vc[m.r] = vc[r][m.r] + 1
          /\ vc' = [vc EXCEPT ![r][m.r] = @ + 1]  
-         /\ msg' = [msg EXCEPT ![r] = m]
+         /\ msg' = m
     /\ UNCHANGED <<incoming>>   
 =============================================================================
 \* Modification History
+\* Last modified Sat Jun 01 20:26:45 CST 2019 by xhdn
 \* Last modified Mon May 06 16:07:03 CST 2019 by jywellin
-\* Last modified Wed Apr 17 17:47:27 CST 2019 by xhdn
 \* Created Wed Mar 27 20:03:44 CST 2019 by jywellin

@@ -12,11 +12,15 @@ VARIABLES
     msg,
     messageset
 
-vars == <<aSet, tSet, seq, incoming, msg, messageset, SECvars>>
+NETvars == <<incoming, msg, messageset>>
+vars == <<aSet, tSet, seq, NETvars, SECvars>>
 ----------------------------------------------------------------------------- 
 Instance == [d: Data, r: Replica, k: Nat]
 Msg == [r : Replica, seq : Nat, update : SUBSET Update, A: SUBSET Instance, T : SUBSET Instance]
 ----------------------------------------------------------------------------- 
+(**********************************************************************)
+(* Any Network                                                        *)
+(**********************************************************************)
 Network == INSTANCE Network
 -----------------------------------------------------------------------------    
 TypeOK == 
@@ -79,9 +83,9 @@ QC == Quiescence => Convergence
 
 (* SEC: Strong Eventual Consistency *)
 SEC == \A r1, r2 \in Replica :
-        Sameupdate(r1, r2) => Convergence
+        Sameupdate(r1, r2) => Read(r1) = Read(r2)
 
 =============================================================================
 \* Modification History
-\* Last modified Fri May 24 14:24:21 CST 2019 by xhdn
+\* Last modified Sat Jun 01 20:55:42 CST 2019 by xhdn
 \* Created Fri May 24 14:13:38 CST 2019 by xhdn

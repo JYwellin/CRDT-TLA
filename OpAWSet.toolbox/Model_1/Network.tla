@@ -15,7 +15,7 @@ NotMsg == CHOOSE m : m \notin Msg
 NInit == 
     /\ Minit
     /\ incoming = [r \in Replica |-> EmptyBag]
-    /\ msg = [r \in Replica |-> NotMsg]
+    /\ msg = NotMsg
 
 NBroadcast(r, m) == 
     /\ incoming' = [x \in Replica |->
@@ -28,16 +28,11 @@ NBroadcast(r, m) ==
 NDeliver(r) == 
     /\ incoming[r] # EmptyBag
     /\ \E m \in BagToSet(incoming[r]):
-         /\ msg' = [msg EXCEPT ![r] = m]
+         /\ msg' = m
          /\ MDeliver(r, m)
-    /\ UNCHANGED <<incoming>>        
------------------------------------------------------------------------------                          
-EmptyChannel ==  
-    incoming = [r \in Replica |-> EmptyBag]
-
-\* judge if two replicas receive the same set of update operations                      
+    /\ UNCHANGED <<incoming>>                         
 =============================================================================
 \* Modification History
+\* Last modified Sat Jun 01 20:22:29 CST 2019 by xhdn
 \* Last modified Mon May 06 15:30:04 CST 2019 by jywellin
-\* Last modified Sun Apr 21 21:44:03 CST 2019 by xhdn
 \* Created Mon Mar 25 20:24:02 CST 2019 by jywellin
