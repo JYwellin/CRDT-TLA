@@ -945,15 +945,15 @@
 \@x{ {\VARIABLES}}%
 \@x{\@s{16.4} vc}%
 \@x{}\midbar\@xx{}%
-\@x{ vector \.{\defeq} [ Replica \.{\rightarrow} Nat ]}%
-\@x{ initvector \.{\defeq} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
+\@x{ Vector \.{\defeq} [ Replica \.{\rightarrow} Nat ]}%
+\@x{ InitVector \.{\defeq} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
 \@x{}\midbar\@xx{}%
 \@x{ CInit \.{\defeq} \.{\land} NInit}%
  \@x{\@s{42.85} \.{\land} vc \.{=} [ r \.{\in} Replica \.{\mapsto} initvector
  ]}%
 \@pvspace{8.0pt}%
 \@x{ CBroadcast ( r ,\, m ) \.{\defeq} \.{\land} NBroadcast ( r ,\, m )}%
- \@x{\@s{86.60} \.{\land} vc \.{'} \.{=} [ vc {\EXCEPT} {\bang} [ r ] [ r ]
+ \@x{\@s{97.29} \.{\land} vc \.{'} \.{=} [ vc {\EXCEPT} {\bang} [ r ] [ r ]
  \.{=} @ \.{+} 1 ]}%
 \@pvspace{8.0pt}%
 \@x{ CDeliver ( r ) \.{\defeq}}%
@@ -962,7 +962,8 @@
 \@x{\@s{35.71} \.{\land} \A\, s \.{\in} Replica \.{:}}%
 \@x{\@s{54.04} \.{\lor} m . vc [ s ] \.{\leq} vc [ r ] [ s ]}%
 \@x{\@s{54.04} \.{\lor} s \.{=} m . r}%
-\@x{\@s{35.71} \.{\land} m . vc [ m . r ] \.{\geq} vc [ r ] [ m . r ]}%
+\@x{\@s{35.71} \.{\land} \.{\lor} m . vc [ m . r ] \.{=} vc [ r ] [ m . r ]}%
+\@x{\@s{46.82} \.{\lor} m . vc [ m . r ] \.{=} vc [ r ] [ m . r ] \.{+} 1}%
  \@x{\@s{35.71} \.{\land} vc \.{'} \.{=} [ vc {\EXCEPT} {\bang} [ r ] [ m . r
  ] \.{=} m . vc [ m . r ] ]}%
 \@x{\@s{35.71} \.{\land} msg \.{'} \.{=} m}%
@@ -976,7 +977,7 @@
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
- \ensuremath{Jun} 03 15:49:10 \ensuremath{CST} 2019 by \ensuremath{xhdn
+ \ensuremath{Jun} 03 16:17:56 \ensuremath{CST} 2019 by \ensuremath{xhdn
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

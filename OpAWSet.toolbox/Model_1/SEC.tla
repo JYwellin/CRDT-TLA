@@ -10,7 +10,7 @@ SECvars == <<updateset, prev_updateset>>
 CONSTANTS 
     Replica
 -----------------------------------------------------------------------------    
-Update == [r : Replica, seq : Nat]
+Uid == [r : Replica, seq : Nat]     \* Update Operation ID
 -----------------------------------------------------------------------------  
 OpUpdate(r) == updateset[r] \ prev_updateset[r] \* for op-based CRDT
 StateUpdate(r) == updateset[r]                  \* for state-based CRDT
@@ -39,6 +39,6 @@ Sameupdate(r1, r2) ==
     updateset[r1] = updateset[r2]
 =============================================================================
 \* Modification History
-\* Last modified Fri May 31 21:26:38 CST 2019 by xhdn
+\* Last modified Mon Jun 03 22:04:36 CST 2019 by xhdn
 \* Last modified Mon May 06 16:50:42 CST 2019 by jywellin
 \* Created Sun May 05 15:42:13 CST 2019 by jywellin

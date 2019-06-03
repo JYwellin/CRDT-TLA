@@ -16,6 +16,21 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>AWSetInterface.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/AWSetInterface.tla</location>
+		</link>
+		<link>
+			<name>CausalInterface.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CausalInterface.tla</location>
+		</link>
+		<link>
+			<name>CausalNetwork.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CausalNetwork.tla</location>
+		</link>
+		<link>
 			<name>Message.tla</name>
 			<type>1</type>
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Message.tla</location>
@@ -24,6 +39,11 @@
 			<name>Network.tla</name>
 			<type>1</type>
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Network.tla</location>
+		</link>
+		<link>
+			<name>OPInterface.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/OPInterface.tla</location>
 		</link>
 		<link>
 			<name>OpAWSet.tla</name>

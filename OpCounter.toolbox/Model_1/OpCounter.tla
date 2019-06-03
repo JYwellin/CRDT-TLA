@@ -3,9 +3,9 @@ EXTENDS
     Naturals, Sequences, SEC
 -----------------------------------------------------------------------------
 VARIABLE 
-    counter,
-    buffer,
-    seq,
+    counter,      \* current value
+    buffer,       \* buffer of increments
+    seq,          \* update sequence for each replica   
     incoming,     \* network variable
     msg,          \* network variable
     messageset    \* network variable
@@ -18,7 +18,7 @@ Msg == [r : Replica, seq : Nat, update : SUBSET Update, buf : Nat]
 (**********************************************************************)
 (* Reliable Network                                                   *)
 (**********************************************************************)
-Network == INSTANCE ReliableNetwork
+Network == INSTANCE Network
 -----------------------------------------------------------------------------
 TypeOK == 
     /\ counter \in [Replica -> Nat]
@@ -28,7 +28,7 @@ Init ==
     /\ seq = [r \in Replica |-> 0]
     /\ counter = [r \in Replica |-> 0]
     /\ buffer = [r \in Replica |-> 0]
-    /\ Network!RInit
+    /\ Network!NInit
     /\ SECInit
      
 Read(r) == counter[r]
@@ -43,12 +43,12 @@ Inc(r) ==
 Send(r) ==  
     /\ buffer[r] # 0
     /\ buffer' = [buffer EXCEPT ![r] = 0]
-    /\ Network!RBroadcast(r, [r |-> r, seq |-> seq[r], update|-> OpUpdate(r), buf |-> buffer[r]])
+    /\ Network!NBroadcast(r, [r |-> r, seq |-> seq[r], update|-> OpUpdate(r), buf |-> buffer[r]])
     /\ SECSend(r)
     /\ UNCHANGED <<counter, seq>>
 
 Receive(r) == 
-    /\ Network!RDeliver(r)
+    /\ Network!NDeliver(r)
     /\ SECDeliver(r, msg')
     /\ counter' = [counter EXCEPT ![r] = @ + msg'.buf]
     /\ UNCHANGED <<buffer, seq>>
@@ -62,6 +62,6 @@ SEC == \A r1, r2 \in Replica : Sameupdate(r1, r2)
                                 => counter[r1] = counter[r2]
 =============================================================================
 \* Modification History
-\* Last modified Sat Jun 01 20:28:29 CST 2019 by xhdn
+\* Last modified Mon Jun 03 14:50:37 CST 2019 by xhdn
 \* Last modified Mon May 06 15:51:30 CST 2019 by jywellin
 \* Created Fri Mar 22 20:43:27 CST 2019 by jywellin

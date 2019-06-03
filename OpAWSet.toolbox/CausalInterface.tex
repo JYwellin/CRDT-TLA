@@ -939,35 +939,91 @@
 \begin{document}
 \tlatex
 \setboolean{shading}{true}
-\@x{}\moduleLeftDash\@xx{ {\MODULE} CausalNetwork}\moduleRightDash\@xx{}%
-\@x{ {\EXTENDS} Network ,\, Naturals}%
+\@x{}\moduleLeftDash\@xx{ {\MODULE} CausalInterface}\moduleRightDash\@xx{}%
+\@x{ {\EXTENDS} SEC}%
+\@x{}\midbar\@xx{}%
+\@x{ {\CONSTANTS}}%
+\@x{\@s{16.4} Data\@s{12.29}}%
+\@y{\@s{0}%
+ the set of data
+}%
+\@xx{}%
+\@pvspace{8.0pt}%
+\@x{ Vector \.{\defeq} [ Replica \.{\rightarrow} Nat ]}%
+\@x{}\midbar\@xx{}%
+\@x{}%
+\@y{\@s{0}%
+ Op-based \ensuremath{AWSet} definition
+}%
+\@xx{}%
+ \@x{ Instance \.{\defeq} [ d \.{:} Data ,\, r \.{:} Replica ,\, k \.{:} Nat
+ ]}%
+ \@x{ Msg \.{\defeq} [ r \.{:} Replica ,\, update \.{:} {\SUBSET} Uid ,\, seq
+ \.{:} Nat ,\, vc \.{:} Vector ,\, abuf \.{:} {\SUBSET} Instance ,\, rbuf
+ \.{:} {\SUBSET} Instance ]}%
 \@x{}\midbar\@xx{}%
 \@x{ {\VARIABLES}}%
-\@x{\@s{16.4} vc}%
-\@x{}\midbar\@xx{}%
-\@x{ vector \.{\defeq} [ Replica \.{\rightarrow} Nat ]}%
-\@x{ initvector \.{\defeq} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
-\@x{}\midbar\@xx{}%
-\@x{ CInit \.{\defeq} \.{\land} NInit}%
- \@x{\@s{42.85} \.{\land} vc \.{=} [ r \.{\in} Replica \.{\mapsto} initvector
- ]}%
+\@x{\@s{16.4}}%
+\@y{\@s{0}%
+ Network variables
+}%
+\@xx{}%
+\@x{\@s{16.4} incoming ,\,\@s{28.7}}%
+\@y{\@s{0}%
+ \ensuremath{incoming[r]}: incoming messages at replica \ensuremath{r \.{\in}
+ Replica
+}}%
+\@xx{}%
+\@x{\@s{16.4} msg ,\,}%
+\@x{\@s{16.4} messageset ,\,}%
+\@x{\@s{16.4} vc ,\,\@s{59.17}}%
+\@y{\@s{0}%
+ vector clock
+}%
+\@xx{}%
+\@x{\@s{16.4} seq\@s{61.38}}%
+\@y{\@s{0}%
+ \ensuremath{seq[r]}: local sequence number at replica \ensuremath{r \.{\in}
+ Replica
+}}%
+\@xx{}%
 \@pvspace{8.0pt}%
-\@x{ CBroadcast ( r ,\, m ) \.{\defeq} \.{\land} NBroadcast ( r ,\, m )}%
- \@x{\@s{86.60} \.{\land} vc \.{'} \.{=} [ vc {\EXCEPT} {\bang} [ r ] [ r ]
- \.{=} @ \.{+} 1 ]}%
+ \@x{ NETvars \.{\defeq} {\langle} incoming ,\, msg ,\, messageset ,\, vc ,\,
+ seq {\rangle}}%
+\@x{}\midbar\@xx{}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Reliable Causal \ensuremath{Network
+}%
+\end{cpar}%
+\end{lcom}%
+\@x{ RNetwork \.{\defeq} {\INSTANCE} ReliableCausalNetwork}%
+\@x{}\midbar\@xx{}%
+\@x{ IntTypeOK \.{\defeq}}%
+\@x{\@s{20.5} seq \.{\in} [ Replica \.{\rightarrow}\@s{4.1} Nat ]}%
 \@pvspace{8.0pt}%
-\@x{ CDeliver ( r ) \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} incoming [ r ] \.{\neq} EmptyBag}%
-\@x{\@s{16.4} \.{\land} \E\, m \.{\in} BagToSet ( incoming [ r ] ) \.{:}}%
-\@x{\@s{35.71} \.{\land} \A\, s \.{\in} Replica \.{:}}%
-\@x{\@s{54.04} \.{\lor} m . vc [ s ] \.{\leq} vc [ r ] [ s ]}%
-\@x{\@s{54.04} \.{\lor} s \.{=} m . r}%
-\@x{\@s{35.71} \.{\land} m . vc [ m . r ] \.{\geq} vc [ r ] [ m . r ]}%
- \@x{\@s{35.71} \.{\land} vc \.{'} \.{=} [ vc {\EXCEPT} {\bang} [ r ] [ m . r
- ] \.{=} m . vc [ m . r ] ]}%
-\@x{\@s{35.71} \.{\land} msg \.{'} \.{=} m}%
-\@x{\@s{35.71} \.{\land} MDeliver ( r ,\, m )}%
-\@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} incoming {\rangle}}%
+\@x{ IntInit \.{\defeq}}%
+\@x{\@s{16.4} \.{\land} seq \.{=} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
+\@x{\@s{16.4} \.{\land} RNetwork {\bang} RCInit}%
+\@x{\@s{16.4} \.{\land} SECInit}%
+\@pvspace{8.0pt}%
+\@x{ IntSend ( r ,\, m ) \.{\defeq}}%
+\@x{\@s{16.4} \.{\land}\@s{7.27} RNetwork {\bang} RCBroadcast ( r ,\, m )}%
+\@x{\@s{16.4} \.{\land}\@s{7.27} SECSend ( r )}%
+\@x{\@s{16.4} \.{\land}\@s{7.27} {\UNCHANGED} {\langle} seq {\rangle}}%
+\@pvspace{8.0pt}%
+\@x{ IntReceive ( r ) \.{\defeq}}%
+\@x{\@s{16.4} \.{\land} RNetwork {\bang} RCDeliver ( r )}%
+\@x{\@s{16.4} \.{\land} SECDeliver ( r ,\, msg \.{'} )}%
+\@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} seq {\rangle}}%
+\@pvspace{8.0pt}%
+\@x{ IntDo ( r ) \.{\defeq}}%
+ \@x{\@s{16.4} \.{\land} seq \.{'} \.{=} [ seq {\EXCEPT} {\bang} [ r ] \.{=} @
+ \.{+} 1 ]}%
+\@x{\@s{16.4} \.{\land} SECUpdate ( r ,\, seq [ r ] )}%
+ \@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} incoming ,\, msg ,\,
+ messageset ,\, vc {\rangle}}%
+\@pvspace{8.0pt}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -975,18 +1031,13 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
- \ensuremath{Jun} 03 15:49:10 \ensuremath{CST} 2019 by \ensuremath{xhdn
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue}
+ \ensuremath{Jun} 04 01:12:22 \ensuremath{CST} 2019 by \ensuremath{xhdn
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon} May 06
- 16:07:03 \ensuremath{CST} 2019 by \ensuremath{jywellin
-}%
-\end{cpar}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Wed} \ensuremath{Mar} 27
- 20:03:44 \ensuremath{CST} 2019 by \ensuremath{jywellin
+ \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Mon} \ensuremath{Jun} 03
+ 21:20:23 \ensuremath{CST} 2019 by \ensuremath{xhdn
 }%
 \end{cpar}%
 \end{lcom}%

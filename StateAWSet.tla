@@ -72,20 +72,10 @@ Spec == Init /\ [][Next]_vars
 -----------------------------------------------------------------------------
 Read(r) == {ins.d: ins \in aSet[r]}
 
-(* QC: Quiescent Consistency *)
-Quiescence == 
-    \A r \in Replica: incoming[r] = <<>>
-    
-Convergence == 
-    \A r, s \in Replica: Read(r) = Read(s)
-
-QC == Quiescence => Convergence
-
 (* SEC: Strong Eventual Consistency *)
 SEC == \A r1, r2 \in Replica :
         Sameupdate(r1, r2) => Read(r1) = Read(r2)
-
 =============================================================================
 \* Modification History
-\* Last modified Sat Jun 01 20:55:42 CST 2019 by xhdn
+\* Last modified Mon Jun 03 20:51:09 CST 2019 by xhdn
 \* Created Fri May 24 14:13:38 CST 2019 by xhdn
