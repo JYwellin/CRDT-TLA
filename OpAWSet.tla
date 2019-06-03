@@ -56,7 +56,7 @@ Send(r) ==
               
 Receive(r) == 
     /\ Network!RCDeliver(r)
-    /\ SECDeliver(r, msg'[r])
+    /\ SECDeliver(r, msg')
     /\ set' = [set EXCEPT ![r] = (@ \cup msg'.abuf) \ msg'.rbuf]
     /\ UNCHANGED <<seq, abuf, rbuf>>         
 -----------------------------------------------------------------------------
@@ -90,5 +90,5 @@ SEC == \A r1, r2 \in Replica :
         Sameupdate(r1, r2) => Read(r1) = Read(r2)
 =============================================================================
 \* Modification History
-\* Last modified Sat Jun 01 20:54:42 CST 2019 by xhdn
+\* Last modified Mon Jun 03 15:16:16 CST 2019 by xhdn
 \* Created Fri May 24 14:12:26 CST 2019 by xhdn

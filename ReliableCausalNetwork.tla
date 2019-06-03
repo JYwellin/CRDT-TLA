@@ -19,13 +19,13 @@ RCDeliver(r) ==
          /\ ~ IfDeliverMsg(m, r)
          /\ \A s \in Replica:
                \/ m.vc[s] <= vc[r][s]  
-               \/ s # m.r 
+               \/ s = m.r 
          /\ m.vc[m.r] = vc[r][m.r] + 1
          /\ vc' = [vc EXCEPT ![r][m.r] = @ + 1]  
          /\ msg' =  m
-    /\ UNCHANGED <<incoming>>    
+    /\ UNCHANGED <<incoming, messageset>>    
 =============================================================================
 \* Modification History
-\* Last modified Sat Jun 01 20:50:28 CST 2019 by xhdn
+\* Last modified Mon Jun 03 14:48:09 CST 2019 by xhdn
 \* Last modified Mon May 06 16:07:42 CST 2019 by jywellin
 \* Created Tue Apr 02 15:26:19 CST 2019 by jywellin
