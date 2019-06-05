@@ -16,7 +16,7 @@ NETvars == <<incoming, msg, messageset>>
 vars == <<aSet, tSet, seq, NETvars, SECvars>>
 ----------------------------------------------------------------------------- 
 Instance == [d: Data, r: Replica, k: Nat]
-Msg == [r : Replica, seq : Nat, update : SUBSET Update, A: SUBSET Instance, T : SUBSET Instance]
+Msg == [r : Replica, seq : Nat, update : SUBSET Uid, A: SUBSET Instance, T : SUBSET Instance]
 ----------------------------------------------------------------------------- 
 (**********************************************************************)
 (* Any Network                                                        *)
@@ -34,6 +34,19 @@ Init ==
     /\ seq = [r \in Replica |-> 0]
     /\ aSet = [r \in Replica |-> {}]
     /\ tSet = [r \in Replica |-> {}]        
+-----------------------------------------------------------------------------                      
+Send(r) == 
+    /\ Network!NBroadcast(r, [r |-> r, seq |-> seq[r], update |-> StateUpdate(r), A |-> aSet[r], T |-> tSet[r]])  
+    /\ SECSend(r)
+    /\ UNCHANGED <<aSet, tSet, seq>>
+           
+Receive(r) == 
+    /\ Network!NDeliver(r)
+    /\ SECDeliver(r, msg'[r])
+    /\ seq' = [seq EXCEPT ![r] = @ + 1]
+    /\ tSet' = [tSet EXCEPT ![r] = @ \cup msg'[r].T]
+    /\ aSet' = [aSet EXCEPT ![r] = (@ \cup msg'[r].A) \ tSet'[r]]           
+    /\ UNCHANGED <<>> 
 -----------------------------------------------------------------------------
 Add(d, r) == 
     /\ seq' = [seq EXCEPT ![r] = @ + 1]
@@ -48,25 +61,13 @@ Remove(d, r) ==
        IN  /\ aSet' = [aSet EXCEPT ![r] = @ \ D]
            /\ tSet' = [tSet EXCEPT ![r] = @ \cup D] 
     /\ UNCHANGED <<incoming, msg, messageset>>
------------------------------------------------------------------------------                      
-Send(r) == 
-    /\ Network!NBroadcast(r, [r |-> r, seq |-> seq[r], update |-> StateUpdate(r), A |-> aSet[r], T |-> tSet[r]])  
-    /\ SECSend(r)
-    /\ UNCHANGED <<aSet, tSet, seq>>
-           
-Deliver(r) == 
-    /\ Network!NDeliver(r)
-    /\ SECDeliver(r, msg'[r])
-    /\ seq' = [seq EXCEPT ![r] = @ + 1]
-    /\ tSet' = [tSet EXCEPT ![r] = @ \cup msg'[r].T]
-    /\ aSet' = [aSet EXCEPT ![r] = (@ \cup msg'[r].A) \ tSet'[r]]           
-    /\ UNCHANGED <<>>                    
+                      
+Update(r) ==  \E a \in Data: 
+                 Add(a, r) \/ Remove(a, r)         
 -----------------------------------------------------------------------------
-Next ==
-    \/ \E r \in Replica: \E a \in Data: 
-        Add(a, r) \/ Remove(a, r)
-    \/ \E r \in Replica: 
-        Send(r) \/ Deliver(r)
+Next == 
+    \E r \in Replica: 
+        Receive(r) \/ Send(r) \/ Update(r)
 
 Spec == Init /\ [][Next]_vars
 -----------------------------------------------------------------------------
@@ -77,5 +78,5 @@ SEC == \A r1, r2 \in Replica :
         Sameupdate(r1, r2) => Read(r1) = Read(r2)
 =============================================================================
 \* Modification History
-\* Last modified Mon Jun 03 20:51:09 CST 2019 by xhdn
+\* Last modified Tue Jun 04 17:50:15 CST 2019 by xhdn
 \* Created Fri May 24 14:13:38 CST 2019 by xhdn
