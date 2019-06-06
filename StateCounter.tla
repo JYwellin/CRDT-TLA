@@ -13,7 +13,7 @@ vars == <<state, seq, NETvars, SECvars>>
 
 Vector == [Replica -> Nat]
 InitVector == [r \in Replica |-> 0]
-Msg == [r : Replica, seq : Nat, update : SUBSET Update, vc : Vector]
+Msg == [r : Replica, seq : Nat, update : SUBSET Uid, vc : Vector]
 -----------------------------------------------------------------------------  
 (**********************************************************************)
 (* Any network                                                        *)
@@ -56,6 +56,6 @@ SEC == \E r1, r2 \in Replica : Sameupdate(r1, r2)
                                 => state[r1] = state[r2]
 =============================================================================
 \* Modification History
-\* Last modified Sat Jun 01 21:05:18 CST 2019 by xhdn
+\* Last modified Thu Jun 06 15:59:05 CST 2019 by xhdn
 \* Last modified Mon May 06 15:54:02 CST 2019 by jywellin
 \* Created Mon Mar 25 14:25:48 CST 2019 by jywellin

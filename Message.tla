@@ -1,26 +1,26 @@
 ----------------------------- MODULE Message ------------------------------
 EXTENDS Naturals
 -----------------------------------------------------------------------------
-VARIABLES 
-    messageset
------------------------------------------------------------------------------
 CONSTANTS 
     Replica
+-----------------------------------------------------------------------------
+VARIABLES 
+    msg
 -----------------------------------------------------------------------------    
 Msgid(m) == [r |-> m.r, seq |-> m.seq] 
 -----------------------------------------------------------------------------  
-IfDeliverMsg(m, r) == Msgid(m) \in messageset[r]
+IfDeliverMsg(m, r) == Msgid(m) \in msg[r]
 -----------------------------------------------------------------------------
 Minit == 
-     messageset = [r \in Replica |-> {}]
+     msg = [r \in Replica |-> {}]
      
 MBroadcast ==
-     UNCHANGED <<messageset>> 
+     UNCHANGED <<msg>> 
   
 MDeliver(r, m) ==
-     messageset' = [messageset EXCEPT ![r] = @ \cup {Msgid(m)}] 
+     msg' = [msg EXCEPT ![r] = @ \cup {Msgid(m)}] 
 =============================================================================
 \* Modification History
-\* Last modified Thu May 30 21:56:50 CST 2019 by xhdn
+\* Last modified Wed Jun 05 20:59:32 CST 2019 by xhdn
 \* Last modified Mon May 06 15:29:41 CST 2019 by jywellin
 \* Created Sat Apr 20 22:31:38 CST 2019 by xhdn
