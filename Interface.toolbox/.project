@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>Interface</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>toolbox.builder.TLAParserBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>toolbox.natures.TLANature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Interface.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Interface.tla</locationURI>
+		</link>
+		<link>
+			<name>SEC.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/SEC.tla</location>
+		</link>
+		<link>
+			<name>SystemModel.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/SystemModel.tla</location>
+		</link>
+	</linkedResources>
+</projectDescription>

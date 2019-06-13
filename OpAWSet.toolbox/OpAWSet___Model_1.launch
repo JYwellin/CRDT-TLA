@@ -19,12 +19,12 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="seq, set, msg, updateset, messageset, abuf, incoming, prev_updateset, vc, rbuf"/>
+<stringAttribute key="modelBehaviorVars" value="seq, set, new_updateset, updateset, dmsg, uincoming, abuf, lmsg, incoming, vc, rbuf"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
 <listEntry value="1TypeOK"/>
-<listEntry value="1SEC"/>
+<listEntry value="1SEC!SEC"/>
 </listAttribute>
 <listAttribute key="modelCorrectnessProperties"/>
 <stringAttribute key="modelExpressionEval" value=""/>
@@ -35,7 +35,7 @@
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">
-<listEntry value="RNetwork!NotMsg;;RNetwork!NotMsg;1;0"/>
+<listEntry value="Network!NotMsg;;Network!NotMsg;1;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>

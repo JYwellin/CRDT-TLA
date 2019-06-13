@@ -940,20 +940,25 @@
 \tlatex
 \setboolean{shading}{true}
 \@x{}\moduleLeftDash\@xx{ {\MODULE} ReliableNetwork}\moduleRightDash\@xx{}%
-\@x{ {\EXTENDS} Network}%
-\@x{}\midbar\@xx{}%
-\@x{ RInit \.{\defeq} NInit}%
+\@x{ {\EXTENDS} BasicNetwork ,\, Message}%
 \@pvspace{8.0pt}%
-\@x{ RBroadcast ( r ,\, m ) \.{\defeq} NBroadcast ( r ,\, m )}%
+\@x{ Rvars \.{\defeq} {\langle} incoming ,\, lmsg ,\, dmsg {\rangle}}%
+\@x{}\midbar\@xx{}%
+\@x{ RInit \.{\defeq} \.{\land} NInit}%
+\@x{\@s{42.99} \.{\land} MInit}%
+\@pvspace{8.0pt}%
+\@x{ RBroadcast ( r ,\, m ) \.{\defeq} \.{\land} NBroadcast ( r ,\, m )}%
+\@x{\@s{97.43} \.{\land} MBroadcast}%
 \@pvspace{8.0pt}%
 \@x{ RDeliver ( r ) \.{\defeq}}%
 \@x{\@s{16.4} \.{\land} incoming [ r ] \.{\neq} EmptyBag}%
 \@x{\@s{16.4} \.{\land} \E\, m \.{\in} BagToSet ( incoming [ r ] ) \.{:}}%
 \@x{\@s{31.61} \.{\land} {\lnot} IfDeliverMsg ( m ,\, r )}%
- \@x{\@s{31.61} \.{\land} msg \.{'} \.{=} [ msg {\EXCEPT} {\bang} [ r ] \.{=}
- m ]}%
+\@x{\@s{31.61} \.{\land} lmsg \.{'} \.{=} m}%
 \@x{\@s{31.61} \.{\land} MDeliver ( r ,\, m )}%
 \@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} incoming {\rangle}}%
+\@pvspace{8.0pt}%
+\@x{ RDo \.{\defeq} {\UNCHANGED} Rvars}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -961,8 +966,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Fri} May 17
- 13:17:44 \ensuremath{CST} 2019 by \ensuremath{xhdn
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sun \ensuremath{Jun} 09
+ 20:28:26 \ensuremath{CST} 2019 by \ensuremath{xhdn
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

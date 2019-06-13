@@ -1,17 +1,13 @@
 ----------------------- MODULE ReliableCausalNetwork -----------------------
-EXTENDS Network, Naturals
------------------------------------------------------------------------------
-VARIABLES
-    vc
------------------------------------------------------------------------------    
-Vector == [Replica -> Nat]
-InitVector == [r \in Replica |-> 0]
------------------------------------------------------------------------------
-RCInit == /\ NInit
-          /\ vc = [r \in Replica |-> InitVector]
+EXTENDS CausalNetwork, Message
 
-RCBroadcast(r, m) == /\ NBroadcast(r, m)
-                     /\ vc' = [vc EXCEPT ![r][r] = @ + 1]  
+RCvars == <<incoming, lmsg, dmsg, vc>>
+-----------------------------------------------------------------------------
+RCInit ==/\ CInit
+         /\ MInit
+
+RCBroadcast(r, m) == /\ CBroadcast(r, m)
+                     /\ MBroadcast
                    
 RCDeliver(r) == 
     /\ incoming[r] # EmptyBag
@@ -22,11 +18,13 @@ RCDeliver(r) ==
                \/ s = m.r 
          /\ m.vc[m.r] = vc[r][m.r] + 1
          /\ vc' = [vc EXCEPT ![r][m.r] = @ + 1]  
-         /\ msg' =  m
+         /\ lmsg' =  m
          /\ MDeliver(r, m)
     /\ UNCHANGED <<incoming>>    
+    
+RCDo == UNCHANGED RCvars
 =============================================================================
 \* Modification History
-\* Last modified Mon Jun 03 15:49:22 CST 2019 by xhdn
+\* Last modified Sat Jun 08 00:47:56 CST 2019 by xhdn
 \* Last modified Mon May 06 16:07:42 CST 2019 by jywellin
 \* Created Tue Apr 02 15:26:19 CST 2019 by jywellin

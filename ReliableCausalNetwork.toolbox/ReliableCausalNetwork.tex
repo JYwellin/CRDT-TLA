@@ -941,21 +941,15 @@
 \setboolean{shading}{true}
  \@x{}\moduleLeftDash\@xx{ {\MODULE}
  ReliableCausalNetwork}\moduleRightDash\@xx{}%
-\@x{ {\EXTENDS} Network ,\, Naturals}%
-\@x{}\midbar\@xx{}%
-\@x{ {\VARIABLES}}%
-\@x{\@s{16.4} vc}%
-\@x{}\midbar\@xx{}%
-\@x{ Vector \.{\defeq} [ Replica \.{\rightarrow} Nat ]}%
-\@x{ InitVector \.{\defeq} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
-\@x{}\midbar\@xx{}%
-\@x{ RCInit \.{\defeq} \.{\land} NInit}%
- \@x{\@s{49.89} \.{\land} vc \.{=} [ r \.{\in} Replica \.{\mapsto} InitVector
- ]}%
+\@x{ {\EXTENDS} CausalNetwork ,\, Message}%
 \@pvspace{8.0pt}%
-\@x{ RCBroadcast ( r ,\, m ) \.{\defeq} \.{\land} NBroadcast ( r ,\, m )}%
- \@x{\@s{104.33} \.{\land} vc \.{'} \.{=} [ vc {\EXCEPT} {\bang} [ r ] [ r ]
- \.{=} @ \.{+} 1 ]}%
+\@x{ RCvars \.{\defeq} {\langle} incoming ,\, lmsg ,\, dmsg ,\, vc {\rangle}}%
+\@x{}\midbar\@xx{}%
+\@x{ RCInit \.{\defeq} \.{\land} CInit}%
+\@x{\@s{49.89} \.{\land} MInit}%
+\@pvspace{8.0pt}%
+\@x{ RCBroadcast ( r ,\, m ) \.{\defeq} \.{\land} CBroadcast ( r ,\, m )}%
+\@x{\@s{104.33} \.{\land} MBroadcast}%
 \@pvspace{8.0pt}%
 \@x{ RCDeliver ( r ) \.{\defeq}}%
 \@x{\@s{16.4} \.{\land} incoming [ r ] \.{\neq} EmptyBag}%
@@ -967,9 +961,11 @@
 \@x{\@s{35.71} \.{\land} m . vc [ m . r ] \.{=} vc [ r ] [ m . r ] \.{+} 1}%
  \@x{\@s{35.71} \.{\land} vc \.{'} \.{=} [ vc {\EXCEPT} {\bang} [ r ] [ m . r
  ] \.{=} @ \.{+} 1 ]}%
-\@x{\@s{35.71} \.{\land} msg \.{'} \.{=}\@s{4.1} m}%
+\@x{\@s{35.71} \.{\land} lmsg \.{'} \.{=}\@s{4.1} m}%
 \@x{\@s{35.71} \.{\land} MDeliver ( r ,\, m )}%
 \@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} incoming {\rangle}}%
+\@pvspace{8.0pt}%
+\@x{ RCDo \.{\defeq} {\UNCHANGED} RCvars}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -977,8 +973,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
- \ensuremath{Jun} 03 15:49:22 \ensuremath{CST} 2019 by \ensuremath{xhdn
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jun} 08
+ 00:47:56 \ensuremath{CST} 2019 by \ensuremath{xhdn
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

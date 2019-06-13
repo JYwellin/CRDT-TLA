@@ -1,26 +1,23 @@
 ----------------------------- MODULE Message ------------------------------
-EXTENDS Naturals
------------------------------------------------------------------------------
-CONSTANTS 
-    Replica
+EXTENDS Naturals, SystemModel
 -----------------------------------------------------------------------------
 VARIABLES 
-    msg
+    dmsg
 -----------------------------------------------------------------------------    
 Msgid(m) == [r |-> m.r, seq |-> m.seq] 
 -----------------------------------------------------------------------------  
-IfDeliverMsg(m, r) == Msgid(m) \in msg[r]
+IfDeliverMsg(m, r) == Msgid(m) \in dmsg[r]
 -----------------------------------------------------------------------------
-Minit == 
-     msg = [r \in Replica |-> {}]
+MInit == 
+     dmsg = [r \in Replica |-> {}]
      
 MBroadcast ==
-     UNCHANGED <<msg>> 
+     UNCHANGED <<dmsg>> 
   
 MDeliver(r, m) ==
-     msg' = [msg EXCEPT ![r] = @ \cup {Msgid(m)}] 
+     dmsg' = [dmsg EXCEPT ![r] = @ \cup {Msgid(m)}] 
 =============================================================================
 \* Modification History
-\* Last modified Wed Jun 05 20:59:32 CST 2019 by xhdn
+\* Last modified Fri Jun 07 20:36:38 CST 2019 by xhdn
 \* Last modified Mon May 06 15:29:41 CST 2019 by jywellin
 \* Created Sat Apr 20 22:31:38 CST 2019 by xhdn

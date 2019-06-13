@@ -944,17 +944,21 @@
 \@x{}\midbar\@xx{}%
 \@x{ {\VARIABLES}}%
 \@x{\@s{16.4} vc}%
+\@pvspace{8.0pt}%
+\@x{ Cvars \.{\defeq} {\langle} incoming ,\, lmsg ,\, vc {\rangle}}%
 \@x{}\midbar\@xx{}%
-\@x{ vector \.{\defeq} [ Replica \.{\rightarrow} Nat ]}%
-\@x{ initvector \.{\defeq} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
+\@x{ Vector \.{\defeq} [ Replica \.{\rightarrow} Nat ]}%
+\@x{ InitVector \.{\defeq} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
 \@x{}\midbar\@xx{}%
 \@x{ CInit \.{\defeq} \.{\land} NInit}%
- \@x{\@s{42.85} \.{\land} vc \.{=} [ r \.{\in} Replica \.{\mapsto} initvector
+ \@x{\@s{42.85} \.{\land} vc \.{=} [ r \.{\in} Replica \.{\mapsto} InitVector
  ]}%
 \@pvspace{8.0pt}%
 \@x{ CBroadcast ( r ,\, m ) \.{\defeq} \.{\land} NBroadcast ( r ,\, m )}%
- \@x{\@s{86.60} \.{\land} vc \.{'} \.{=} [ vc {\EXCEPT} {\bang} [ r ] [ r ]
+ \@x{\@s{97.29} \.{\land} vc \.{'} \.{=} [ vc {\EXCEPT} {\bang} [ r ] [ r ]
  \.{=} @ \.{+} 1 ]}%
+\@x{ SetMax ( a ,\, b ) \.{\defeq}}%
+\@x{\@s{16.4} {\IF} a \.{>} b \.{\THEN} a \.{\ELSE} b}%
 \@pvspace{8.0pt}%
 \@x{ CDeliver ( r ) \.{\defeq}}%
 \@x{\@s{16.4} \.{\land} incoming [ r ] \.{\neq} EmptyBag}%
@@ -962,12 +966,14 @@
 \@x{\@s{35.71} \.{\land} \A\, s \.{\in} Replica \.{:}}%
 \@x{\@s{54.04} \.{\lor} m . vc [ s ] \.{\leq} vc [ r ] [ s ]}%
 \@x{\@s{54.04} \.{\lor} s \.{=} m . r}%
-\@x{\@s{35.71} \.{\land} m . vc [ m . r ] \.{\geq} vc [ r ] [ m . r ]}%
+ \@x{\@s{35.71} \.{\land} m . vc [ m . r ] \.{\leq} vc [ r ] [ m . r ] \.{+}
+ 1}%
  \@x{\@s{35.71} \.{\land} vc \.{'} \.{=} [ vc {\EXCEPT} {\bang} [ r ] [ m . r
- ] \.{=} m . vc [ m . r ] ]}%
-\@x{\@s{35.71} \.{\land} msg \.{'} \.{=} m}%
-\@x{\@s{35.71} \.{\land} MDeliver ( r ,\, m )}%
+ ] \.{=} SetMax ( @ ,\, m . vc [ m . r ] ) ]}%
+\@x{\@s{35.71} \.{\land} lmsg \.{'} \.{=} m}%
 \@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} incoming {\rangle}}%
+\@pvspace{8.0pt}%
+\@x{ CDo \.{\defeq} {\UNCHANGED} Cvars}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -975,8 +981,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
- \ensuremath{Jun} 03 15:49:10 \ensuremath{CST} 2019 by \ensuremath{xhdn
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jun} 08
+ 00:48:19 \ensuremath{CST} 2019 by \ensuremath{xhdn
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

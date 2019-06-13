@@ -16,6 +16,26 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>AWSet.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/AWSet.tla</location>
+		</link>
+		<link>
+			<name>BasicNetwork.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/BasicNetwork.tla</location>
+		</link>
+		<link>
+			<name>CausalNetwork.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CausalNetwork.tla</location>
+		</link>
+		<link>
+			<name>Interface.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Interface.tla</location>
+		</link>
+		<link>
 			<name>Message.tla</name>
 			<type>1</type>
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Message.tla</location>
@@ -26,6 +46,21 @@
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Network.tla</location>
 		</link>
 		<link>
+			<name>OpAWSet.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/OpAWSet.tla</location>
+		</link>
+		<link>
+			<name>OpSEC.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/OpSEC.tla</location>
+		</link>
+		<link>
+			<name>ReliableCausalNetwork.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/ReliableCausalNetwork.tla</location>
+		</link>
+		<link>
 			<name>SEC.tla</name>
 			<type>1</type>
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/SEC.tla</location>
@@ -34,6 +69,16 @@
 			<name>StateAWSet.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/StateAWSet.tla</locationURI>
+		</link>
+		<link>
+			<name>StateSEC.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/StateSEC.tla</location>
+		</link>
+		<link>
+			<name>SystemModel.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/SystemModel.tla</location>
 		</link>
 	</linkedResources>
 </projectDescription>

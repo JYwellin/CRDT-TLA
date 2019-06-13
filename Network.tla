@@ -1,30 +1,30 @@
 ------------------------------ MODULE Network ------------------------------
 EXTENDS Bags, SystemModel
 -----------------------------------------------------------------------------
-VARIABLES msg
+VARIABLES lmsg
        
-vars == <<incoming, msg>>
+Nvars  == <<incoming, lmsg>>
 -----------------------------------------------------------------------------
-TypeOK == SMTypeOK
-
 NInit == 
     /\ incoming = [r \in Replica |-> EmptyBag]
-    /\ msg = NotMsg
+    /\ lmsg = NotMsg
 
 NBroadcast(r, m) == 
     /\ incoming' = [x \in Replica |->
                         IF x = r
                         THEN incoming[x]
                         ELSE incoming[x] (+) SetToBag({m}) ]                    
-    /\ UNCHANGED <<msg>> 
+    /\ UNCHANGED <<lmsg>> 
 
 NDeliver(r) == 
     /\ incoming[r] # EmptyBag
     /\ \E m \in BagToSet(incoming[r]):
-         /\ msg' = m
-    /\ UNCHANGED <<incoming>>                         
+         /\ lmsg' = m
+    /\ UNCHANGED <<incoming>> 
+    
+NDo == UNCHANGED Nvars                        
 =============================================================================
 \* Modification History
-\* Last modified Thu Jun 06 15:58:34 CST 2019 by xhdn
+\* Last modified Sat Jun 08 00:45:32 CST 2019 by xhdn
 \* Last modified Mon May 06 15:30:04 CST 2019 by jywellin
 \* Created Mon Mar 25 20:24:02 CST 2019 by jywellin

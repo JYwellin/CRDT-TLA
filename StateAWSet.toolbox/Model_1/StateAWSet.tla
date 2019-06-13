@@ -1,87 +1,81 @@
 ----------------------------- MODULE StateAWSet -----------------------------
-EXTENDS Naturals, Sequences, SEC
+EXTENDS AWSet
 -----------------------------------------------------------------------------
-CONSTANTS
-    Data      \* the set of data
-
 VARIABLES
-    aSet,     \* aSet[r]: set of active Instance(s) maintained by r \in Replica
-    tSet,     \* tSet[r]: set of tombstone Instance(s) maintained by r \in Replica
-    seq,      \* seq[r]: local sequence number at replica r \in Replica
+    aset,     \* aset[r]: set of active Instance(s) maintained by r \in Replica
+    tset,     \* tset[r]: set of tombstone Instance(s) maintained by r \in Replica
+    (*
+    network variables
+    *) 
     incoming, \* incoming[r]: incoming messages at replica r \in Replica
-    msg,
-    messageset
+    lmsg,
+    (*
+    SEC variables
+    *) 
+    updateset,
+    uincoming
+    
+Nvars  == <<incoming, lmsg>>
+SECvars == <<updateset, uincoming>> 
+vars == <<aset, tset, seq, Nvars, SECvars>>
 
-vars == <<aSet, tSet, seq, incoming, msg, messageset, SECvars>>
------------------------------------------------------------------------------ 
-Instance == [d: Data, r: Replica, k: Nat]
-Msg == [r : Replica, seq : Nat, update : SUBSET Update, A: SUBSET Instance, T : SUBSET Instance]
------------------------------------------------------------------------------ 
-Network == INSTANCE Network
+Msg == [r : Replica, seq : Nat, A: SUBSET Element, T : SUBSET Element]  \* message type
+Network == INSTANCE BasicNetwork                                        \* instantiate basic network
+
+Read(r, s) == {ele.d: ele \in s}                                        \* read the state of r\in Replica
+SEC == INSTANCE StateSEC WITH data <- aset                              \* instantiate SEC module
 -----------------------------------------------------------------------------    
 TypeOK == 
-    /\ aSet \in [Replica -> SUBSET Instance]
-    /\ tSet \in [Replica -> SUBSET Instance]
-    /\ seq \in [Replica -> Nat]
+    /\ aset \in [Replica -> SUBSET Element]
+    /\ tset \in [Replica -> SUBSET Element]
+    /\ IntTypeOK
+    /\ Network!SMTypeOK
+    /\ SEC!SECTypeOK
 -----------------------------------------------------------------------------
-Init == 
+Init ==     \* initial state
+    /\ aset = [r \in Replica |-> {}]
+    /\ tset = [r \in Replica |-> {}]   
     /\ Network!NInit
-    /\ SECInit
-    /\ seq = [r \in Replica |-> 0]
-    /\ aSet = [r \in Replica |-> {}]
-    /\ tSet = [r \in Replica |-> {}]        
------------------------------------------------------------------------------
-Add(d, r) == 
-    /\ seq' = [seq EXCEPT ![r] = @ + 1]
-    /\ SECUpdate(r, seq[r])
-    /\ aSet'= [aSet EXCEPT ![r] = @ \union {[d |-> d, r |-> r, k |-> seq'[r]]}]
-    /\ UNCHANGED <<tSet, incoming, msg, messageset>>
-
-Remove(d, r) ==
-    /\ seq' = [seq EXCEPT ![r] = @ + 1]
-    /\ SECUpdate(r, seq[r])
-    /\ LET D == {ins \in aSet[r] : ins.d = d}
-       IN  /\ aSet' = [aSet EXCEPT ![r] = @ \ D]
-           /\ tSet' = [tSet EXCEPT ![r] = @ \cup D] 
-    /\ UNCHANGED <<incoming, msg, messageset>>
+    /\ SEC!StateSECInit
+    /\ IntInit     
 -----------------------------------------------------------------------------                      
-Send(r) == 
-    /\ Network!NBroadcast(r, [r |-> r, seq |-> seq[r], update |-> StateUpdate(r), A |-> aSet[r], T |-> tSet[r]])  
-    /\ SECSend(r)
-    /\ UNCHANGED <<aSet, tSet, seq>>
+Send(r) ==      \* r\in Replica sends a message 
+    /\ Network!NBroadcast(r,  [r |-> r, seq |-> seq[r],  A |-> aset[r], T |-> tset[r]])  
+    /\ IntSend(r)
+    /\ SEC!StateSECSend(r, seq[r]) 
+    /\ UNCHANGED <<aset, tset>>
            
-Deliver(r) == 
+Deliver(r) ==      \* r\in Replica receives a message 
     /\ Network!NDeliver(r)
-    /\ SECDeliver(r, msg'[r])
-    /\ seq' = [seq EXCEPT ![r] = @ + 1]
-    /\ tSet' = [tSet EXCEPT ![r] = @ \cup msg'[r].T]
-    /\ aSet' = [aSet EXCEPT ![r] = (@ \cup msg'[r].A) \ tSet'[r]]           
-    /\ UNCHANGED <<>>                    
+    /\ IntDeliver(r)
+    /\ SEC!StateSECDeliver(r, [r |-> lmsg'.r, seq |-> lmsg'.seq])
+    /\ tset' = [tset EXCEPT ![r] = @ \cup lmsg'.T]
+    /\ aset' = [aset EXCEPT ![r] = (@ \cup lmsg'.A) \ tset'[r]]           
+    /\ UNCHANGED <<>> 
 -----------------------------------------------------------------------------
-Next ==
-    \/ \E r \in Replica: \E a \in Data: 
-        Add(a, r) \/ Remove(a, r)
-    \/ \E r \in Replica: 
-        Send(r) \/ Deliver(r)
+Add(d, r) ==  \* r\in Replica adds d \in Data
+    /\ aset'= [aset EXCEPT ![r] = @ \union {[d |-> d, r |-> r, k |-> seq[r]]}]
+    /\ IntDo(r)
+    /\ Network!NDo
+    /\ SEC!StateSECUpdate(r, seq[r])
+    /\ UNCHANGED <<tset>>
+    
+Remove(d, r) == \* r\in Replica removes d \in Data 
+    /\ LET E == {ele \in aset[r] : ele.d = d}
+       IN  /\ aset' = [aset EXCEPT ![r] = @ \ E]
+           /\ tset' = [tset EXCEPT ![r] = @ \cup E] 
+    /\ IntDo(r)
+    /\ Network!NDo
+    /\ SEC!StateSECUpdate(r, seq[r]) 
+                      
+Do(r) ==  \* update operations
+    \E a \in Data: Add(a, r) \/ Remove(a, r)         
+-----------------------------------------------------------------------------
+Next ==     \* next-state relation
+    \E r \in Replica: Deliver(r) \/ Send(r) \/ Do(r)
 
 Spec == Init /\ [][Next]_vars
------------------------------------------------------------------------------
-Read(r) == {ins.d: ins \in aSet[r]}
-
-(* QC: Quiescent Consistency *)
-Quiescence == 
-    \A r \in Replica: incoming[r] = <<>>
-    
-Convergence == 
-    \A r, s \in Replica: Read(r) = Read(s)
-
-QC == Quiescence => Convergence
-
-(* SEC: Strong Eventual Consistency *)
-SEC == \A r1, r2 \in Replica :
-        Sameupdate(r1, r2) => Read(r1) = Read(r2)
-
 =============================================================================
 \* Modification History
-\* Last modified Thu May 30 22:36:15 CST 2019 by xhdn
+\* Last modified Thu Jun 13 21:14:38 CST 2019 by xhdn
 \* Created Fri May 24 14:13:38 CST 2019 by xhdn
