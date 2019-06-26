@@ -940,25 +940,29 @@
 \tlatex
 \setboolean{shading}{true}
 \@x{}\moduleLeftDash\@xx{ {\MODULE} ReliableNetwork}\moduleRightDash\@xx{}%
-\@x{ {\EXTENDS} BasicNetwork ,\, Message}%
-\@pvspace{8.0pt}%
-\@x{ Rvars \.{\defeq} {\langle} incoming ,\, lmsg ,\, dmsg {\rangle}}%
+\@x{ {\EXTENDS} BasicNetwork}%
 \@x{}\midbar\@xx{}%
-\@x{ RInit \.{\defeq} \.{\land} NInit}%
-\@x{\@s{42.99} \.{\land} MInit}%
+\@x{ rnVars \.{\defeq} {\langle} incoming ,\, lmsg {\rangle}}%
+\@x{}\midbar\@xx{}%
+\@x{ RNInit \.{\defeq} BNInit}%
 \@pvspace{8.0pt}%
-\@x{ RBroadcast ( r ,\, m ) \.{\defeq} \.{\land} NBroadcast ( r ,\, m )}%
-\@x{\@s{97.43} \.{\land} MBroadcast}%
+\@x{ RNBroadcast ( r ,\, m ) \.{\defeq} BNBroadcast ( r ,\, m )}%
 \@pvspace{8.0pt}%
-\@x{ RDeliver ( r ) \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} incoming [ r ] \.{\neq} EmptyBag}%
-\@x{\@s{16.4} \.{\land} \E\, m \.{\in} BagToSet ( incoming [ r ] ) \.{:}}%
-\@x{\@s{31.61} \.{\land} {\lnot} IfDeliverMsg ( m ,\, r )}%
-\@x{\@s{31.61} \.{\land} lmsg \.{'} \.{=} m}%
-\@x{\@s{31.61} \.{\land} MDeliver ( r ,\, m )}%
-\@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} incoming {\rangle}}%
-\@pvspace{8.0pt}%
-\@x{ RDo \.{\defeq} {\UNCHANGED} Rvars}%
+\@x{ RNDeliver ( r ) \.{\defeq}}%
+\@x{\@s{16.4} \.{\land} incoming [ r ] \.{\neq} \{ \}}%
+\@x{\@s{16.4} \.{\land} \E\, m \.{\in} incoming [ r ] \.{:}}%
+ \@x{\@s{31.61} \.{\land} lmsg \.{'} \.{=} [ lmsg {\EXCEPT} {\bang} [ r ]
+ \.{=} m ]\@s{4.1}}%
+\@y{\@s{0}%
+ choose \ensuremath{m} from \ensuremath{incoming[r]} non-deterministically
+}%
+\@xx{}%
+ \@x{\@s{31.61} \.{\land} incoming \.{'} \.{=} [ incoming {\EXCEPT} {\bang} [
+ r ] \.{=} @ \.{\,\backslash\,} \{ m \} ]\@s{4.1}}%
+\@y{\@s{0}%
+ delete \ensuremath{m
+}}%
+\@xx{}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -966,8 +970,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sun \ensuremath{Jun} 09
- 20:28:26 \ensuremath{CST} 2019 by \ensuremath{xhdn
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
+ \ensuremath{Jun} 17 13:01:38 \ensuremath{CST} 2019 by \ensuremath{xhdn
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

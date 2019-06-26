@@ -941,91 +941,122 @@
 \setboolean{shading}{true}
 \@x{}\moduleLeftDash\@xx{ {\MODULE} OpAWSet}\moduleRightDash\@xx{}%
 \@x{ {\EXTENDS} AWSet}%
+\@x{ {\CONSTANTS} Read ( \_ )}%
 \@x{}\midbar\@xx{}%
 \@x{ {\VARIABLES}}%
-\@x{\@s{16.4} set ,\,\@s{27.80}}%
+\@x{\@s{16.4} aset ,\,\@s{31.63}}%
 \@y{\@s{0}%
- \ensuremath{set[r]}: set of \ensuremath{Element(s)} maintained by
- \ensuremath{r \.{\in} Replica
+ \ensuremath{aset[r]}: the set of active elements maintained by \ensuremath{r
+ \.{\in} Replica
 }}%
 \@xx{}%
-\@x{\@s{16.4} abuf ,\,\@s{20.50}}%
+\@x{\@s{16.4} abuf ,\,\@s{29.44}}%
 \@y{\@s{0}%
- \ensuremath{abuf[r]}: buffer of \ensuremath{Element(s)} added maintained by
- \ensuremath{r \.{\in} Replica
+ \ensuremath{abuf[r]}: the buffer for elements added by \ensuremath{r \.{\in}
+ Replica} since the last broadcast
+}%
+\@xx{}%
+\@x{\@s{16.4} rbuf ,\,\@s{30.33}}%
+\@y{\@s{0}%
+ \ensuremath{rbuf[r]}: the buffer for elements removed by \ensuremath{r
+ \.{\in} Replica} since the last broadcast
+}%
+\@xx{}%
+\@x{}%
+\@y{\@s{0}%
+ variables for network:
+}%
+\@xx{}%
+\@x{\@s{16.4} incoming ,\,\@s{9.46}}%
+\@y{\@s{0}%
+ \ensuremath{incoming[r]}: incoming channel at replica \ensuremath{r \.{\in}
+ Replica
 }}%
 \@xx{}%
-\@x{\@s{16.4} rbuf ,\,\@s{21.39}}%
+\@x{\@s{16.4} lmsg ,\,\@s{29.39}}%
 \@y{\@s{0}%
- \ensuremath{rbuf[r]}: buffer of \ensuremath{Element(s)} removed maintained
- by \ensuremath{r \.{\in} Replica
+ \ensuremath{lmsg[r]}: the last message delivered at \ensuremath{r \.{\in}
+ Replica} to the upper-layer protocol
+}%
+\@xx{}%
+\@x{\@s{16.4} vc ,\,\@s{39.94}}%
+\@y{\@s{0}%
+ \ensuremath{vc[r][s]} denotes the latest message from \ensuremath{s \.{\in}
+ Replica} observed by \ensuremath{r \.{\in} Replica
 }}%
+\@xx{}%
+\@x{}%
+\@y{\@s{0}%
+ variables for \ensuremath{SEC}:
+}%
+\@xx{}%
+\@x{\@s{16.4} uset ,\,\@s{31.38}}%
+\@y{\@s{0}%
+ \ensuremath{uset[r]}: the set of updates seen by replica \ensuremath{r
+ \.{\in} Replica
+}}%
+\@xx{}%
+\@x{\@s{16.4} uincoming ,\,\@s{4.1}}%
+\@y{\@s{0}%
+ \ensuremath{uincoming[r]}: incoming channel for broadcasting/delivering
+ updates at \ensuremath{r \.{\in} Replica
+}}%
+\@xx{}%
+\@x{\@s{16.4} buset\@s{32.89}}%
+\@y{\@s{0}%
+ \ensuremath{buset[r]}: the buffer of local updates made by \ensuremath{r
+ \.{\in} Replica} since the last broadcast
+}%
 \@xx{}%
 \@pvspace{8.0pt}%
-\begin{lcom}{10.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-network variables
-\end{cpar}%
-\end{lcom}%
-\@x{\@s{16.4} incoming ,\,}%
-\@x{\@s{16.4} dmsg ,\,}%
-\@x{\@s{16.4} lmsg ,\,}%
-\@x{\@s{16.4} vc ,\,}%
-\begin{lcom}{10.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-\ensuremath{SEC} variables
-\end{cpar}%
-\end{lcom}%
-\@x{\@s{16.4} updateset ,\,}%
-\@x{\@s{16.4} uincoming ,\,}%
-\@x{\@s{16.4} new\_updateset}%
-\@pvspace{8.0pt}%
-\@x{ Nvars \.{\defeq} {\langle} incoming ,\, lmsg ,\, dmsg ,\, vc {\rangle}}%
- \@x{ SECvars \.{\defeq} {\langle} updateset ,\, new\_updateset ,\, uincoming
- {\rangle}}%
- \@x{ vars \.{\defeq} {\langle} set ,\, abuf ,\, rbuf ,\, seq ,\, Nvars ,\,
- SECvars {\rangle}}%
+\@x{ nVars \.{\defeq} {\langle} incoming ,\, lmsg ,\, vc {\rangle}}%
+\@x{ secVars \.{\defeq} {\langle} uset ,\, uincoming ,\, buset {\rangle}}%
+ \@x{ vars \.{\defeq} {\langle} aset ,\, abuf ,\, rbuf ,\, seq ,\, nVars ,\,
+ secVars {\rangle}}%
 \@x{}\midbar\@xx{}%
- \@x{ Msg \.{\defeq} [ r \.{:} Replica ,\, seq \.{:} Nat ,\, vc \.{:} Vector
- ,\, abuf \.{:} {\SUBSET} Element ,\, rbuf \.{:} {\SUBSET} Element ]}%
-\@y{%
- message type
-}%
-\@xx{}%
-\@x{}%
-\@y{\@s{0}%
- instantiate a reliable causal network
-}%
-\@xx{}%
+ \@x{ Msg \.{\defeq} [ aid \.{:} Aid ,\, abuf \.{:} {\SUBSET} Element ,\, rbuf
+ \.{:} {\SUBSET} Element ,\, lvc \.{:} [ Replica \.{\rightarrow} Nat ] ]}%
 \@x{ Network \.{\defeq} {\INSTANCE} ReliableCausalNetwork}%
+\@y{\@s{0}%
+ \ensuremath{{\WITH}} \ensuremath{incoming \.{\leftarrow} incoming},
+ \ensuremath{lmsg \.{\leftarrow} lmsg}, \ensuremath{vc \.{\leftarrow} vc
+}}%
+\@xx{}%
 \@pvspace{8.0pt}%
-\@x{}%
+ \@x{ ReadOpAWSet ( r ) \.{\defeq} \{ ele . d \.{:} ele \.{\in} aset [ r ]
+ \}\@s{8.2}}%
 \@y{\@s{0}%
  read the state of \ensuremath{r\.{\in} Replica
 }}%
 \@xx{}%
-\@x{ Read ( r ,\, s ) \.{\defeq} \{ ele . d \.{:} ele \.{\in} s \}}%
-\@x{}%
+\@x{ SEC \.{\defeq} {\INSTANCE} OpSEC}%
 \@y{\@s{0}%
- instantiate \ensuremath{SEC} module
-}%
+ \ensuremath{{\WITH}} \ensuremath{uset \.{\leftarrow} uset},
+ \ensuremath{uincoming \.{\leftarrow} uincoming}, \ensuremath{buset
+ \.{\leftarrow} buset
+}}%
 \@xx{}%
-\@x{ SEC \.{\defeq} {\INSTANCE} OpSEC {\WITH} data \.{\leftarrow} set}%
 \@x{}\midbar\@xx{}%
-\@x{ TypeOK \.{\defeq}\@s{4.1}}%
-\@y{%
- check types
-}%
-\@xx{}%
- \@x{\@s{16.4} \.{\land}\@s{9.74} set \.{\in} [ Replica \.{\rightarrow}
+\@x{ TypeOK \.{\defeq}}%
+ \@x{\@s{16.4} \.{\land} aset\@s{2.19} \.{\in} [ Replica \.{\rightarrow}
  {\SUBSET} Element ]}%
- \@x{\@s{16.4} \.{\land}\@s{9.74} abuf \.{\in} [ Replica \.{\rightarrow}
+ \@x{\@s{16.4} \.{\land} abuf \.{\in} [ Replica \.{\rightarrow} {\SUBSET}
+ Element ]}%
+ \@x{\@s{16.4} \.{\land} rbuf\@s{0.89} \.{\in} [ Replica \.{\rightarrow}
  {\SUBSET} Element ]}%
- \@x{\@s{16.4} \.{\land}\@s{9.74} rbuf\@s{0.89} \.{\in} [ Replica
- \.{\rightarrow} {\SUBSET} Element ]}%
-\@x{\@s{16.4} \.{\land}\@s{9.74} IntTypeOK}%
-\@x{\@s{16.4} \.{\land}\@s{9.74} Network {\bang} SMTypeOK}%
-\@x{\@s{16.4} \.{\land}\@s{9.74} SEC {\bang} SECTypeOK}%
+\@x{\@s{16.4} \.{\land} IntTypeOK}%
+\@x{\@s{16.4} \.{\land} Network {\bang} SMTypeOK}%
+\@x{\@s{16.4} \.{\land} SEC {\bang} SECTypeOK}%
+\@x{}\midbar\@xx{}%
+\@x{ Init \.{\defeq}}%
+ \@x{\@s{16.4} \.{\land} aset\@s{2.19} \.{=} [ r \.{\in} Replica \.{\mapsto}
+ \{ \} ]}%
+\@x{\@s{16.4} \.{\land} abuf \.{=} [ r \.{\in} Replica \.{\mapsto} \{ \} ]}%
+ \@x{\@s{16.4} \.{\land} rbuf\@s{0.89} \.{=} [ r \.{\in} Replica \.{\mapsto}
+ \{ \} ]}%
+\@x{\@s{16.4} \.{\land} IntInit}%
+\@x{\@s{16.4} \.{\land} Network {\bang} RCNInit}%
+\@x{\@s{16.4} \.{\land} SEC {\bang} OpSECInit}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 1
@@ -1036,130 +1067,87 @@ network variables
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 1
 \end{cpar}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-1
-\end{cpar}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-1
-\end{cpar}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-1
-\end{cpar}%
 \end{lcom}%
 \@x{}\midbar\@xx{}%
-\@x{ Init \.{\defeq}\@s{16.4}}%
-\@y{\@s{0}%
- initial state
-}%
-\@xx{}%
-\@x{\@s{16.4} \.{\land} set \.{=} [ r \.{\in} Replica \.{\mapsto} \{ \} ]}%
-\@x{\@s{16.4} \.{\land} abuf \.{=} [ r \.{\in} Replica \.{\mapsto} \{ \} ]}%
- \@x{\@s{16.4} \.{\land} rbuf\@s{0.89} \.{=} [ r \.{\in} Replica \.{\mapsto}
- \{ \} ]}%
-\@x{\@s{16.4} \.{\land} IntInit}%
-\@x{\@s{16.4} \.{\land} Network {\bang} RCInit}%
-\@x{\@s{16.4} \.{\land} SEC {\bang} OpSECInit}%
-\@x{}\midbar\@xx{}%
-\@x{ Send ( r ) \.{\defeq}\@s{16.4}}%
-\@y{\@s{0}%
- \ensuremath{r\.{\in} Replica} sends a message
-}%
-\@xx{}%
- \@x{\@s{21.98} \.{\land} abuf \.{'} \.{=} [ abuf {\EXCEPT} {\bang} [ r ]
- \.{=} \{ \} ]}%
- \@x{\@s{21.98} \.{\land} rbuf \.{'}\@s{0.89} \.{=} [ rbuf {\EXCEPT} {\bang} [
- r ]\@s{0.89} \.{=} \{ \} ]}%
- \@x{\@s{21.98} \.{\land} Network {\bang} RCBroadcast ( r ,\, [ r \.{\mapsto}
- r ,\, seq \.{\mapsto} seq [ r ] ,\, vc \.{\mapsto} [ vc {\EXCEPT} {\bang} [
- r ] [ r ] \.{=} @ \.{+} 1 ] [ r ] ,\,}%
- \@x{\@s{270.25} abuf \.{\mapsto} abuf [ r ] ,\, rbuf \.{\mapsto} rbuf [ r ] ]
- )}%
-\@x{\@s{21.98} \.{\land} SEC {\bang} OpSECSend ( r ,\, seq [ r ] )}%
-\@x{\@s{21.98} \.{\land} IntSend ( r )}%
-\@x{\@s{21.98} \.{\land} {\UNCHANGED} {\langle} set {\rangle}}%
-\@pvspace{8.0pt}%
-\@x{ Deliver ( r ) \.{\defeq}\@s{4.1}}%
-\@y{\@s{0}%
- \ensuremath{r\.{\in} Replica} receives a message
-}%
-\@xx{}%
-\@x{\@s{16.4} \.{\land}\@s{4.75} Network {\bang} RCDeliver ( r )}%
- \@x{\@s{16.4} \.{\land}\@s{4.75} SEC {\bang} OpSECDeliver ( r ,\, [ r
- \.{\mapsto} lmsg \.{'} . r ,\, seq \.{\mapsto} lmsg \.{'} . seq ] )}%
- \@x{\@s{16.4} \.{\land}\@s{4.75} set \.{'} \.{=} [ set {\EXCEPT} {\bang} [ r
- ] \.{=} ( @ \.{\cup} lmsg \.{'} . abuf ) \.{\,\backslash\,} lmsg \.{'} .
- rbuf ]}%
-\@x{\@s{16.4} \.{\land}\@s{4.75} IntDeliver ( r )}%
- \@x{\@s{16.4} \.{\land}\@s{4.75} {\UNCHANGED} {\langle} abuf ,\, rbuf
- {\rangle}}%
-\@x{}\midbar\@xx{}%
-\@x{ Add ( d ,\, r ) \.{\defeq}\@s{16.4}}%
+\@x{ Add ( d ,\, r ) \.{\defeq}\@s{4.1}}%
 \@y{\@s{0}%
  \ensuremath{r\.{\in} Replica} adds \ensuremath{d \.{\in} Data
 }}%
 \@xx{}%
- \@x{\@s{22.06} \.{\land} set \.{'}\@s{7.30} \.{=} [ set {\EXCEPT} {\bang} [ r
- ] \.{=} @ \.{\cup} \{ [ d \.{\mapsto} d ,\, r \.{\mapsto} r ,\, k
- \.{\mapsto} seq [ r ] ] \} ]}%
- \@x{\@s{22.06} \.{\land} abuf \.{'} \.{=} [ abuf {\EXCEPT} {\bang} [ r ]
- \.{=} @ \.{\cup} \{ [ d \.{\mapsto} d ,\, r \.{\mapsto} r ,\, k \.{\mapsto}
- seq [ r ] ] \} ]}%
+ \@x{\@s{22.06} \.{\land} \.{\LET} e \.{\defeq} [ aid \.{\mapsto} [ r
+ \.{\mapsto} r ,\, seq \.{\mapsto} seq [ r ] ] ,\, d \.{\mapsto} d ]}%
+ \@x{\@s{33.17} \.{\IN} \.{\land} aset \.{'}\@s{2.19} \.{=} [ aset {\EXCEPT}
+ {\bang} [ r ]\@s{2.19} \.{=} @ \.{\cup} \{ e \} ]}%
+ \@x{\@s{53.57} \.{\land} abuf \.{'} \.{=} [ abuf {\EXCEPT} {\bang} [ r ]
+ \.{=} @ \.{\cup} \{ e \} ]}%
 \@x{\@s{22.06} \.{\land} IntDo ( r )}%
-\@x{\@s{22.06} \.{\land} Network {\bang} RCDo}%
-\@x{\@s{22.06} \.{\land} SEC {\bang} OpSECUpdate ( r ,\, seq [ r ] )}%
-\@x{\@s{22.06} \.{\land} {\UNCHANGED} {\langle} rbuf {\rangle}}%
+\@x{\@s{22.06} \.{\land} SEC {\bang} OpSECDo ( r )}%
+\@x{\@s{22.06} \.{\land} {\UNCHANGED} {\langle} rbuf ,\, nVars {\rangle}}%
 \@pvspace{8.0pt}%
 \@x{ Remove ( d ,\, r ) \.{\defeq}\@s{4.1}}%
 \@y{\@s{0}%
  \ensuremath{r\.{\in} Replica} removes \ensuremath{d \.{\in} Data
 }}%
 \@xx{}%
- \@x{\@s{16.4} \.{\land} \{ ele \.{\in} set [ r ] \.{:} ele . d \.{=} d \}
- \.{\neq} \{ \}}%
- \@x{\@s{16.4} \.{\land} \.{\LET} D \.{\defeq} \{ ele \.{\in} set [ r ] \.{:}
- ele . d \.{=} d \}}%
- \@x{\@s{27.51} \.{\IN} \.{\land}\@s{4.1} set \.{'} \.{=} [ set {\EXCEPT}
- {\bang} [ r ] \.{=} @ \.{\,\backslash\,} D ]}%
- \@x{\@s{47.91} \.{\land}\@s{4.10} rbuf \.{'} \.{=} [ rbuf {\EXCEPT} {\bang} [
- r ] \.{=} @ \.{\cup} D ]}%
-\@x{\@s{16.4} \.{\land} IntDo ( r )}%
-\@x{\@s{16.4} \.{\land} Network {\bang} RCDo}%
-\@x{\@s{16.4} \.{\land} SEC {\bang} OpSECUpdate ( r ,\, seq [ r ] )}%
-\@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} abuf {\rangle}}%
-\@pvspace{8.0pt}%
-\@x{ Do ( r ) \.{\defeq}\@s{32.8}}%
+ \@x{\@s{16.4} \.{\land} \.{\LET} E\@s{4.05} \.{\defeq} \{ ele \.{\in} aset [
+ r ] \.{:} ele . d \.{=} d \}\@s{4.1}}%
 \@y{\@s{0}%
- update operations
+ \ensuremath{E} may be empty
+}%
+\@xx{}%
+ \@x{\@s{27.51} \.{\IN} \.{\land}\@s{4.1} aset \.{'}\@s{1.29} \.{=} [ aset
+ {\EXCEPT} {\bang} [ r ]\@s{1.29} \.{=} @ \.{\,\backslash\,} E ]}%
+ \@x{\@s{47.91} \.{\land}\@s{4.10} rbuf \.{'} \.{=} [ rbuf {\EXCEPT} {\bang} [
+ r ] \.{=} @ \.{\cup} E ]}%
+\@x{\@s{16.4} \.{\land} IntDo ( r )}%
+\@x{\@s{16.4} \.{\land} SEC {\bang} OpSECDo ( r )}%
+\@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} abuf ,\, nVars {\rangle}}%
+\@pvspace{8.0pt}%
+\@x{ Do ( r ) \.{\defeq}\@s{4.1}}%
+\@y{\@s{0}%
+ We ignore \ensuremath{ReadOpAWSet(r)} since it does not modify states.
 }%
 \@xx{}%
  \@x{\@s{22.47} \E\, d \.{\in} Data \.{:} Add ( d ,\, r ) \.{\lor} Remove ( d
  ,\, r )}%
 \@x{}\midbar\@xx{}%
-\@x{ Next \.{\defeq}\@s{86.1}}%
+\@x{ Send ( r ) \.{\defeq}\@s{4.1}}%
 \@y{\@s{0}%
- next-state relation
+ \ensuremath{r\.{\in} Replica} sends a message
 }%
 \@xx{}%
-\@x{\@s{16.4} \E\, r \.{\in} Replica \.{:}}%
-\@x{\@s{27.72} Deliver ( r ) \.{\lor} Send ( r ) \.{\lor} Do ( r )}%
+\@x{\@s{21.98} \.{\land} \.{\lor} abuf [ r ] \.{\neq} \{ \}}%
+\@x{\@s{33.09} \.{\lor} rbuf [ r ]\@s{0.89} \.{\neq} \{ \}}%
+ \@x{\@s{21.98} \.{\land} abuf \.{'} \.{=} [ abuf {\EXCEPT} {\bang} [ r ]
+ \.{=} \{ \} ]}%
+ \@x{\@s{21.98} \.{\land} rbuf \.{'}\@s{0.89} \.{=} [ rbuf {\EXCEPT} {\bang} [
+ r ]\@s{0.89} \.{=} \{ \} ]}%
+ \@x{\@s{21.98} \.{\land} Network {\bang} RCNBroadcast ( r ,\, [ aid\@s{5.94}
+ \.{\mapsto} [ r \.{\mapsto} r ,\, seq \.{\mapsto} seq [ r ] ] ,\,}%
+ \@x{\@s{157.49} abuf \.{\mapsto} abuf [ r ] ,\, rbuf \.{\mapsto} rbuf [ r ] ]
+ )}%
+\@x{\@s{21.98} \.{\land} SEC {\bang} OpSECSend ( r )}%
+\@x{\@s{21.98} \.{\land} IntSend ( r )}%
+\@x{\@s{21.98} \.{\land} {\UNCHANGED} {\langle} aset {\rangle}}%
 \@pvspace{8.0pt}%
-\@x{ Spec \.{\defeq} Init \.{\land} {\Box} [ Next ]_{ vars}}%
+\@x{ Deliver ( r ) \.{\defeq}\@s{4.1}}%
 \@y{\@s{0}%
- specification
+ \ensuremath{r\.{\in} Replica} delivers a message (\ensuremath{lmsg\.{'}[r]})
 }%
 \@xx{}%
+\@x{\@s{16.4} \.{\land} Network {\bang} RCNDeliver ( r )}%
+ \@x{\@s{16.4} \.{\land} SEC {\bang} OpSECDeliver ( r ,\, lmsg \.{'} [ r ] .
+ aid )}%
+ \@x{\@s{16.4} \.{\land} aset \.{'} \.{=} [ aset {\EXCEPT} {\bang} [ r ] \.{=}
+ ( @ \.{\cup} lmsg \.{'} [ r ] . abuf ) \.{\,\backslash\,} lmsg \.{'} [ r ] .
+ rbuf ]}%
+\@x{\@s{16.4} \.{\land} IntDeliver ( r )}%
+\@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} abuf ,\, rbuf {\rangle}}%
 \@x{}\midbar\@xx{}%
-\@x{}%
-\@y{%
- \ensuremath{SECa \.{\defeq} \A\, r1}, \ensuremath{r2 \.{\in} Replica} :
-}%
-\@xx{}%
-\@x{}%
-\@y{\@s{27.5}%
- \ensuremath{SEC{\bang}Sameupdate(r1,\, r2) \.{\implies} Read(r1) \.{=}
- Read(r2)
-}}%
-\@xx{}%
+ \@x{ Next \.{\defeq} \E\, r \.{\in} Replica \.{:} Do ( r ) \.{\lor} Send ( r
+ ) \.{\lor} Deliver ( r )}%
+\@pvspace{8.0pt}%
+\@x{ Spec\@s{1.46} \.{\defeq} Init \.{\land} {\Box} [ Next ]_{ vars}}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -1167,8 +1155,8 @@ network variables
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Thu}
- \ensuremath{Jun} 13 21:46:27 \ensuremath{CST} 2019 by \ensuremath{xhdn
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Wed}
+ \ensuremath{Jun} 26 13:30:44 \ensuremath{CST} 2019 by \ensuremath{xhdn
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

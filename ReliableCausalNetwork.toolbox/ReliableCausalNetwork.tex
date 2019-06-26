@@ -941,31 +941,43 @@
 \setboolean{shading}{true}
  \@x{}\moduleLeftDash\@xx{ {\MODULE}
  ReliableCausalNetwork}\moduleRightDash\@xx{}%
-\@x{ {\EXTENDS} CausalNetwork ,\, Message}%
-\@pvspace{8.0pt}%
-\@x{ RCvars \.{\defeq} {\langle} incoming ,\, lmsg ,\, dmsg ,\, vc {\rangle}}%
+\@x{ {\EXTENDS} CausalNetwork}%
 \@x{}\midbar\@xx{}%
-\@x{ RCInit \.{\defeq} \.{\land} CInit}%
-\@x{\@s{49.89} \.{\land} MInit}%
+\@x{ RCNCausallyReady ( r ,\, m ) \.{\defeq}\@s{4.1}}%
+\@y{\@s{0}%
+ whether \ensuremath{m} is causally ready to be delivered by \ensuremath{r
+ \.{\in} Replica
+}}%
+\@xx{}%
+\@x{\@s{16.4} \.{\LET} mr \.{\defeq} sender ( m )}%
+ \@x{\@s{16.4} \.{\IN} \.{\land} ts ( m ) [ mr ] \.{=} vc [ r ] [ mr ] \.{+}
+ 1\@s{4.1}}%
+\@y{\@s{0}%
+ no message duplication
+}%
+\@xx{}%
+ \@x{\@s{36.79} \.{\land} \A\, s \.{\in} Replica \.{\,\backslash\,} \{ mr \}
+ \.{:} ts ( m ) [ s ] \.{\leq} vc [ r ] [ s ]}%
 \@pvspace{8.0pt}%
-\@x{ RCBroadcast ( r ,\, m ) \.{\defeq} \.{\land} CBroadcast ( r ,\, m )}%
-\@x{\@s{104.33} \.{\land} MBroadcast}%
-\@pvspace{8.0pt}%
-\@x{ RCDeliver ( r ) \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} incoming [ r ] \.{\neq} EmptyBag}%
-\@x{\@s{16.4} \.{\land} \E\, m \.{\in} BagToSet ( incoming [ r ] ) \.{:}}%
-\@x{\@s{35.71} \.{\land} {\lnot} IfDeliverMsg ( m ,\, r )}%
-\@x{\@s{35.71} \.{\land} \A\, s \.{\in} Replica \.{:}}%
-\@x{\@s{54.04} \.{\lor} m . vc [ s ] \.{\leq} vc [ r ] [ s ]}%
-\@x{\@s{54.04} \.{\lor} s \.{=} m . r}%
-\@x{\@s{35.71} \.{\land} m . vc [ m . r ] \.{=} vc [ r ] [ m . r ] \.{+} 1}%
- \@x{\@s{35.71} \.{\land} vc \.{'} \.{=} [ vc {\EXCEPT} {\bang} [ r ] [ m . r
- ] \.{=} @ \.{+} 1 ]}%
-\@x{\@s{35.71} \.{\land} lmsg \.{'} \.{=}\@s{4.1} m}%
-\@x{\@s{35.71} \.{\land} MDeliver ( r ,\, m )}%
-\@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} incoming {\rangle}}%
-\@pvspace{8.0pt}%
-\@x{ RCDo \.{\defeq} {\UNCHANGED} RCvars}%
+\@x{ RCNDeliver ( r ) \.{\defeq}}%
+\@x{\@s{16.4} \.{\land} incoming [ r ] \.{\neq} \{ \}}%
+\@x{\@s{16.4} \.{\land} \E\, m \.{\in} incoming [ r ] \.{:}}%
+\@x{\@s{35.71} \.{\land} RCNCausallyReady ( r ,\, m )}%
+\@x{\@s{35.71} \.{\land} \.{\LET} mr \.{\defeq} sender ( m )}%
+ \@x{\@s{46.82} \.{\IN} vc \.{'} \.{=} [ vc {\EXCEPT} {\bang} [ r ] [ mr ]
+ \.{=} ts ( m ) [ mr ] ]\@s{4.1}}%
+\@y{\@s{0}%
+ update \ensuremath{vc[r]
+}}%
+\@xx{}%
+ \@x{\@s{35.71} \.{\land} lmsg \.{'} \.{=} [ lmsg {\EXCEPT} {\bang} [ r ]
+ \.{=} m ]}%
+ \@x{\@s{35.71} \.{\land} incoming \.{'} \.{=} [ incoming {\EXCEPT} {\bang} [
+ r ] \.{=} @ \.{\,\backslash\,} \{ m \} ]\@s{8.2}}%
+\@y{\@s{0}%
+ delete \ensuremath{m
+}}%
+\@xx{}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -973,8 +985,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jun} 08
- 00:47:56 \ensuremath{CST} 2019 by \ensuremath{xhdn
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue}
+ \ensuremath{Jun} 18 12:41:57 \ensuremath{CST} 2019 by \ensuremath{xhdn
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

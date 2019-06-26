@@ -26,6 +26,11 @@
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/BasicNetwork.tla</location>
 		</link>
 		<link>
+			<name>CRDTInterface.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CRDTInterface.tla</location>
+		</link>
+		<link>
 			<name>CausalNetwork.tla</name>
 			<type>1</type>
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CausalNetwork.tla</location>

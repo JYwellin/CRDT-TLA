@@ -1,46 +1,41 @@
 ----------------------------- MODULE StateAWSet -----------------------------
 EXTENDS AWSet
+CONSTANTS Read(_)
 -----------------------------------------------------------------------------
 VARIABLES
-    aset,     \* aset[r]: set of active Instance(s) maintained by r \in Replica
-    tset,     \* tset[r]: set of tombstone Instance(s) maintained by r \in Replica
+    aset,      \* aset[r]: the set of active elements maintained by r \in Replica
+    tset,      \* tset[r]: the set of tombstone elements maintained by r \in Replica 
+    (* variables for network: *) 
+    incoming,  \* incoming[r]: incoming channel at replica r \in Replica
+    lmsg,      \* lmsg[r]: the last message delivered at r \in Replica to the upper-layer protocol 
+    (* variables for SEC: *) 
+    uset,       \* uset[r]: the set of updates seen by replica r \in Replica
+    uincoming   \* uincoming[r]: incoming channel for broadcasting/delivering updates at r \in Replica
     
-    (*
-    network variables
-    *) 
-    incoming, \* incoming[r]: incoming messages at replica r \in Replica
-    lmsg,
-    (*
-    SEC variables
-    *) 
-    updateset,
-    uincoming
-    
-Nvars  == <<incoming, lmsg>>
-SECvars == <<updateset, uincoming>> 
-vars == <<aset, tset, seq, Nvars, SECvars>>
+nVars  == <<incoming, lmsg>>
+secVars == <<uset, uincoming>> 
+vars == <<aset, tset, seq, nVars, secVars>>
 -----------------------------------------------------------------------------  
-Msg == [r : Replica, seq : Nat, A: SUBSET Element, T : SUBSET Element]  \* message type
-Network == INSTANCE BasicNetwork                                        \* instantiate basic network
+Msg == [aid : Aid, A: SUBSET Element, T : SUBSET Element]  
+Network == INSTANCE BasicNetwork  \* WITH incoming <- incoming, lmsg <- lmsg                                   
 
-Read(r, s) == {ele.d: ele \in s}                                        \* read the state of r\in Replica
-SEC == INSTANCE StateSEC WITH data <- aset                              \* instantiate SEC module
+ReadStateAWSet(r) == {ele.d: ele \in aset[r]}  \* read the state of r\in Replica
+SEC == INSTANCE StateSEC  \* WITH uset <- uset, uincoming <- uincoming                                         
 -----------------------------------------------------------------------------    
-TypeOK ==   \*check types
-    /\ aset \in [Replica -> SUBSET Element]
-    /\ tset \in [Replica -> SUBSET Element]
-    /\ IntTypeOK
-    /\ Network!SMTypeOK
-    /\ SEC!SECTypeOK
+TypeOK ==
+    /\aset \in [Replica -> SUBSET Element]
+    /\tset \in [Replica -> SUBSET Element]
+    /\IntTypeOK
+    /\Network!SMTypeOK
+    /\SEC!SECTypeOK
 -----------------------------------------------------------------------------
-Init ==     \* initial state
+Init == 
     /\ aset = [r \in Replica |-> {}]
     /\ tset = [r \in Replica |-> {}]   
-    /\ Network!NInit
+    /\ IntInit  
+    /\ Network!BNInit
     /\ SEC!StateSECInit
-    /\ IntInit     
------------------------------------------------------------------------------    
-(*
+ (*
 1
 1
 1
@@ -49,44 +44,45 @@ Init ==     \* initial state
 1
 1
 1
-*)                  
-Send(r) ==     \* r\in Replica sends a message 
-    /\ Network!NBroadcast(r,  [r |-> r, seq |-> seq[r],  A |-> aset[r], T |-> tset[r]])  
-    /\ IntSend(r)
-    /\ SEC!StateSECSend(r, seq[r]) 
-    /\ UNCHANGED <<aset, tset>>
-           
-Deliver(r) ==  \* r\in Replica delivers a message(lmsg') 
-    /\ Network!NDeliver(r)
-    /\ IntDeliver(r)
-    /\ SEC!StateSECDeliver(r, [r |-> lmsg'.r, seq |-> lmsg'.seq])
-    /\ tset' = [tset EXCEPT ![r] = @ \cup lmsg'.T]
-    /\ aset' = [aset EXCEPT ![r] = (@ \cup lmsg'.A) \ tset'[r]]           
-    /\ UNCHANGED <<>> 
------------------------------------------------------------------------------
-Add(d, r) ==     \* r\in Replica adds d \in Data
-    /\ aset'= [aset EXCEPT ![r] = @ \union {[d |-> d, r |-> r, k |-> seq[r]]}]
+1
+*) 
+-----------------------------------------------------------------------------                 
+Add(d, r) ==  \* r\in Replica adds d \in Data
+    /\ aset'= [aset EXCEPT ![r] = @ \union {[aid |-> [r |-> r, seq |-> seq[r]], d |-> d]}]
     /\ IntDo(r)
-    /\ Network!NDo
-    /\ SEC!StateSECUpdate(r, seq[r])
-    /\ UNCHANGED <<tset>>
+    /\ SEC!StateSECDo(r)
+    /\ UNCHANGED <<tset, nVars>>
     
 Remove(d, r) ==  \* r\in Replica removes d \in Data 
-    /\ LET E == {ele \in aset[r] : ele.d = d}
+    /\ LET E == {ele \in aset[r] : ele.d = d}  \* E may be empty
        IN  /\ aset' = [aset EXCEPT ![r] = @ \ E]
            /\ tset' = [tset EXCEPT ![r] = @ \cup E] 
     /\ IntDo(r)
-    /\ Network!NDo
-    /\ SEC!StateSECUpdate(r, seq[r]) 
+    /\ SEC!StateSECDo(r) 
+    /\ UNCHANGED <<nVars>>
                       
-Do(r) ==         \* update operations
+Do(r) ==  \* We ignore ReadStateAWSet(r) since it does not modify states.
     \E a \in Data: Add(a, r) \/ Remove(a, r)         
 -----------------------------------------------------------------------------
-Next ==                        \* next-state relation
-    \E r \in Replica: Deliver(r) \/ Send(r) \/ Do(r)
+Send(r) ==  \* r\in Replica sends a message 
+    /\ Network!BNBroadcast(r, [aid |-> [r |-> r, seq |-> seq[r]],  
+                                 A |-> aset[r], T |-> tset[r]])  
+    /\ IntSend(r)
+    /\ SEC!StateSECSend(r) 
+    /\ UNCHANGED <<aset, tset>>
+           
+Deliver(r) ==  \* r\in Replica delivers a message (lmsg'[r]) 
+    /\ IntDeliver(r)
+    /\ Network!BNDeliver(r)
+    /\ SEC!StateSECDeliver(r, lmsg'[r].aid)
+    /\ tset' = [tset EXCEPT ![r] = @ \cup lmsg'[r].T]
+    /\ aset' = [aset EXCEPT ![r] = (@ \cup lmsg'[r].A) \ tset'[r]]           
+    /\ UNCHANGED <<>> 
+-----------------------------------------------------------------------------
+Next == \E r \in Replica: Do(r) \/ Send(r) \/ Deliver(r)
 
-Spec == Init /\ [][Next]_vars  \*specification
+Spec == Init /\ [][Next]_vars
 =============================================================================
 \* Modification History
-\* Last modified Thu Jun 13 21:45:44 CST 2019 by xhdn
+\* Last modified Wed Jun 26 15:12:53 CST 2019 by xhdn
 \* Created Fri May 24 14:13:38 CST 2019 by xhdn

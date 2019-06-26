@@ -940,31 +940,36 @@
 \tlatex
 \setboolean{shading}{true}
 \@x{}\moduleLeftDash\@xx{ {\MODULE} BasicNetwork}\moduleRightDash\@xx{}%
-\@x{ {\EXTENDS} Bags ,\, SystemModel}%
+\@x{ {\EXTENDS} SystemModel}%
 \@x{}\midbar\@xx{}%
-\@x{ {\VARIABLES} lmsg}%
-\@pvspace{8.0pt}%
-\@x{ Nvars\@s{4.1} \.{\defeq} {\langle} incoming ,\, lmsg {\rangle}}%
+\@x{ {\VARIABLES} lmsg\@s{4.1}}%
+\@y{\@s{0}%
+ \ensuremath{lmsg[r]}: the last message delivered at \ensuremath{r \.{\in}
+ Replica} to the upper-layer protocol
+}%
+\@xx{}%
 \@x{}\midbar\@xx{}%
-\@x{ NInit \.{\defeq}}%
- \@x{\@s{16.4} \.{\land} incoming \.{=} [ r \.{\in} Replica \.{\mapsto}
- EmptyBag ]}%
-\@x{\@s{16.4} \.{\land} lmsg \.{=} NotMsg}%
+\@x{ BNInit \.{\defeq}}%
+ \@x{\@s{16.4} \.{\land}\@s{3.77} incoming \.{=} [ r \.{\in} Replica
+ \.{\mapsto} \{ \} ]}%
+ \@x{\@s{16.4} \.{\land}\@s{3.77} lmsg \.{=} [ r \.{\in} Replica \.{\mapsto}
+ NotMsg ]}%
 \@pvspace{8.0pt}%
-\@x{ NBroadcast ( r ,\, m ) \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} incoming \.{'} \.{=} [ x \.{\in} Replica \.{\mapsto}}%
-\@x{\@s{100.71} {\IF} x \.{=} r}%
-\@x{\@s{100.71} \.{\THEN} incoming [ x ]}%
-\@x{\@s{100.71} \.{\ELSE} incoming [ x ] \.{\oplus} SetToBag ( \{ m \} ) ]}%
+\@x{ BNBroadcast ( r ,\, m ) \.{\defeq}}%
+ \@x{\@s{16.4} \.{\land} incoming \.{'} \.{=} [ x \.{\in} Replica \.{\mapsto}
+ {\IF} x \.{=} r \.{\THEN} incoming [ x ]}%
+\@x{\@s{190.10} \.{\ELSE} incoming [ x ] \.{\cup} \{ m \} ]}%
 \@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} lmsg {\rangle}}%
 \@pvspace{8.0pt}%
-\@x{ NDeliver ( r ) \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} incoming [ r ] \.{\neq} EmptyBag}%
-\@x{\@s{16.4} \.{\land} \E\, m \.{\in} BagToSet ( incoming [ r ] ) \.{:}}%
-\@x{\@s{35.71} \.{\land} lmsg \.{'} \.{=} m}%
+\@x{ BNDeliver ( r ) \.{\defeq}}%
+\@x{\@s{16.4} \.{\land} incoming [ r ] \.{\neq} \{ \}\@s{57.4}}%
+\@y{\@s{0}%
+ choose \ensuremath{m} from \ensuremath{incoming[r]} non-deterministically
+}%
+\@xx{}%
+ \@x{\@s{16.4} \.{\land} \E\, m \.{\in} incoming [ r ] \.{:} lmsg \.{'} \.{=}
+ [ lmsg {\EXCEPT} {\bang} [ r ] \.{=} m ]}%
 \@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} incoming {\rangle}}%
-\@pvspace{8.0pt}%
-\@x{ NDo \.{\defeq} {\UNCHANGED} Nvars}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -972,8 +977,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sun \ensuremath{Jun} 09
- 20:28:01 \ensuremath{CST} 2019 by \ensuremath{xhdn
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
+ \ensuremath{Jun} 17 17:10:47 \ensuremath{CST} 2019 by \ensuremath{xhdn
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

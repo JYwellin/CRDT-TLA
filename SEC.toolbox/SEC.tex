@@ -940,62 +940,75 @@
 \tlatex
 \setboolean{shading}{true}
 \@x{}\moduleLeftDash\@xx{ {\MODULE} SEC}\moduleRightDash\@xx{}%
-\@x{ {\EXTENDS} Naturals}%
+\@x{ {\EXTENDS} Naturals ,\, CRDTInterface}%
+\@x{}\midbar\@xx{}%
+\@x{ {\CONSTANTS} Read ( \_ )\@s{4.1}}%
+\@y{\@s{0}%
+ \ensuremath{Read(r \.{\in} Replica)}: the read operation at \ensuremath{r
+}}%
+\@xx{}%
+\@pvspace{8.0pt}%
+ \@x{ UMsg \.{\defeq} [ aid \.{:} Aid ,\, update \.{:} {\SUBSET} Aid
+ ]\@s{4.1}}%
+\@y{\@s{0}%
+ \ensuremath{SEC} message type
+}%
+\@xx{}%
 \@x{}\midbar\@xx{}%
 \@x{ {\VARIABLES}}%
-\@x{\@s{16.4} updateset ,\,}%
-\@x{\@s{16.4} prev\_updateset}%
+\@x{\@s{16.4} uset ,\,\@s{29.36}}%
+\@y{\@s{0}%
+ \ensuremath{uset[r]}: set of updates at replica \ensuremath{r \.{\in} Replica
+}}%
+\@xx{}%
+\@x{\@s{16.4} uincoming\@s{8.20}}%
+\@y{\@s{0}%
+ \ensuremath{uincoming[r]}: incoming channel for updates at \ensuremath{r
+ \.{\in} Replica
+}}%
+\@xx{}%
 \@pvspace{8.0pt}%
-\@x{ SECvars \.{\defeq} {\langle} updateset ,\, prev\_updateset {\rangle}}%
-\@x{}\midbar\@xx{}%
-\@x{ {\CONSTANTS}}%
-\@x{\@s{16.4} Replica}%
-\@x{}\midbar\@xx{}%
-\@x{ Update \.{\defeq} [ r \.{:} Replica ,\, seq \.{:} Nat ]}%
-\@x{}\midbar\@xx{}%
- \@x{ OpUpdate ( r ) \.{\defeq} updateset [ r ] \.{\,\backslash\,}
- prev\_updateset [ r ]}%
-\@y{\@s{0}%
- for op-based \ensuremath{CRDT
-}}%
-\@xx{}%
-\@x{ StateUpdate ( r ) \.{\defeq} updateset [ r ]\@s{74.64}}%
-\@y{\@s{0}%
- for state-based \ensuremath{CRDT
-}}%
-\@xx{}%
+\@x{ SECTypeOK \.{\defeq}}%
+ \@x{\@s{16.4} \.{\land} uset \.{\in} [ Replica \.{\rightarrow} {\SUBSET} Aid
+ ]}%
+ \@x{\@s{16.4} \.{\land} uincoming \.{\in} [ Replica \.{\rightarrow} {\SUBSET}
+ UMsg ]}%
 \@x{}\midbar\@xx{}%
 \@x{ SECInit \.{\defeq}}%
- \@x{\@s{16.4} \.{\land} updateset \.{=} [ r\@s{2.18} \.{\in} Replica
+ \@x{\@s{20.5} \.{\land}\@s{4.76} uset \.{=} [ r\@s{5.87} \.{\in} Replica
  \.{\mapsto} \{ \} ]}%
- \@x{\@s{16.4} \.{\land} prev\_updateset \.{=} [ r \.{\in} Replica \.{\mapsto}
- \{ \} ]}%
+ \@x{\@s{20.5} \.{\land}\@s{4.76} uincoming \.{=} [ r \.{\in} Replica
+ \.{\mapsto} \{ \} ]}%
 \@pvspace{8.0pt}%
-\@x{ SECUpdate ( r ,\, seq ) \.{\defeq}}%
- \@x{\@s{16.4} \.{\land} updateset \.{'} \.{=} [ updateset {\EXCEPT} {\bang} [
- r ] \.{=} @ \.{\cup} \{ [ r \.{\mapsto} r ,\, seq \.{\mapsto} seq ] \} ]}%
-\@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} prev\_updateset {\rangle}}%
+\@x{ SECDo ( r ) \.{\defeq}}%
+ \@x{\@s{32.85} \.{\land} uset \.{'} \.{=} [ uset {\EXCEPT} {\bang} [ r ]
+ \.{=} @ \.{\cup} \{ [ r \.{\mapsto} r ,\, seq \.{\mapsto} seq [ r ] ] \} ]}%
+\@x{\@s{32.85} \.{\land} {\UNCHANGED} {\langle} uincoming {\rangle}}%
 \@pvspace{8.0pt}%
-\@x{ SECSend ( r ) \.{\defeq}}%
- \@x{\@s{16.4} \.{\land}\@s{14.03} prev\_updateset \.{'} \.{=} [
- prev\_updateset {\EXCEPT} {\bang} [ r ] \.{=} updateset [ r ] ]}%
-\@x{\@s{16.4} \.{\land}\@s{14.03} {\UNCHANGED} {\langle} updateset {\rangle}}%
+ \@x{ SECSend \.{\defeq}\@s{4.1} {\UNCHANGED} {\langle} uset
+ {\rangle}\@s{4.1}}%
+\@y{\@s{0}%
+ implemented by \ensuremath{OpSEC} and \ensuremath{StateSEC
+}}%
+\@xx{}%
 \@pvspace{8.0pt}%
-\@x{ SECFlush ( r ,\, seq ) \.{\defeq}}%
- \@x{\@s{16.4} \.{\land} updateset \.{'} \.{=} [ updateset {\EXCEPT} {\bang} [
- r ] \.{=} @ \.{\cup} \{ [ r \.{\mapsto} r ,\, seq \.{\mapsto} seq ] \} ]}%
- \@x{\@s{16.4} \.{\land} prev\_updateset \.{'} \.{=} [ prev\_updateset
- {\EXCEPT} {\bang} [ r ] \.{=} @ \.{\cup} \{ [ r \.{\mapsto} r ,\, seq
- \.{\mapsto} seq ] \} ]}%
-\@pvspace{8.0pt}%
-\@x{ SECDeliver ( r ,\, m ) \.{\defeq}}%
- \@x{\@s{16.4} \.{\land} updateset \.{'} \.{=} [ updateset {\EXCEPT} {\bang} [
- r ] \.{=} @ \.{\cup} m . update ]}%
- \@x{\@s{16.4} \.{\land} prev\_updateset \.{'} \.{=} [ prev\_updateset
- {\EXCEPT} {\bang} [ r ] \.{=} @ \.{\cup} m . update ]}%
+\@x{ SECDeliver ( r ,\, aid ) \.{\defeq}\@s{4.1}}%
+\@y{\@s{0}%
+ choose the \ensuremath{SEC} message \ensuremath{m} according to aid
+}%
+\@xx{}%
+ \@x{\@s{16.4} \.{\land} \.{\LET} m \.{\defeq} {\CHOOSE} m \.{\in} uincoming [
+ r ] \.{:} m . aid \.{=} aid}%
+\@y{\@s{0}%
+ \ensuremath{m} is unique
+}%
+\@xx{}%
+ \@x{\@s{27.51} \.{\IN} uset \.{'} \.{=} [ uset {\EXCEPT} {\bang} [ r ] \.{=}
+ @ \.{\cup} m . update ]}%
+\@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} uincoming {\rangle}}%
 \@x{}\midbar\@xx{}%
-\@x{ Sameupdate ( r1 ,\, r2 ) \.{\defeq}}%
-\@x{\@s{16.4} updateset [ r1 ] \.{=} updateset [ r2 ]}%
+ \@x{ SEC \.{\defeq} \A\, r1 ,\, r2 \.{\in} Replica \.{:} uset [ r1 ] \.{=}
+ uset [ r2 ] \.{\implies} Read ( r1 ) \.{=} Read ( r2 )}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -1003,8 +1016,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Fri} May 31
- 21:26:38 \ensuremath{CST} 2019 by \ensuremath{xhdn
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue}
+ \ensuremath{Jun} 18 12:22:30 \ensuremath{CST} 2019 by \ensuremath{xhdn
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

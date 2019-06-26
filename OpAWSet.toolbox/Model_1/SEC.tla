@@ -1,43 +1,36 @@
 -------------------------------- MODULE SEC --------------------------------
-EXTENDS Naturals
-CONSTANTS 
-    Replica,
-    Read(_, _)
+EXTENDS Naturals, CRDTInterface
+-----------------------------------------------------------------------------
+CONSTANTS Read(_)  \* Read(r \in Replica): the read operation at r 
     
-Aid == [r : Replica, seq : Nat]                       \*action ID
-UMsg == [r : Replica, seq : Nat, update: SUBSET Aid]  \*SEC message type   
+UMsg == [aid : Aid, update: SUBSET Aid]  \* SEC message type   
 -----------------------------------------------------------------------------
 VARIABLES 
-    updateset,  \*updateset[r]£º
-    data,
-    uincoming   \* uincoming[r]£ºupdate incoming channel for r \in Replica
------------------------------------------------------------------------------
-SECTypeOK ==
-    /\ updateset \in [Replica -> SUBSET Aid]
-    /\ uincoming \in [Replica -> SUBSET UMsg]
+    uset,       \* uset[r]: set of updates at replica r \in Replica
+    uincoming   \* uincoming[r]: incoming channel for updates at r \in Replica
     
-SECInit ==  \*initial state
-     /\ updateset = [r \in Replica |-> {}]
+SECTypeOK ==
+    /\ uset \in [Replica -> SUBSET Aid]
+    /\ uincoming \in [Replica -> SUBSET UMsg]
+-----------------------------------------------------------------------------   
+SECInit == 
+     /\ uset = [r \in Replica |-> {}]
      /\ uincoming = [r \in Replica |-> {}]
     
-SECUpdate(r, seq) == 
-     /\ updateset' = [updateset EXCEPT ![r] = @ \cup { [r |-> r, seq |-> seq ] }]
+SECDo(r) == 
+     /\ uset' = [uset EXCEPT ![r] = @ \cup {[r |-> r, seq |-> seq[r]]}]
      /\ UNCHANGED <<uincoming>>
 
-SECSend(r) == UNCHANGED <<updateset>>
-       
-SECDeliver(r, u) == 
-    /\ updateset' = [updateset EXCEPT ![r] = @ \cup u] 
+SECSend(r) ==  UNCHANGED <<uset>>  \* implemented by OpSEC and StateSEC
+           
+SECDeliver(r, aid) ==  \* choose the SEC message um according to aid
+    /\ LET um == CHOOSE m \in uincoming[r] : m.aid = aid \* um is unique
+       IN  uset' = [uset EXCEPT ![r] = @ \cup um.update] 
     /\ UNCHANGED <<uincoming>>
 -----------------------------------------------------------------------------   
-SearchMsg(set, id) ==  CHOOSE m \in set : m.seq = id.seq /\ m.r = id.r     \*Find the message in set
- 
-Sameupdate(r1, r2) == 
-    updateset[r1] = updateset[r2]
-
-SEC == \A r1, r2 \in Replica : Sameupdate(r1, r2) => Read(r1, data[r1]) = Read(r2, data[r2])
+SEC == \A r1, r2 \in Replica : uset[r1] = uset[r2] => Read(r1) = Read(r2)
 =============================================================================
 \* Modification History
-\* Last modified Thu Jun 13 21:15:02 CST 2019 by xhdn
+\* Last modified Wed Jun 19 20:21:46 CST 2019 by xhdn
 \* Last modified Mon May 06 16:50:42 CST 2019 by jywellin
 \* Created Sun May 05 15:42:13 CST 2019 by jywellin

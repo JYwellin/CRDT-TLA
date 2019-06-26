@@ -1,29 +1,27 @@
 ------------------------------- MODULE OpSEC -------------------------------
 EXTENDS SEC
 -----------------------------------------------------------------------------
-VARIABLES 
-    new_updateset  \* new_update[r]:     
+VARIABLES buset  \* buset[r]: the buffer of local updates made by r \in Replica since the last broadcast     
 -----------------------------------------------------------------------------
-OpSECInit ==   \* initial state
+OpSECInit ==
     /\ SECInit
-    /\ new_updateset = [r \in Replica |-> {}]
+    /\ buset = [r \in Replica |-> {}]
 
-OpSECUpdate(r, seq) == 
-    /\ SECUpdate(r, seq) 
-    /\ new_updateset' = [new_updateset EXCEPT ![r] = @ \cup { [r |-> r, seq |-> seq ] }]
+OpSECDo(r) == 
+    /\SECDo(r)                             
+    /\buset' = [buset EXCEPT ![r] = @ \cup {[r |-> r, seq |-> seq[r]]}]  \*collect a new update
     
-OpSECSend(r, seq) == 
+OpSECSend(r) == 
     /\ SECSend(r)
-    /\ uincoming' = [x \in Replica |->
-                        IF x = r
-                        THEN uincoming[x]
-                        ELSE uincoming[x] \cup {[r |-> r, seq |->seq, update |-> new_updateset[r]]} ]  
-    /\ new_updateset' = [new_updateset EXCEPT ![r] = {} ]
+    /\ uincoming' = [x \in Replica |->     \* broadcast buset[r]
+               IF x = r THEN uincoming[x]
+                        ELSE uincoming[x] \cup {[aid |-> [r |-> r, seq |-> seq[r]], update |-> buset[r]]} ]  
+    /\ buset' = [buset EXCEPT ![r] = {} ]  \* clear buset[r]
                     
 OpSECDeliver(r, aid) ==
-    /\  SECDeliver(r, SearchMsg(uincoming[r], aid).update)  
-    /\  UNCHANGED <<new_updateset>>
+    /\  SECDeliver(r, aid) 
+    /\  UNCHANGED <<buset>>
 =============================================================================
 \* Modification History
-\* Last modified Thu Jun 13 17:03:15 CST 2019 by xhdn
+\* Last modified Wed Jun 26 13:21:02 CST 2019 by xhdn
 \* Created Tue Jun 11 17:32:49 CST 2019 by xhdn

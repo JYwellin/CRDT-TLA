@@ -1,108 +1,92 @@
 ------------------------------ MODULE OpAWSet ------------------------------
 EXTENDS AWSet
+CONSTANTS Read(_)
 -----------------------------------------------------------------------------
 VARIABLES 
-    set,       \* set[r]: set of Element(s) maintained by r \in Replica
-    abuf,      \* abuf[r]: buffer of Element(s) added maintained by r \in Replica
-    rbuf,      \* rbuf[r]: buffer of Element(s) removed maintained by r \in Replica
-    
-    (*
-    network variables
-    *) 
-    incoming,
-    dmsg,            
-    lmsg, 
-    vc,
-    (*
-    SEC variables
-    *) 
-    updateset,
-    uincoming,
-    new_updateset
+    aset,       \* aset[r]: the set of active elements maintained by r \in Replica
+    abuf,       \* abuf[r]: the buffer for elements added by r \in Replica since the last broadcast 
+    rbuf,       \* rbuf[r]: the buffer for elements removed by r \in Replica since the last broadcast
+(* variables for network: *)    
+    incoming,   \* incoming[r]: incoming channel at replica r \in Replica
+    lmsg,       \* lmsg[r]: the last message delivered at r \in Replica to the upper-layer protocol 
+    vc,         \* vc[r][s] denotes the latest message from s \in Replica observed by r \in Replica
+(* variables for SEC: *)
+    uset,       \* uset[r]: the set of updates seen by replica r \in Replica
+    uincoming,  \* uincoming[r]: incoming channel for broadcasting/delivering updates at r \in Replica
+    buset       \* buset[r]: the buffer of local updates made by r \in Replica since the last broadcast 
 
-Nvars == <<incoming, lmsg, dmsg, vc>>
-SECvars == <<updateset, new_updateset, uincoming>> 
-vars == <<set, abuf, rbuf, seq, Nvars, SECvars>>    
+nVars == <<incoming, lmsg, vc>>
+secVars == <<uset, uincoming, buset>> 
+vars == <<aset, abuf, rbuf, seq, nVars, secVars>>   
 -----------------------------------------------------------------------------
-Msg == [r : Replica, seq : Nat, vc : Vector, abuf : SUBSET Element, rbuf: SUBSET Element] \*message type
-\* instantiate a reliable causal network
-Network == INSTANCE ReliableCausalNetwork                                                 
-
-\* read the state of r\in Replica 
-Read(r, s) == {ele.d: ele \in s} 
-\* instantiate SEC module                                                       
-SEC == INSTANCE OpSEC WITH data <- set                                               
+Msg == [aid : Aid, abuf : SUBSET Element, rbuf: SUBSET Element]
+Network == INSTANCE ReliableCausalNetwork \* WITH incoming <- incoming, lmsg <- lmsg, vc <- vc                                               
+ 
+ReadOpAWSet(r) == {ele.d: ele \in aset[r]}   \* read the state of r\in Replica                                                     
+SEC == INSTANCE OpSEC \* WITH uset <- uset, uincoming <- uincoming, buset <- buset                                        
 -----------------------------------------------------------------------------
-TypeOK ==  \*check types
-    /\ set \in [Replica -> SUBSET Element]
-    /\ abuf \in [Replica -> SUBSET Element]
-    /\ rbuf \in [Replica -> SUBSET Element]
-    /\ IntTypeOK
-    /\ Network!SMTypeOK
-    /\ SEC!SECTypeOK
+TypeOK == 
+    /\aset \in [Replica -> SUBSET Element]
+    /\abuf \in [Replica -> SUBSET Element]
+    /\rbuf \in [Replica -> SUBSET Element]
+    /\IntTypeOK
+    /\Network!SMTypeOK
+    /\SEC!SECTypeOK
+-----------------------------------------------------------------------------
+Init ==   
+    /\ aset = [r \in Replica |-> {}] 
+    /\ abuf = [r \in Replica |-> {}]
+    /\ rbuf = [r \in Replica |-> {}]
+    /\ IntInit
+    /\ Network!RCNInit
+    /\ SEC!OpSECInit    
 (*
 1
 1
 1
-1
-1
-1
-*)
+*) 
 -----------------------------------------------------------------------------
-Init ==     \* initial state
-    /\ set = [r \in Replica |-> {}] 
-    /\ abuf = [r \in Replica |-> {}]
-    /\ rbuf = [r \in Replica |-> {}]
-    /\ IntInit
-    /\ Network!RCInit
-    /\ SEC!OpSECInit
------------------------------------------------------------------------------                                    
-Send(r) ==     \* r\in Replica sends a message 
-    /\ abuf' = [abuf EXCEPT ![r] = {}]
-    /\ rbuf' = [rbuf EXCEPT ![r] = {}]
-    /\ Network!RCBroadcast(r, [r |-> r, seq |-> seq[r], vc |-> [vc EXCEPT ![r][r] = @ + 1][r], 
-                                                                abuf|-> abuf[r], rbuf|-> rbuf[r] ])
-    /\ SEC!OpSECSend(r, seq[r])
-    /\ IntSend(r)
-    /\ UNCHANGED <<set>>  
-              
-Deliver(r) ==  \* r\in Replica receives a message 
-    /\ Network!RCDeliver(r)
-    /\ SEC!OpSECDeliver(r, [r |-> lmsg'.r, seq |-> lmsg'.seq])
-    /\ set' = [set EXCEPT ![r] = (@ \cup lmsg'.abuf) \ lmsg'.rbuf]
-    /\ IntDeliver(r)
-    /\ UNCHANGED <<abuf, rbuf>>         
------------------------------------------------------------------------------
-Add(d, r) ==     \* r\in Replica adds d \in Data
-    /\ set' = [set EXCEPT ![r] = @ \union {[d |-> d, r |-> r, k |-> seq[r]]}] 
-    /\ abuf'= [abuf EXCEPT ![r] = @ \union {[d |-> d, r |-> r, k |-> seq[r]]}] 
+Add(d, r) ==  \* r\in Replica adds d \in Data
+    /\ LET e == [aid |-> [r |-> r, seq |-> seq[r]], d |-> d]
+       IN /\ aset' = [aset EXCEPT ![r] = @ \union {e}] 
+          /\ abuf' = [abuf EXCEPT ![r] = @ \union {e}] 
     /\ IntDo(r)
-    /\ Network!RCDo
-    /\ SEC!OpSECUpdate(r, seq[r])
-    /\ UNCHANGED <<rbuf>>     
+    /\ SEC!OpSECDo(r)
+    /\ UNCHANGED <<rbuf, nVars>>     
 
 Remove(d, r) ==  \* r\in Replica removes d \in Data
-    /\ {ele \in set[r] : ele.d = d} # {}
-    /\ LET D == {ele \in set[r] : ele.d = d}
-       IN /\  set' = [set EXCEPT ![r] = @ \ D]  
-          /\  rbuf' = [rbuf EXCEPT ![r] = @ \cup D]  
+    /\ LET E == {ele \in aset[r] : ele.d = d}  \* E may be empty
+       IN /\  aset' = [aset EXCEPT ![r] = @ \ E]  
+          /\  rbuf' = [rbuf EXCEPT ![r] = @ \cup E]  
     /\ IntDo(r)
-    /\ Network!RCDo
-    /\ SEC!OpSECUpdate(r, seq[r])
-    /\ UNCHANGED <<abuf>>  
+    /\ SEC!OpSECDo(r)
+    /\ UNCHANGED <<abuf, nVars>>  
     
-Do(r) ==         \* update operations
-    \E d \in Data : Add(d, r) \/ Remove(d, r)         
+Do(r) ==  \* We ignore ReadOpAWSet(r) since it does not modify states.
+    \E d \in Data : Add(d, r) \/ Remove(d, r)        
+-----------------------------------------------------------------------------                                    
+Send(r) ==  \* r\in Replica sends a message 
+    /\ \/ abuf[r] # {}
+       \/ rbuf[r] # {}
+    /\ abuf' = [abuf EXCEPT ![r] = {}]
+    /\ rbuf' = [rbuf EXCEPT ![r] = {}]
+    /\ Network!RCNBroadcast(r, [aid |-> [r |-> r, seq |-> seq[r]], 
+                                abuf|-> abuf[r], rbuf|-> rbuf[r]])
+    /\ IntSend(r)
+    /\ SEC!OpSECSend(r)
+    /\ UNCHANGED <<aset>>  
+              
+Deliver(r) ==  \* r\in Replica delivers a message (lmsg'[r]) 
+    /\IntDeliver(r)
+    /\Network!RCNDeliver(r)
+    /\SEC!OpSECDeliver(r, lmsg'[r].aid)
+    /\aset' = [aset EXCEPT ![r] = (@ \cup lmsg'[r].abuf) \ lmsg'[r].rbuf]
+    /\UNCHANGED <<abuf, rbuf>>    
 -----------------------------------------------------------------------------
-Next ==                      \* next-state relation
-    \E r \in Replica: 
-        Deliver(r) \/ Send(r) \/ Do(r)
+Next == \E r \in Replica: Do(r) \/ Send(r) \/ Deliver(r) 
 
-Spec == Init /\ [][Next]_vars\* specification
------------------------------------------------------------------------------
-\*SECa == \A r1, r2 \in Replica : 
-\*            SEC!Sameupdate(r1, r2) => Read(r1) = Read(r2)
+Spec == Init /\ [][Next]_vars  
 =============================================================================
 \* Modification History
-\* Last modified Thu Jun 13 21:46:27 CST 2019 by xhdn
+\* Last modified Wed Jun 26 15:11:53 CST 2019 by xhdn
 \* Created Fri May 24 14:12:26 CST 2019 by xhdn

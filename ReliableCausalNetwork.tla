@@ -1,30 +1,27 @@
 ----------------------- MODULE ReliableCausalNetwork -----------------------
-EXTENDS CausalNetwork, Message
-
-RCvars == <<incoming, lmsg, dmsg, vc>>
+EXTENDS CausalNetwork
+  
+rcnVars == <<incoming, lmsg, vc>>
 -----------------------------------------------------------------------------
-RCInit ==/\ CInit
-         /\ MInit
+RCNInit == CNInit
 
-RCBroadcast(r, m) == /\ CBroadcast(r, m)
-                     /\ MBroadcast
+RCNBroadcast(r, m) == CNBroadcast(r, m)
+
+RCNCausallyReady(r, cm) ==  \* whether cm is causally ready to be delivered by r \in Replica
+    LET mr == sender(cm)  \* cm : message with vector clock
+    IN  /\ ts(cm)[mr] = vc[r][mr] + 1  \* no message duplication
+        /\ \A s \in Replica \ {mr}: ts(cm)[s] <= vc[r][s] 
                    
-RCDeliver(r) == 
-    /\ incoming[r] # EmptyBag
-    /\ \E m \in BagToSet(incoming[r]): 
-         /\ ~ IfDeliverMsg(m, r)
-         /\ \A s \in Replica:
-               \/ m.vc[s] <= vc[r][s]  
-               \/ s = m.r 
-         /\ m.vc[m.r] = vc[r][m.r] + 1
-         /\ vc' = [vc EXCEPT ![r][m.r] = @ + 1]  
-         /\ lmsg' =  m
-         /\ MDeliver(r, m)
-    /\ UNCHANGED <<incoming>>    
-    
-RCDo == UNCHANGED RCvars
+RCNDeliver(r) == 
+    /\ incoming[r] # {}
+    /\ \E cm \in incoming[r]: 
+         /\ RCNCausallyReady(r, cm)
+         /\ LET mr == sender(cm) 
+            IN  vc' = [vc EXCEPT ![r][mr] = ts(cm)[mr]]  \* update vc[r]
+         /\ lmsg' = [lmsg EXCEPT ![r] = cm.m]
+         /\ incoming' = [incoming EXCEPT ![r] = @ \ {cm}]   \* delete cm 
 =============================================================================
 \* Modification History
-\* Last modified Sat Jun 08 00:47:56 CST 2019 by xhdn
+\* Last modified Wed Jun 26 19:23:25 CST 2019 by xhdn
 \* Last modified Mon May 06 16:07:42 CST 2019 by jywellin
 \* Created Tue Apr 02 15:26:19 CST 2019 by jywellin

@@ -21,6 +21,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/AWSet.tla</locationURI>
 		</link>
 		<link>
+			<name>CRDTInterface.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CRDTInterface.tla</location>
+		</link>
+		<link>
 			<name>Interface.tla</name>
 			<type>1</type>
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Interface.tla</location>

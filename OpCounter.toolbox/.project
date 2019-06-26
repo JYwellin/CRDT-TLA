@@ -16,6 +16,16 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>BasicNetwork.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/BasicNetwork.tla</location>
+		</link>
+		<link>
+			<name>CRDTInterface.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CRDTInterface.tla</location>
+		</link>
+		<link>
 			<name>Message.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Message.tla</locationURI>

@@ -1,29 +1,24 @@
 ---------------------------- MODULE BasicNetwork ----------------------------
-EXTENDS Bags, SystemModel
+EXTENDS SystemModel
 -----------------------------------------------------------------------------
-VARIABLES lmsg
-       
-Nvars  == <<incoming, lmsg>>
------------------------------------------------------------------------------
-NInit == 
-    /\ incoming = [r \in Replica |-> EmptyBag]
-    /\ lmsg = NotMsg
+VARIABLES lmsg  \* lmsg[r]: the last message delivered at r \in Replica to the upper-layer protocol 
 
-NBroadcast(r, m) == 
-    /\ incoming' = [x \in Replica |->
-                        IF x = r
-                        THEN incoming[x]
-                        ELSE incoming[x] (+) SetToBag({m}) ]                    
+nVars == <<incoming, lmsg>>
+-----------------------------------------------------------------------------
+BNInit == 
+    /\ incoming = [r \in Replica |-> {}]
+    /\ lmsg = [r \in Replica |-> NotMsg]
+
+BNBroadcast(r, m) == 
+    /\ incoming' = [x \in Replica |-> IF x = r THEN incoming[x]
+                                               ELSE incoming[x] \cup {m} ]                    
     /\ UNCHANGED <<lmsg>> 
 
-NDeliver(r) == 
-    /\ incoming[r] # EmptyBag
-    /\ \E m \in BagToSet(incoming[r]):
-         /\ lmsg' = m
-    /\ UNCHANGED <<incoming>> 
-    
-NDo == UNCHANGED Nvars  
+BNDeliver(r) == 
+    /\ incoming[r] # {}               \* choose m from incoming[r] non-deterministically 
+    /\ \E m \in incoming[r]: lmsg' = [lmsg EXCEPT ![r] = m]  
+    /\ UNCHANGED <<incoming>>  
 =============================================================================
 \* Modification History
-\* Last modified Sun Jun 09 20:28:01 CST 2019 by xhdn
+\* Last modified Mon Jun 17 17:11:51 CST 2019 by xhdn
 \* Created Sun Jun 09 20:27:37 CST 2019 by xhdn

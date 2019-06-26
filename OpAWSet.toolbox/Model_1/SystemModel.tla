@@ -1,17 +1,15 @@
 ---------------------------- MODULE SystemModel ----------------------------
-EXTENDS Bags
------------------------------------------------------------------------------
 CONSTANTS 
-    Replica,  \* 副本节点集合
-    Msg       \* 消息集合
+    Replica,  \* the set of replicas 
+    Msg       \* the set of messages
     
 NotMsg == CHOOSE m : m \notin Msg  
 -----------------------------------------------------------------------------
-VARIABLES incoming  \* incoming[r]：副本节点r用于接收消息的信道
+VARIABLES incoming  \* incoming[r]: incoming channel at replica r \in Replica
 -----------------------------------------------------------------------------
-SMTypeOK == 
-    \A r \in Replica : BagToSet(incoming[r]) \in SUBSET Msg  \* 每个副本节点的通信信道是一个多重集 (multiset, 使用Bag表示)
+SMTypeOK ==  \* each incoming channel is a set of messages
+    incoming \in [Replica -> SUBSET Msg]
 =============================================================================
 \* Modification History
-\* Last modified Thu Jun 06 15:56:45 CST 2019 by xhdn
+\* Last modified Sun Jun 16 20:52:51 CST 2019 by xhdn
 \* Created Wed Jun 05 21:05:12 CST 2019 by xhdn

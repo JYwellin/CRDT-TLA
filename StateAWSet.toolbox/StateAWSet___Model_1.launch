@@ -6,7 +6,7 @@
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
 <intAttribute key="distributedFPSetCount" value="0"/>
-<stringAttribute key="distributedNetworkInterface" value="172.28.204.247"/>
+<stringAttribute key="distributedNetworkInterface" value="172.27.142.165"/>
 <intAttribute key="distributedNodesCount" value="1"/>
 <stringAttribute key="distributedTLC" value="off"/>
 <stringAttribute key="distributedTLCVMArgs" value=""/>
@@ -32,6 +32,7 @@
 <listAttribute key="modelParameterConstants">
 <listEntry value="Data;;{&quot;a&quot;,&quot;b&quot;,&quot;c&quot;};0;0"/>
 <listEntry value="Replica;;{r1, r2, r3};1;1"/>
+<listEntry value="Read;r:;ReadStateAWSet(r);0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">

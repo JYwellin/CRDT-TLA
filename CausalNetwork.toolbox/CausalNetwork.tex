@@ -940,40 +940,80 @@
 \tlatex
 \setboolean{shading}{true}
 \@x{}\moduleLeftDash\@xx{ {\MODULE} CausalNetwork}\moduleRightDash\@xx{}%
-\@x{ {\EXTENDS} Network ,\, Naturals}%
+\@x{ {\EXTENDS} BasicNetwork ,\, Naturals}%
 \@x{}\midbar\@xx{}%
 \@x{ {\VARIABLES}}%
-\@x{\@s{16.4} vc}%
-\@pvspace{8.0pt}%
-\@x{ Cvars \.{\defeq} {\langle} incoming ,\, lmsg ,\, vc {\rangle}}%
+\@x{\@s{16.4} vc\@s{4.1}}%
+\@y{\@s{0}%
+ \ensuremath{vc[r][s]} denotes the latest message from \ensuremath{s \.{\in}
+ Replica} observed by \ensuremath{r \.{\in} Replica
+}}%
+\@xx{}%
 \@x{}\midbar\@xx{}%
-\@x{ Vector \.{\defeq} [ Replica \.{\rightarrow} Nat ]}%
-\@x{ InitVector \.{\defeq} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
+\@x{ ts ( m ) \.{\defeq} m . lvc\@s{4.1}}%
+\@y{\@s{0}%
+ timestamp (vector clock) for \ensuremath{m
+}}%
+\@xx{}%
+\@x{ sender ( m ) \.{\defeq} m . aid . r\@s{4.1}}%
+\@y{\@s{0}%
+ the replica that sends \ensuremath{m
+}}%
+\@xx{}%
+ \@x{ Max ( a ,\, b )\@s{1.11} \.{\defeq} {\IF} a \.{>} b \.{\THEN} a
+ \.{\ELSE} b}%
 \@x{}\midbar\@xx{}%
-\@x{ CInit \.{\defeq} \.{\land} NInit}%
- \@x{\@s{42.85} \.{\land} vc \.{=} [ r \.{\in} Replica \.{\mapsto} InitVector
- ]}%
+\@x{ CNTypeOK \.{\defeq}}%
+\@x{\@s{16.4} \.{\land} SMTypeOK}%
+ \@x{\@s{16.4} \.{\land} vc \.{=} [ r \.{\in} Replica \.{\mapsto} [ Replica
+ \.{\rightarrow} Nat ] ]\@s{4.1}}%
+\@y{\@s{0}%
+ \ensuremath{vc[r]} : vector clock at \ensuremath{r \.{\in} Replica
+}}%
+\@xx{}%
+\@x{}\midbar\@xx{}%
+\@x{ CNInit \.{\defeq}}%
+\@x{\@s{16.4} \.{\land}\@s{3.89} BNInit}%
+ \@x{\@s{16.4} \.{\land}\@s{3.89} vc \.{=} [ r \.{\in} Replica \.{\mapsto} [ s
+ \.{\in} Replica \.{\mapsto} 0 ] ]\@s{4.1}}%
+\@y{\@s{0}%
+ \ensuremath{\A\, r}, \ensuremath{s}, \ensuremath{vc[r][s] \.{=} 0
+}}%
+\@xx{}%
 \@pvspace{8.0pt}%
-\@x{ CBroadcast ( r ,\, m ) \.{\defeq} \.{\land} NBroadcast ( r ,\, m )}%
- \@x{\@s{97.29} \.{\land} vc \.{'} \.{=} [ vc {\EXCEPT} {\bang} [ r ] [ r ]
+\@x{ CNBroadcast ( r ,\, m ) \.{\defeq}}%
+ \@x{\@s{16.4} \.{\land} vc \.{'} \.{=} [ vc {\EXCEPT} {\bang} [ r ] [ r ]
  \.{=} @ \.{+} 1 ]}%
-\@x{ SetMax ( a ,\, b ) \.{\defeq}}%
-\@x{\@s{16.4} {\IF} a \.{>} b \.{\THEN} a \.{\ELSE} b}%
+ \@x{\@s{16.4} \.{\land} \.{\LET} cm \.{\defeq} [ m {\EXCEPT} {\bang} . lvc
+ \.{=} vc \.{'} [ r ] ]}%
+\@x{\@s{27.51} \.{\IN} BNBroadcast ( r ,\, cm )}%
 \@pvspace{8.0pt}%
-\@x{ CDeliver ( r ) \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} incoming [ r ] \.{\neq} EmptyBag}%
-\@x{\@s{16.4} \.{\land} \E\, m \.{\in} BagToSet ( incoming [ r ] ) \.{:}}%
-\@x{\@s{35.71} \.{\land} \A\, s \.{\in} Replica \.{:}}%
-\@x{\@s{54.04} \.{\lor} m . vc [ s ] \.{\leq} vc [ r ] [ s ]}%
-\@x{\@s{54.04} \.{\lor} s \.{=} m . r}%
- \@x{\@s{35.71} \.{\land} m . vc [ m . r ] \.{\leq} vc [ r ] [ m . r ] \.{+}
- 1}%
- \@x{\@s{35.71} \.{\land} vc \.{'} \.{=} [ vc {\EXCEPT} {\bang} [ r ] [ m . r
- ] \.{=} SetMax ( @ ,\, m . vc [ m . r ] ) ]}%
-\@x{\@s{35.71} \.{\land} lmsg \.{'} \.{=} m}%
+\@x{ CNCausallyReady ( r ,\, m ) \.{\defeq}\@s{4.1}}%
+\@y{\@s{0}%
+ whether \ensuremath{m} is causally ready to be delivered by \ensuremath{r
+ \.{\in} Replica
+}}%
+\@xx{}%
+\@x{\@s{16.4} \.{\LET} mr \.{\defeq} sender ( m )}%
+ \@x{\@s{16.4} \.{\IN} \.{\land} ts ( m ) [ mr ] \.{\leq} vc [ r ] [ mr ]
+ \.{+} 1}%
+ \@x{\@s{36.79} \.{\land} \A\, s \.{\in} Replica \.{\,\backslash\,} \{ mr \}
+ \.{:} ts ( m ) [ s ] \.{\leq} vc [ r ] [ s ]}%
+\@pvspace{8.0pt}%
+\@x{ CNDeliver ( r ) \.{\defeq}}%
+\@x{\@s{16.4} \.{\land} incoming [ r ] \.{\neq} \{ \}}%
+\@x{\@s{16.4} \.{\land} \E\, m \.{\in} incoming [ r ] \.{:}}%
+\@x{\@s{35.71} \.{\land} CNCausallyReady ( r ,\, m )}%
+\@x{\@s{35.71} \.{\land} \.{\LET} mr \.{\defeq} sender ( m )}%
+ \@x{\@s{46.82} \.{\IN} vc \.{'} \.{=} [ vc {\EXCEPT} {\bang} [ r ] [ mr ]
+ \.{=} Max ( @ ,\, ts ( m ) [ mr ] ) ]\@s{4.1}}%
+\@y{\@s{0}%
+ update \ensuremath{vc[r]
+}}%
+\@xx{}%
+ \@x{\@s{35.71} \.{\land} lmsg \.{'} \.{=} [ lmsg {\EXCEPT} {\bang} [ r ]
+ \.{=} m ]}%
 \@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} incoming {\rangle}}%
-\@pvspace{8.0pt}%
-\@x{ CDo \.{\defeq} {\UNCHANGED} Cvars}%
 \@x{}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -981,8 +1021,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jun} 08
- 00:48:19 \ensuremath{CST} 2019 by \ensuremath{xhdn
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue}
+ \ensuremath{Jun} 18 12:38:28 \ensuremath{CST} 2019 by \ensuremath{xhdn
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

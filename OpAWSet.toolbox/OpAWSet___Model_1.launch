@@ -6,7 +6,7 @@
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
 <intAttribute key="distributedFPSetCount" value="0"/>
-<stringAttribute key="distributedNetworkInterface" value="192.168.1.106"/>
+<stringAttribute key="distributedNetworkInterface" value="172.27.129.128"/>
 <intAttribute key="distributedNodesCount" value="1"/>
 <stringAttribute key="distributedTLC" value="off"/>
 <stringAttribute key="distributedTLCVMArgs" value=""/>
@@ -19,7 +19,7 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="seq, set, new_updateset, updateset, dmsg, uincoming, abuf, lmsg, incoming, vc, rbuf"/>
+<stringAttribute key="modelBehaviorVars" value="aset, seq, buset, uincoming, abuf, lmsg, uset, incoming, vc, rbuf"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
@@ -32,6 +32,7 @@
 <listAttribute key="modelParameterConstants">
 <listEntry value="Data;;{&quot;a&quot;,&quot;b&quot;,&quot;c&quot;};0;0"/>
 <listEntry value="Replica;;{r1, r2, r3};1;1"/>
+<listEntry value="Read;r:;ReadOpAWSet(r);0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">

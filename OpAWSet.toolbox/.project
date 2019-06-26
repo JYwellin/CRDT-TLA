@@ -26,6 +26,16 @@
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/AWSetInterface.tla</location>
 		</link>
 		<link>
+			<name>BasicNetwork.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/BasicNetwork.tla</location>
+		</link>
+		<link>
+			<name>CRDTInterface.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CRDTInterface.tla</location>
+		</link>
+		<link>
 			<name>CausalInterface.tla</name>
 			<type>1</type>
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CausalInterface.tla</location>
