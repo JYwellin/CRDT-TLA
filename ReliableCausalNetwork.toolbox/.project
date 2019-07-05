@@ -23,27 +23,12 @@
 		<link>
 			<name>CausalNetwork.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/CausalNetwork.tla</locationURI>
-		</link>
-		<link>
-			<name>Message.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Message.tla</locationURI>
-		</link>
-		<link>
-			<name>Network.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Network.tla</locationURI>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CausalNetwork.tla</location>
 		</link>
 		<link>
 			<name>ReliableCausalNetwork.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/ReliableCausalNetwork.tla</locationURI>
-		</link>
-		<link>
-			<name>ReliableNetwork.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/ReliableNetwork.tla</locationURI>
 		</link>
 		<link>
 			<name>SystemModel.tla</name>

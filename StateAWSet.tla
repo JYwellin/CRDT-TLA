@@ -1,6 +1,6 @@
 ----------------------------- MODULE StateAWSet -----------------------------
 EXTENDS AWSet
-CONSTANTS Read(_)
+CONSTANTS Read(_), InitMsg
 -----------------------------------------------------------------------------
 VARIABLES
     aset,      \* aset[r]: the set of active elements maintained by r \in Replica
@@ -26,7 +26,6 @@ TypeOK ==
     /\aset \in [Replica -> SUBSET Element]
     /\tset \in [Replica -> SUBSET Element]
     /\IntTypeOK
-    /\Network!SMTypeOK
     /\SEC!SECTypeOK
 -----------------------------------------------------------------------------
 Init == 
@@ -35,6 +34,7 @@ Init ==
     /\ IntInit  
     /\ Network!BNInit
     /\ SEC!StateSECInit
+-----------------------------------------------------------------------------    
  (*
 1
 1
@@ -45,8 +45,7 @@ Init ==
 1
 1
 1
-*) 
------------------------------------------------------------------------------                 
+*)              
 Add(d, r) ==  \* r\in Replica adds d \in Data
     /\ aset'= [aset EXCEPT ![r] = @ \union {[aid |-> [r |-> r, seq |-> seq[r]], d |-> d]}]
     /\ IntDo(r)
@@ -84,5 +83,5 @@ Next == \E r \in Replica: Do(r) \/ Send(r) \/ Deliver(r)
 Spec == Init /\ [][Next]_vars
 =============================================================================
 \* Modification History
-\* Last modified Wed Jun 26 15:12:53 CST 2019 by xhdn
+\* Last modified Sun Jun 30 19:19:39 CST 2019 by xhdn
 \* Created Fri May 24 14:13:38 CST 2019 by xhdn

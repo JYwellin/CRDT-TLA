@@ -7,7 +7,7 @@ nVars == <<incoming, lmsg>>
 -----------------------------------------------------------------------------
 BNInit == 
     /\ incoming = [r \in Replica |-> {}]
-    /\ lmsg = [r \in Replica |-> NotMsg]
+    /\ lmsg = [r \in Replica |-> InitMsg]
 
 BNBroadcast(r, m) == 
     /\ incoming' = [x \in Replica |-> IF x = r THEN incoming[x]
@@ -20,5 +20,5 @@ BNDeliver(r) ==
     /\ UNCHANGED <<incoming>>  
 =============================================================================
 \* Modification History
-\* Last modified Mon Jun 17 17:11:51 CST 2019 by xhdn
+\* Last modified Wed Jun 26 20:45:32 CST 2019 by xhdn
 \* Created Sun Jun 09 20:27:37 CST 2019 by xhdn

@@ -21,11 +21,6 @@
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/AWSet.tla</location>
 		</link>
 		<link>
-			<name>AWSetInterface.tla</name>
-			<type>1</type>
-			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/AWSetInterface.tla</location>
-		</link>
-		<link>
 			<name>BasicNetwork.tla</name>
 			<type>1</type>
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/BasicNetwork.tla</location>
@@ -36,34 +31,9 @@
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CRDTInterface.tla</location>
 		</link>
 		<link>
-			<name>CausalInterface.tla</name>
-			<type>1</type>
-			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CausalInterface.tla</location>
-		</link>
-		<link>
 			<name>CausalNetwork.tla</name>
 			<type>1</type>
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CausalNetwork.tla</location>
-		</link>
-		<link>
-			<name>Interface.tla</name>
-			<type>1</type>
-			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Interface.tla</location>
-		</link>
-		<link>
-			<name>Message.tla</name>
-			<type>1</type>
-			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Message.tla</location>
-		</link>
-		<link>
-			<name>Network.tla</name>
-			<type>1</type>
-			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Network.tla</location>
-		</link>
-		<link>
-			<name>OPInterface.tla</name>
-			<type>1</type>
-			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/OPInterface.tla</location>
 		</link>
 		<link>
 			<name>OpAWSet.tla</name>
@@ -81,11 +51,6 @@
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/ReliableCausalNetwork.tla</location>
 		</link>
 		<link>
-			<name>ReliableNetwork.tla</name>
-			<type>1</type>
-			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/ReliableNetwork.tla</location>
-		</link>
-		<link>
 			<name>SEC.tla</name>
 			<type>1</type>
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/SEC.tla</location>
@@ -94,11 +59,6 @@
 			<name>SystemModel.tla</name>
 			<type>1</type>
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/SystemModel.tla</location>
-		</link>
-		<link>
-			<name>temp.tla</name>
-			<type>1</type>
-			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/temp.tla</location>
 		</link>
 	</linkedResources>
 </projectDescription>

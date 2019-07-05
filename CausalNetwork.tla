@@ -7,7 +7,7 @@ VARIABLES
 cnVars == <<incoming, lmsg, vc>>
 -----------------------------------------------------------------------------
 ts(cm) == cm.lvc  \* timestamp (vector clock) for cm
-sender(cm) == cm.m.aid.r  \* the replica that sends m
+sender(cm) == cm.m.aid.r  \* the replica that sends cm
 Max(a, b) == IF a > b THEN a ELSE b
 -----------------------------------------------------------------------------    
 CNTypeOK == 
@@ -32,12 +32,12 @@ CNDeliver(r) ==
     /\ incoming[r] # {}
     /\ \E cm \in incoming[r]:        
          /\ CNCausallyReady(r, cm)
-         /\ LET mr == sender(cm.m) 
+         /\ LET mr == sender(cm) 
             IN  vc' = [vc EXCEPT ![r][mr] = Max(@, ts(cm)[mr])]  \* update vc[r]
          /\ lmsg' = [lmsg EXCEPT ![r] = cm.m]
     /\ UNCHANGED <<incoming>>   
 =============================================================================
 \* Modification History
-\* Last modified Wed Jun 26 19:24:12 CST 2019 by xhdn
+\* Last modified Thu Jun 27 15:13:28 CST 2019 by xhdn
 \* Last modified Mon May 06 16:07:03 CST 2019 by jywellin
 \* Created Wed Mar 27 20:03:44 CST 2019 by jywellin

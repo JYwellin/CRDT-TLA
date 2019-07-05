@@ -1,6 +1,6 @@
 ------------------------------ MODULE OpAWSet ------------------------------
 EXTENDS AWSet
-CONSTANTS Read(_)
+CONSTANTS Read(_), InitMsg
 -----------------------------------------------------------------------------
 VARIABLES 
     aset,       \* aset[r]: the set of active elements maintained by r \in Replica
@@ -21,7 +21,7 @@ vars == <<aset, abuf, rbuf, seq, nVars, secVars>>
 -----------------------------------------------------------------------------
 Msg == [aid : Aid, abuf : SUBSET Element, rbuf: SUBSET Element]
 Network == INSTANCE ReliableCausalNetwork \* WITH incoming <- incoming, lmsg <- lmsg, vc <- vc                                               
- 
+
 ReadOpAWSet(r) == {ele.d: ele \in aset[r]}   \* read the state of r\in Replica                                                     
 SEC == INSTANCE OpSEC \* WITH uset <- uset, uincoming <- uincoming, buset <- buset                                        
 -----------------------------------------------------------------------------
@@ -30,7 +30,6 @@ TypeOK ==
     /\abuf \in [Replica -> SUBSET Element]
     /\rbuf \in [Replica -> SUBSET Element]
     /\IntTypeOK
-    /\Network!SMTypeOK
     /\SEC!SECTypeOK
 -----------------------------------------------------------------------------
 Init ==   
@@ -40,12 +39,12 @@ Init ==
     /\ IntInit
     /\ Network!RCNInit
     /\ SEC!OpSECInit    
+-----------------------------------------------------------------------------
 (*
 1
 1
 1
 *) 
------------------------------------------------------------------------------
 Add(d, r) ==  \* r\in Replica adds d \in Data
     /\ LET e == [aid |-> [r |-> r, seq |-> seq[r]], d |-> d]
        IN /\ aset' = [aset EXCEPT ![r] = @ \union {e}] 
@@ -88,5 +87,5 @@ Next == \E r \in Replica: Do(r) \/ Send(r) \/ Deliver(r)
 Spec == Init /\ [][Next]_vars  
 =============================================================================
 \* Modification History
-\* Last modified Wed Jun 26 15:11:53 CST 2019 by xhdn
+\* Last modified Sun Jun 30 18:49:14 CST 2019 by xhdn
 \* Created Fri May 24 14:12:26 CST 2019 by xhdn

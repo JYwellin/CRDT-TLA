@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>AWSet</name>
+	<name>OpBasedCounter</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -16,14 +16,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>AWSet.tla</name>
+			<name>OpBasedCounter.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/AWSet.tla</locationURI>
-		</link>
-		<link>
-			<name>CRDTInterface.tla</name>
-			<type>1</type>
-			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CRDTInterface.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/OpBasedCounter.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
