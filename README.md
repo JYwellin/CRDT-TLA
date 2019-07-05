@@ -1,24 +1,30 @@
-# CRDT-TLA+
-CRDTĞ­ÒéµÄTLA+ÃèÊöÓëÑéÖ¤
-## Ä£¿éËµÃ÷
-²ã´Î|Ä£¿é|×÷ÓÃ
+ï»¿# CRDT-TLA+
+CRDTåè®®çš„TLA+æè¿°ä¸éªŒè¯
+## æ¨¡å—è¯´æ˜
+å±‚æ¬¡|æ¨¡å—|ä½œç”¨
 :---:|:--:|:---:
-¹æÔ¼²ã|SEC|Ç¿×îÖÕÒ»ÖÂĞÔ|
+è§„çº¦å±‚|SEC|å¼ºæœ€ç»ˆä¸€è‡´æ€§|
+è§„çº¦å±‚|OpSEC|åŸºäºæ“ä½œçš„åè®®çš„SEC|
+è§„çº¦å±‚|StateSEC|åŸºäºçŠ¶æ€çš„åè®®çš„SEC|
 
-²ã´Î|Ä£¿é|×÷ÓÃ
+å±‚æ¬¡|æ¨¡å—|ä½œç”¨
 :---:|:--:|:---:
-Ğ­Òé²ã|OpCounter|»ùÓÚ²Ù×÷µÄCounterĞ­Òé
-Ğ­Òé²ã|StateCounter|»ùÓÚ×´Ì¬µÄCounterĞ­Òé
-Ğ­Òé²ã|OpAWSet|»ùÓÚ²Ù×÷µÄAWSetĞ­Òé
-Ğ­Òé²ã|StateAWSet|»ùÓÚ×´Ì¬µÄAWSetĞ­Òé
-Ğ­Òé²ã|OptimizedAWSet|ÓÅ»¯°æ±¾µÄState-based AWSetĞ­Òé
-Ğ­Òé²ã|RGA|RGAĞ­Òé(»ùÓÚ²Ù×÷µÄÁĞ±íĞ­Òé£©
-Ğ­Òé²ã|InsertTree|Ä£ÄâRGAĞ­ÒéµÄÊı¾İ½á¹¹
+åè®®å±‚|OpCounter|åŸºäºæ“ä½œçš„Counteråè®®
+åè®®å±‚|StateCounter|åŸºäºçŠ¶æ€çš„Counteråè®®
+åè®®å±‚|OpAWSet|åŸºäºæ“ä½œçš„AWSetåè®®
+åè®®å±‚|StateAWSet|åŸºäºçŠ¶æ€çš„AWSetåè®®
+åè®®å±‚|OptimizedAWSet|ä¼˜åŒ–ç‰ˆæœ¬çš„State-based AWSetåè®®
+åè®®å±‚|RGA|RGAåè®®(åŸºäºæ“ä½œçš„åˆ—è¡¨åè®®ï¼‰
+åè®®å±‚|InsertTree|æ¨¡æ‹ŸRGAåè®®çš„æ•°æ®ç»“æ„
 
-²ã´Î|Ä£¿é|×÷ÓÃ
+å±‚æ¬¡|æ¨¡å—|ä½œç”¨
 :---:|:--:|:---:
-ÍøÂç²ã|Message|Ä£ÄâÏûÏ¢
-ÍøÂç²ã|Network|Ä£ÄâÈÎÒâÍøÂç
-ÍøÂç²ã|ReliableNetwork|Ä£ÄâÒ»¸öreliable deliveryµÄÍøÂç
-ÍøÂç²ã|CausalNetwork|Ä£ÄâÒ»¸öcausal deliveryµÄÍøÂç
-ÍøÂç²ã|ReliableCausalNetwork|Í¬Ê±Âú×ãreliable deliveryºÍcausal delivery
+æ¥å£å±‚|CRDTInterface|ä¸ºåè®®æä¾›ç»Ÿä¸€çš„æ¥å£
+
+å±‚æ¬¡|æ¨¡å—|ä½œç”¨
+:---:|:--:|:---:
+ç½‘ç»œå±‚|SystemModel|ç³»ç»Ÿæ¨¡å‹
+ç½‘ç»œå±‚|BasicNetwork|åŸºç¡€ç½‘ç»œ
+ç½‘ç»œå±‚|ReliableNetwork|å¯é ç½‘ç»œ
+ç½‘ç»œå±‚|CausalNetwork|å› æœç½‘ç»œ
+ç½‘ç»œå±‚|ReliableCausalNetwork|å¯é å› æœç½‘ç»œ
