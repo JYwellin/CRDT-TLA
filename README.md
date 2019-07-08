@@ -5,7 +5,7 @@ CRDT协议的TLA+描述与验证
 
 下图显示了项目中的关键模块之间的关系
 
-![Module Graph](https://github.com/JYwellin/CRDT-TLA/fig/modules.bmp)
+![Module Graph](https://github.com/JYwellin/CRDT-TLA/tree/master/fig/modules.bmp)
 
 层次|模块|作用
 :---:|:--:|:---:
