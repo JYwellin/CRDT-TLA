@@ -1,6 +1,12 @@
-﻿# CRDT-TLA+
+# `CRDT-TLA+`
 CRDT协议的TLA+描述与验证
-## 模块说明
+
+## TLA+模块说明
+
+下图显示了项目中的关键模块之间的关系
+
+![Module Graph](https://github.com/JYwellin/CRDT-TLA/fig/modules.bmp)
+
 层次|模块|作用
 :---:|:--:|:---:
 规约层|SEC|强最终一致性|
