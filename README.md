@@ -2,13 +2,11 @@
 CRDT协议的TLA+描述与验证
 
 ## TLA+模块说明
-下图显示了项目中的关键模块之间的关系
+下图显示了项目中关键模块之间的关系:
+从模块A指向模块B的实线表示A扩展了B,
+从模块A指向模块B的虚线表示A实例化了B.
 
-从模块A指向模块B的实线表示A扩展了B
-
-从模块A指向模块B的虚线表示A实例化了B
-
-![Module Graph](https://github.com/JYwellin/CRDT-TLA/tree/master/fig/modules.png)
+![Module Graph](https://raw.githubusercontent.com/JYwellin/CRDT-TLA/master/fig/modules.png)
 
 层次|模块|作用
 :---:|:--:|:---:
