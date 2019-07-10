@@ -3,7 +3,9 @@ CRDT协议的TLA+描述与验证
 
 ## TLA+模块说明
 下图显示了项目中的关键模块之间的关系
+
 从模块A指向模块B的实线表示A扩展了B
+
 从模块A指向模块B的虚线表示A实例化了B
 
 ![Module Graph](https://github.com/JYwellin/CRDT-TLA/tree/master/fig/modules.png)
@@ -41,4 +43,5 @@ CRDT协议的TLA+描述与验证
 2. 批量运行(***推荐***).
 
 我们编写了可以自动批量执行实验模型的脚本.
+
 详见[JYwellin/crdt-experiments](https://github.com/JYwellin/crdt-experiment).
