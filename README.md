@@ -1,4 +1,4 @@
-# `CRDT-TLA+`
+# `CRDT-TLA`
 CRDT协议的TLA+描述与验证
 
 ## 项目说明
