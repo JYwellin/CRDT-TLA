@@ -24,7 +24,7 @@ CRDT协议的TLA+描述与验证
 协议层|OpCounter|基于操作的Counter协议
 协议层|StateCounter|基于状态的Counter协议
 协议层|OpAWSet|基于操作的AWSet协议
-协议层|StateAWSet|基于状态的AWSet协议33
+协议层|StateAWSet|基于状态的AWSet协议
 
 层次|模块|作用
 :---:|:--:|:---:
