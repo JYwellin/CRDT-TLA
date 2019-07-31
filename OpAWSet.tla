@@ -40,11 +40,6 @@ Init ==
     /\ Network!RCNInit
     /\ SEC!OpSECInit    
 -----------------------------------------------------------------------------
-(*
-1
-1
-1
-*) 
 Add(d, r) ==  \* r\in Replica adds d \in Data
     /\ LET e == [aid |-> [r |-> r, seq |-> seq[r]], d |-> d]
        IN /\ aset' = [aset EXCEPT ![r] = @ \union {e}] 
@@ -87,5 +82,5 @@ Next == \E r \in Replica: Do(r) \/ Send(r) \/ Deliver(r)
 Spec == Init /\ [][Next]_vars  
 =============================================================================
 \* Modification History
-\* Last modified Sun Jun 30 18:49:14 CST 2019 by xhdn
+\* Last modified Wed Jul 31 22:59:07 CST 2019 by xhdn
 \* Created Fri May 24 14:12:26 CST 2019 by xhdn

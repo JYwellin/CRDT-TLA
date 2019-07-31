@@ -12,7 +12,7 @@ Max(a, b) == IF a > b THEN a ELSE b
 -----------------------------------------------------------------------------    
 CNTypeOK == 
     /\ SMTypeOK
-    /\ vc = [r \in Replica |-> [Replica -> Nat]]  \* vc[r] : vector clock at r \in Replica
+    /\ vc = [Replica -> [Replica -> Nat]]  \* vc[r] : vector clock at r \in Replica
 -----------------------------------------------------------------------------
 CNInit == 
     /\ BNInit
@@ -38,6 +38,6 @@ CNDeliver(r) ==
     /\ UNCHANGED <<incoming>>   
 =============================================================================
 \* Modification History
-\* Last modified Thu Jun 27 15:13:28 CST 2019 by xhdn
+\* Last modified Wed Jul 31 23:10:05 CST 2019 by xhdn
 \* Last modified Mon May 06 16:07:03 CST 2019 by jywellin
 \* Created Wed Mar 27 20:03:44 CST 2019 by jywellin

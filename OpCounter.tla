@@ -65,5 +65,6 @@ Next == \E r \in Replica: Do(r) \/ Send(r) \/ Deliver(r)
 Spec == Init /\ [][Next]_vars  
 =============================================================================
 \* Modification History
+\* Last modified Wed Jul 31 23:21:13 CST 2019 by xhdn
 \* Last modified Sat Jul 27 16:05:16 CST 2019 by jywellin
 \* Created Thu Jul 25 16:38:30 CST 2019 by jywellin
