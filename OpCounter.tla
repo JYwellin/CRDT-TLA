@@ -1,5 +1,5 @@
 ----------------------------- MODULE OpCounter -----------------------------
-EXTENDS Counter
+EXTENDS Counter, FiniteSets
 CONSTANTS Read(_), InitMsg
 -----------------------------------------------------------------------------
 VARIABLES 
@@ -9,12 +9,13 @@ VARIABLES
     incoming,   \* incoming[r]: incoming channel at replica r \in Replica
     lmsg,       \* lmsg[r]: the last message delivered at r \in Replica to the upper-layer protocol 
 (* variables for SEC: *)
+    doset,
     uset,       \* uset[r]: the set of updates seen by replica r \in Replica
     uincoming,  \* uincoming[r]: incoming channel for broadcasting/delivering updates at r \in Replica
     buset       \* buset[r]: the buffer of local updates made by r \in Replica since the last broadcast 
 
 nVars == <<incoming, lmsg>>
-secVars == <<uset, uincoming, buset>> 
+secVars == <<doset, uset, uincoming, buset>> 
 vars == <<counter, buf, seq, nVars, secVars>>   
 -----------------------------------------------------------------------------
 Msg == [aid : Aid, buf : Nat]
@@ -62,9 +63,13 @@ Deliver(r) ==  \* r\in Replica delivers a message (lmsg'[r])
 -----------------------------------------------------------------------------
 Next == \E r \in Replica: Do(r) \/ Send(r) \/ Deliver(r) 
 
-Spec == Init /\ [][Next]_vars  
+Fairness == \A r \in Replica: WF_vars(Send(r)) /\ WF_vars(Deliver(r))
+
+Spec == Init /\ [][Next]_vars /\ Fairness
+
+Liveness == [](\A r \in Replica: \A aid \in doset[r]:<>(\A s \in Replica: aid \in uset[s]))
 =============================================================================
 \* Modification History
-\* Last modified Wed Jul 31 23:21:13 CST 2019 by xhdn
+\* Last modified Mon Aug 26 20:55:16 CST 2019 by xhdn
 \* Last modified Sat Jul 27 16:05:16 CST 2019 by jywellin
 \* Created Thu Jul 25 16:38:30 CST 2019 by jywellin
