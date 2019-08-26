@@ -67,9 +67,10 @@ Fairness == \A r \in Replica: WF_vars(Send(r)) /\ WF_vars(Deliver(r))
 
 Spec == Init /\ [][Next]_vars /\ Fairness
 
-Liveness == [](\A r \in Replica: \A aid \in doset[r]:<>(\A s \in Replica: aid \in uset[s]))
+Liveness == \A aid \in Aid, r \in Replica: aid \in doset[r] ~> (\A s \in Replica : aid \in uset[s])
+\*Liveness == [](\A r \in Replica: \A aid \in doset[r]:<>(\A s \in Replica: aid \in uset[s]))
 =============================================================================
 \* Modification History
-\* Last modified Mon Aug 26 20:55:16 CST 2019 by xhdn
+\* Last modified Mon Aug 26 22:36:31 CST 2019 by xhdn
 \* Last modified Sat Jul 27 16:05:16 CST 2019 by jywellin
 \* Created Thu Jul 25 16:38:30 CST 2019 by jywellin
