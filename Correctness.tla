@@ -34,8 +34,8 @@ CDeliver(r, aid) ==  \* choose the update message um according to aid
 -----------------------------------------------------------------------------   
 SEC == \A r1, r2 \in Replica : delset[r1] = delset[r2] => Read(r1) = Read(r2)
 
-ED == \A aid \in Aid, r \in Replica: aid \in doset[r] ~> (\A s \in Replica : aid \in delset[s])
+EV == \A aid \in Aid, r \in Replica: aid \in doset[r] ~> (\A s \in Replica : aid \in delset[s])
 =============================================================================
 \* Modification History
-\* Last modified Wed Aug 28 19:53:01 CST 2019 by xhdn
+\* Last modified Wed Aug 28 22:59:13 CST 2019 by xhdn
 \* Created Wed Aug 28 16:48:45 CST 2019 by xhdn
