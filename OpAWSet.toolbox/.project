@@ -36,24 +36,24 @@
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CausalNetwork.tla</location>
 		</link>
 		<link>
+			<name>Correctness.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Correctness.tla</location>
+		</link>
+		<link>
 			<name>OpAWSet.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/OpAWSet.tla</locationURI>
 		</link>
 		<link>
-			<name>OpSEC.tla</name>
+			<name>OpCorrectness.tla</name>
 			<type>1</type>
-			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/OpSEC.tla</location>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/OpCorrectness.tla</location>
 		</link>
 		<link>
 			<name>ReliableCausalNetwork.tla</name>
 			<type>1</type>
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/ReliableCausalNetwork.tla</location>
-		</link>
-		<link>
-			<name>SEC.tla</name>
-			<type>1</type>
-			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/SEC.tla</location>
 		</link>
 		<link>
 			<name>SystemModel.tla</name>

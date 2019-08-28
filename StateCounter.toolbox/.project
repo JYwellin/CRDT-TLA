@@ -26,6 +26,11 @@
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CRDTInterface.tla</location>
 		</link>
 		<link>
+			<name>Correctness.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Correctness.tla</location>
+		</link>
+		<link>
 			<name>Counter.tla</name>
 			<type>1</type>
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Counter.tla</location>

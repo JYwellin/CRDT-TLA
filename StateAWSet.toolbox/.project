@@ -31,9 +31,9 @@
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/CRDTInterface.tla</location>
 		</link>
 		<link>
-			<name>SEC.tla</name>
+			<name>Correctness.tla</name>
 			<type>1</type>
-			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/SEC.tla</location>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/Correctness.tla</location>
 		</link>
 		<link>
 			<name>StateAWSet.tla</name>
@@ -41,9 +41,9 @@
 			<locationURI>PARENT-1-PROJECT_LOC/StateAWSet.tla</locationURI>
 		</link>
 		<link>
-			<name>StateSEC.tla</name>
+			<name>StateCorrectness.tla</name>
 			<type>1</type>
-			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/StateSEC.tla</location>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/StateCorrectness.tla</location>
 		</link>
 		<link>
 			<name>SystemModel.tla</name>
