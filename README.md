@@ -15,9 +15,9 @@ CRDT协议的TLA+描述与验证
 
 层次|模块|作用
 :---:|:--:|:---:
-规约层|SEC|强最终一致性|
-规约层|OpSEC|基于操作的协议的SEC|
-规约层|StateSEC|基于状态的协议的SEC|
+规约层|Correctness|正确性|
+规约层|OpCorrectness|基于操作协议的正确性|
+规约层|StateCorrectness|基于状态协议的正确性|
 
 层次|模块|作用
 :---:|:--:|:---:
