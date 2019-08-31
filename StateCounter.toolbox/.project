@@ -41,6 +41,11 @@
 			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/SEC.tla</location>
 		</link>
 		<link>
+			<name>StateCorrectness.tla</name>
+			<type>1</type>
+			<location>C:/Users/xhdn/Documents/GitHub/CRDT-TLA/StateCorrectness.tla</location>
+		</link>
+		<link>
 			<name>StateCounter.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/StateCounter.tla</locationURI>

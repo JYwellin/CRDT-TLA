@@ -17,15 +17,15 @@ VARIABLES
     buset       \* buset[r]: the buffer of local updates made by r \in Replica since the last broadcast  
 
 nVars == <<incoming, lmsg, vc>>
-secVars == <<doset, delset, uincoming, buset>> 
-vars == <<aset, abuf, rbuf, seq, nVars, secVars>>   
+cVars == <<doset, delset, uincoming, buset>> 
+vars == <<aset, abuf, rbuf, seq, nVars, cVars>>   
 -----------------------------------------------------------------------------
 Msg == [aid : Aid, abuf : SUBSET Element, rbuf: SUBSET Element]
 Network == INSTANCE ReliableCausalNetwork \* WITH incoming <- incoming, lmsg <- lmsg, vc <- vc                                               
 
-ReadOpAWSet(r) == {ele.d: ele \in aset[r]}   \* read the state of r\in Replica       
-\* WITH doset <- doset, delset <- delset, uincoming <- uincoming, buset <- buset                                               
-Correctness == INSTANCE OpCorrectness                 
+ReadOpAWSet(r) == {ele.d: ele \in aset[r]}   \* read the state of r\in Replica                                                     
+Correctness == INSTANCE OpCorrectness
+                \* WITH doset <- doset, delset <- delset, uincoming <- uincoming, buset <- buset                   
 -----------------------------------------------------------------------------
 TypeOK == 
     /\aset \in [Replica -> SUBSET Element]
@@ -85,5 +85,5 @@ Fairness == \A r \in Replica: WF_vars(Send(r)) /\ WF_vars(Deliver(r))
 Spec == Init /\ [][Next]_vars /\ Fairness
 =============================================================================
 \* Modification History
-\* Last modified Wed Aug 28 19:32:48 CST 2019 by xhdn
+\* Last modified Sat Aug 31 15:58:24 CST 2019 by xhdn
 \* Created Fri May 24 14:12:26 CST 2019 by xhdn

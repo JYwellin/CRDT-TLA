@@ -14,14 +14,15 @@ VARIABLES
     uincoming   \* uincoming[r]: incoming channel for broadcasting/delivering updates at r \in Replica
     
 nVars  == <<incoming, lmsg>>
-secVars == <<doset, delset, uincoming>> 
-vars == <<aset, tset, seq, nVars, secVars>>
+cVars == <<doset, delset, uincoming>> 
+vars == <<aset, tset, seq, nVars, cVars>>
 -----------------------------------------------------------------------------  
 Msg == [aid : Aid, A: SUBSET Element, T : SUBSET Element]  
 Network == INSTANCE BasicNetwork  \* WITH incoming <- incoming, lmsg <- lmsg                                   
 
 ReadStateAWSet(r) == {ele.d: ele \in aset[r]}  \* read the state of r\in Replica
-Correctness == INSTANCE StateCorrectness  \* WITH doset <- doset, delset <- delset, uincoming <- uincoming                                         
+Correctness == INSTANCE StateCorrectness  
+                \* WITH doset <- doset, delset <- delset, uincoming <- uincoming                                         
 -----------------------------------------------------------------------------    
 TypeOK ==
     /\aset \in [Replica -> SUBSET Element]
@@ -75,5 +76,5 @@ Fairness == \A r \in Replica: WF_vars(Send(r)) /\ WF_vars(Deliver(r))
 Spec == Init /\ [][Next]_vars /\ Fairness
 =============================================================================
 \* Modification History
-\* Last modified Wed Aug 28 20:06:33 CST 2019 by xhdn
+\* Last modified Sat Aug 31 16:08:31 CST 2019 by xhdn
 \* Created Fri May 24 14:13:38 CST 2019 by xhdn

@@ -2,36 +2,36 @@
 EXTENDS OpAWSet, TLC
 
 \* CONSTANT definitions @modelParameterConstants:0Data
-const_156700437658042000 == 
-{"a","b","c"}
+const_1567009284690112000 == 
+{"a"}
 ----
 
 \* CONSTANT definitions @modelParameterConstants:2Replica
-const_156700437658043000 == 
-{"r1","r2","r3"}
+const_1567009284690113000 == 
+{"r1","r2"}
 ----
 
 \* CONSTANT definitions @modelParameterConstants:3Read(r)
-const_156700437658044000(r) == 
+const_1567009284690114000(r) == 
 ReadOpAWSet(r)
 ----
 
 \* CONSTANT definition @modelParameterDefinitions:0
-def_ov_156700437658045000 ==
+def_ov_1567009284690115000 ==
 0..100
 ----
 \* CONSTRAINT definition @modelParameterContraint:0
-constr_156700437658046000 ==
-\A r \in Replica: Cardinality(doset[r])<=1
+constr_1567009284691116000 ==
+\A r \in Replica: Cardinality(doset[r])<=3
 ----
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_156700437658047000 ==
+spec_1567009284691117000 ==
 Spec
 ----
 \* PROPERTY definition @modelCorrectnessProperties:0
-prop_156700437658048000 ==
+prop_1567009284691118000 ==
 Correctness!EV
 ----
 =============================================================================
 \* Modification History
-\* Created Wed Aug 28 22:59:36 CST 2019 by xhdn
+\* Created Thu Aug 29 00:21:24 CST 2019 by xhdn

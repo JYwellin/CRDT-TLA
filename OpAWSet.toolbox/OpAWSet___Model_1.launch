@@ -6,7 +6,7 @@
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
 <intAttribute key="distributedFPSetCount" value="0"/>
-<stringAttribute key="distributedNetworkInterface" value="172.27.147.82"/>
+<stringAttribute key="distributedNetworkInterface" value="192.168.1.111"/>
 <intAttribute key="distributedNodesCount" value="1"/>
 <stringAttribute key="distributedTLC" value="off"/>
 <stringAttribute key="distributedTLCVMArgs" value=""/>
@@ -29,12 +29,12 @@
 <stringAttribute key="modelExpressionEval" value=""/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
-<listEntry value="Data;;{&quot;a&quot;,&quot;b&quot;,&quot;c&quot;};0;0"/>
+<listEntry value="Data;;{&quot;a&quot;};0;0"/>
 <listEntry value="InitMsg;;InitMsg;1;0"/>
-<listEntry value="Replica;;{&quot;r1&quot;,&quot;r2&quot;,&quot;r3&quot;};0;0"/>
+<listEntry value="Replica;;{&quot;r1&quot;,&quot;r2&quot;};0;0"/>
 <listEntry value="Read;r:;ReadOpAWSet(r);0;0"/>
 </listAttribute>
-<stringAttribute key="modelParameterContraint" value="\A r \in Replica: Cardinality(doset[r])&lt;=1"/>
+<stringAttribute key="modelParameterContraint" value="\A r \in Replica: Cardinality(doset[r])&lt;=3"/>
 <listAttribute key="modelParameterDefinitions">
 <listEntry value="Nat;;0..100;0;0"/>
 </listAttribute>
