@@ -24,7 +24,7 @@ CNBroadcast(r, m) ==
        IN  BNBroadcast(r, cm) 
               
 CNCausallyReady(r, cm) ==  \* whether cm is causally ready to be delivered by r \in Replica
-    LET mr == sender(cm.m)  \* cm : message with vector clock
+    LET mr == sender(cm)  \* cm : message with vector clock
     IN  /\ ts(cm)[mr] <= vc[r][mr] + 1 
         /\ \A s \in Replica \ {mr}: ts(cm)[s] <= vc[r][s]  
                       
