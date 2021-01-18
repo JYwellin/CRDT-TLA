@@ -33,12 +33,12 @@ Init ==
     /\ state = [r \in Replica |-> [s \in Replica |-> 0]]
     /\ IntInit  
     /\ Network!BNInit
-    /\ Correctness!CInit
+    /\ Correctness!StateCInit
 -----------------------------------------------------------------------------              
 Inc(r) ==  
     /\ state' = [state EXCEPT ![r][r] = @ + 1]
     /\ IntDo(r)
-    /\ Correctness!CDo(r)
+    /\ Correctness!StateCDo(r)
     /\ UNCHANGED <<nVars>>
                          
 Do(r) ==  Inc(r)\* We ignore ReadStateCounter(r) since it does not modify states.       
@@ -46,13 +46,13 @@ Do(r) ==  Inc(r)\* We ignore ReadStateCounter(r) since it does not modify states
 Send(r) ==  \* r\in Replica sends a message 
     /\ Network!BNBroadcast(r, [aid |-> [r |-> r, seq |-> seq[r]], rstate |-> state[r]])  
     /\ IntSend(r)
-    /\ Correctness!CSend(r) 
+    /\ Correctness!StateCSend(r) 
     /\ UNCHANGED <<state>>
            
 Deliver(r) ==  \* r\in Replica delivers a message (lmsg'[r]) 
     /\ IntDeliver(r)
     /\ Network!BNDeliver(r)
-    /\ Correctness!CDeliver(r, lmsg'[r].aid)
+    /\ Correctness!StateCDeliver(r, lmsg'[r].aid)
     /\ \A s \in Replica : state' = [state EXCEPT ![r][s] = Max(@, lmsg'[r].rstate[s])]    
     /\ UNCHANGED <<>> 
 -----------------------------------------------------------------------------
@@ -63,5 +63,6 @@ Fairness == \A r \in Replica: WF_vars(Send(r)) /\ WF_vars(Deliver(r))
 Spec == Init /\ [][Next]_vars /\ Fairness
 =============================================================================
 \* Modification History
+\* Last modified Mon Jan 18 18:11:10 CST 2021 by yz1509
 \* Last modified Sat Aug 31 20:36:11 CST 2019 by xhdn
 \* Created Thu Jul 25 16:38:48 CST 2019 by jywellin
