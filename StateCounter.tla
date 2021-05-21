@@ -63,6 +63,7 @@ Fairness == \A r \in Replica: WF_vars(Send(r)) /\ WF_vars(Deliver(r))
 Spec == Init /\ [][Next]_vars /\ Fairness
 =============================================================================
 \* Modification History
-\* Last modified Mon Jan 18 18:11:10 CST 2021 by yz1509
+\* Last modified Fri May 21 17:40:43 CST 2021 by JYwellin
+\* Last modified Fri May 21 17:39:05 CST 2021 by JYwellin
 \* Last modified Sat Aug 31 20:36:11 CST 2019 by xhdn
 \* Created Thu Jul 25 16:38:48 CST 2019 by jywellin
