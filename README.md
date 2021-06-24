@@ -16,16 +16,7 @@ The solid line from module A to module B indicates that A extends B,
 
 The dashed line from module A to module B indicates that A instantiates B.
 
-![Module Graph](https://raw.githubusercontent.com/JYwellin/CRDT-TLA/master/fig/modules.png)
-
-<style>
-table
-{
-    margin: auto;
-}
-</style>
-
-
+![Module Graph](https://raw.githubusercontent.com/JYwellin/CRDT-TLA/master/fig/modules.png 480x360)
 
 layer|module|function
 :---:|:--:|:---:
